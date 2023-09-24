@@ -1,6 +1,6 @@
 import ProfilePic from "../../images/profilePicture.png"
 
-import { useEffect , useState ,useRef } from "react";
+import { useEffect, useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import useUserContext from "../hooks/useUserContext";
 export default function BioSection() {
@@ -9,10 +9,10 @@ export default function BioSection() {
     const [followings, setfollowings] = useState([]);
     const editProfileRef = useRef();
     const Navigate = useNavigate();
-    
+
 
     useEffect(() => {
-        
+
         async function fetchingData() {
             const response = await fetch(`http://localhost:3000/accounts/followings/${user._id}`, {
                 method: 'GET',
@@ -58,7 +58,7 @@ export default function BioSection() {
             }
         }
     }
-    
+
 
 
     async function ConvertToBase64(file) {
@@ -74,7 +74,7 @@ export default function BioSection() {
         })
     }
     return (
-        <div className="userPage-Bio-section">
+        <div className="userPage-Bio-section-div">
             {user?.profilePicture ? (
                 <img src={user.profilePicture} className="userPage-Bio-section-profileImage" />
             ) : (
@@ -91,11 +91,11 @@ export default function BioSection() {
             </div>
 
             <div className="userPage-Bio-section-followers-count">
-                {user.followers.length} Followers
+                {user.followers.length} {user.followers.length == 1 ? "Follower" : "Followers"}
             </div>
 
             <div className="userPage-Bio-section-myBio">
-                {user?.bio ? (
+                {(user?.bio) ? (
                     user?.bio
                 ) : (
                     <div className="userPage-Bio-section-myBio-reminder">
@@ -109,23 +109,24 @@ export default function BioSection() {
             </div>
 
             <div className="userPage-Bio-section-followings">
-                hello
+                <h4 className="userPage-Bio-section-followings-header">Following</h4>
                 {followings.length && followings.map(item => (
-                    <div key={item._id} className="userPage-Bio-section-followings-name" onClick={() => Navigate(`/user/account/${item._id}`, { state: { userId: item._id } })}>
+                    <div key={item._id} className="userPage-Bio-section-following-details" onClick={() => Navigate(`/user/account/${item._id}`, { state: { userId: item._id } })}>
+                        {item.profilePicture ? (<img src={item.profilePicture} />) : (<img src={ProfilePic} />)}
                         {item.name}
                     </div>
                 ))}
             </div>
-            
-            <EditProfile ConvertToBase64={ConvertToBase64} editProfileRef={editProfileRef}/>
+
+            <EditProfile ConvertToBase64={ConvertToBase64} editProfileRef={editProfileRef} />
 
         </div>
     )
 }
 
-function EditProfile({ConvertToBase64 , editProfileRef}) {
+function EditProfile({ ConvertToBase64, editProfileRef }) {
 
-    const {user , token , dispatch} = useUserContext();
+    const { user, token, dispatch } = useUserContext();
     const editProfileSaveRef = useRef();
 
     const [editProfileImg, setEditProfileImg] = useState(() => {
@@ -140,13 +141,13 @@ function EditProfile({ConvertToBase64 , editProfileRef}) {
         if (user) return user.bio;
         return ""
     })
-    useEffect(()=>{
+    useEffect(() => {
         if (user) {
             setEditProfileBio(user.bio || "");
             setEditProfileName(user.name || "")
             setEditProfileImg(user.profilePicture || "")
         }
-    },[user])
+    }, [user])
     async function handleSaveProfile(event) {
         event.preventDefault();
         const updatedProfile = {};
@@ -191,29 +192,37 @@ function EditProfile({ConvertToBase64 , editProfileRef}) {
     }
 
     return (
-        <dialog ref={editProfileRef}>
-            <button onClick={handleEditProfileClose}>close</button>
-            <form>
+        <dialog ref={editProfileRef} className="userPage-Bio-section-editProfile-dialogBox">
+            <div className="userPage-Bio-section-editProfile-Heading">
                 <h2>Profile Information</h2>
+                <button onClick={handleEditProfileClose}>close</button>
+            </div>
+            <form className="userPage-Bio-section-editProfile-dialogBox-form">
+                <div className="editProfile-Image-div">
+                    <p htmlFor="editProfile-Image">
+                        Photo
+                    </p>
+                    <img src={editProfileImg} />
+                    <input type="file" id="editProfile-Image" accept="image/*" onChange={handleProfileImageChange} />
+                    <label htmlFor="editProfile-Image">
+                        Update
+                    </label>
+                </div>
 
-                <p htmlFor="editProfile-Image">
-                    Photo
-                </p>
-                <img src={editProfileImg} />
-                <input type="file" id="editProfile-Image" accept="image/*" onChange={handleProfileImageChange} />
-                <label htmlFor="editProfile-Image">
-                    Update
-                </label>
+                <div className="editProfile-name-div">
+                    <label htmlFor="editProfile-name">
+                        Name
+                    </label>
+                    <input type="text" id="editProfile-name" value={editProfileName} onChange={(e) => setEditProfileName(e.target.value)} />
+                </div>
 
-                <label htmlFor="editProfile-name">
-                    Name
-                </label>
-                <input type="text" id="editProfile-name" value={editProfileName} onChange={(e) => setEditProfileName(e.target.value)} />
+                <div className="editProfile-bio-div">
+                    <label htmlFor="editProfile-bio">
+                        Bio
+                    </label>
+                    <input type="text" id="editProfile-bio" value={editProfileBio} onChange={(e) => setEditProfileBio(e.target.value)} />
+                </div>
 
-                <label htmlFor="editProfile-bio">
-                    Bio
-                </label>
-                <input type="text" id="editProfile-bio" value={editProfileBio} onChange={(e) => setEditProfileBio(e.target.value)} />
 
                 <button onClick={handleEditProfileClose}>Cancel</button>
                 <button disabled={handleSaveButtonDisabled()} ref={editProfileSaveRef} onClick={handleSaveProfile} >save</button>

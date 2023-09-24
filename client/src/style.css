@@ -147,6 +147,9 @@ nav{
     align-items: center;
     border-bottom: 0.01px solid rgb(231, 222, 222);
     font-family: Arial, Helvetica, sans-serif;
+    /* position: fixed;
+    top: 0px; */
+    background-color: white;
 }
 .navbar-homepage img{
     height: 7vh;
@@ -214,6 +217,8 @@ nav{
 
 .userPage-div{
     display: flex;
+    /* margin-top: 10vh; */
+    overflow: hidden;
 }
 .userPage-content-section{
     width: 60vw;
@@ -234,6 +239,10 @@ nav{
     font-size: 14px;
     padding-bottom: 2vh;
     border-bottom: 0.5px solid rgb(219, 219, 219);
+    cursor: pointer;
+}
+.userPage-routes:hover{
+    text-decoration: underline;
 }
 .UserPage-Articles-div{
     padding-top: 4vh;
@@ -277,12 +286,112 @@ nav{
     transform: translateY(-15%);
     margin-left: 2vw;
 }
+
+/* USER PAGE BIO SECTION */
+.userPage-Bio-section-div{
+    box-sizing: border-box;
+    width: 40vw;
+    padding: 4vh 3.5vw;
+    /* position: fixed;
+    right: 0px; */
+}
 #userPage-profilePicture{
     display: none;
 }
 .userPage-Bio-section-profileImage{
-    height: 10vh;
-    width: 10vh;
+    height: 12vh;
+    width: 12vh;
     border-radius: 50%;
     object-fit: cover;
+}
+.userPage-Bio-section-userName{
+    font-weight: 600;
+    color: rgb(46, 46, 46);
+    padding-top: 2.5vh;
+    font-family: 'lora';
+    font-size: 18px;
+}
+.userPage-Bio-section-followers-count{
+    padding-top: 0.3vh;
+    font-family: 'lora';
+    font-size: 17px;
+    color: var(--unselected);
+}
+.userPage-Bio-section-myBio{
+    padding-top: 2.8vh;
+    font-size: 15px;
+    font-family: 'lora';
+    padding-right: 10vw;
+    color:var(--unselected);
+}
+.userPage-Bio-section-myBio-edit{
+    color: rgb(18, 138, 18);
+    font-size: 14px;
+    letter-spacing: 0.3px;
+    width: 5.5vw;
+    margin: 2vh 0;
+    cursor: pointer;
+}
+.userPage-Bio-section-myBio-edit:hover{
+    color: rgb(18, 54, 18);
+}
+.userPage-Bio-section-followings-header{
+    font-size: 15px;
+    padding: 1vh 0;
+    margin-bottom: 2vh;
+}
+.userPage-Bio-section-following-details{
+    display: flex;
+    align-items: center;
+    padding: 1vh 1vw; 
+    font-family: 'lora';
+    font-size: 16px;
+    color: rgb(66, 65, 65);
+    cursor: pointer;
+    transition: all 0.25s ease-out;
+}
+.userPage-Bio-section-following-details:hover{
+    color: rgb(163, 149, 19);
+}
+.userPage-Bio-section-following-details img{
+    height: 4vh;
+    width: 4vh;
+    border-radius: 50%;
+    border: 0.1px solid rgb(192, 189, 189);
+    margin-right: 1vw;
+    font-weight: 100;
+    overflow: hidden;
+}
+
+/* dialog box */
+
+.userPage-Bio-section-editProfile-dialogBox{
+    padding: 2vh 3vw;
+    box-sizing: border-box;
+    width: 40vw;
+    margin: 2vh 30vw;
+    border: 0.5px solid rgb(230, 225, 225);
+    border-radius: 10px;
+}
+.userPage-Bio-section-editProfile-Heading{
+    display: flex;
+    justify-content: space-between;
+}
+.userPage-Bio-section-editProfile-dialogBox-form img{
+    height: 15vh;
+    width: 15vh;
+    border-radius: 50%;
+    object-fit: cover;
+}
+#editProfile-Image{
+    display: none;
+}
+.editProfile-Image-div label {
+    margin-left: 2vw;
+    color: rgb(18, 138, 18);
+    font-size: 16px;
+    letter-spacing: 0.3px;
+    width: 5.5vw;
+    margin: 2vh 0;
+    cursor: pointer;
 }

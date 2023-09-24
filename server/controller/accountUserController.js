@@ -97,7 +97,7 @@ async function userFollowings(req , res){
         const followings = await User.findOne({_id : userId}).select('following')
         const newFollowings = followings.following.slice(0,5);
         const finalFollowings = await Promise.all(newFollowings.map(
-            async (_id) => await User.findOne({_id}).select('name')
+            async (_id) => await User.findOne({_id}).select('name profilePicture')
         ))
         res.json(finalFollowings);
     }catch(error){
