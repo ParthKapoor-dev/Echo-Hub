@@ -1,0 +1,288 @@
+@import url('https://fonts.googleapis.com/css2?family=Lora&display=swap');
+*{
+    margin: 0px;
+    font-family:helvetica;
+    overflow-x: hidden;
+    /* font-family: 'Lora'; */
+}
+
+.light{
+    --bg-color : white;
+    --font-color : rgb(36,36,36); 
+    --unselected :  rgb(119, 117, 117);
+    
+}
+.loginPage-div{
+    display: flex;
+    box-sizing: border-box;
+    padding:2vh 4vw;
+    /* width: 100vw; */
+}
+.loginPage-div img{
+    height: 80vh;
+}
+.signupPage-loginSection{
+    margin:2vh 8vw;
+    padding: 0vh 2vw;
+    width: 22vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items:flex-start;
+    font-size: 20px;
+    color: var(--font-color);
+    border: 0.5px solid rgb(177, 176, 176);
+    border-radius: 10px;
+}
+.loginPage-loginSection{
+    margin:8vh 8vw;
+    padding: 0vh 2vw;
+    width: 22vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items:flex-start;
+    font-size: 20px;
+    color: var(--font-color);
+    border: 0.5px solid rgb(177, 176, 176);
+    border-radius: 10px;
+}
+.signupPage-loginSection img,
+.loginPage-loginSection img{
+    height: 5vh;
+    margin-left: 2vw;
+}
+.loginPage-Login-title{
+    display: flex;
+    font-size: 30px;
+    padding-bottom: 2vh;
+}
+.loginPage-name-div,
+.loginPage-email-div,
+.loginPage-password-div{
+    display: flex;
+    align-items:center;
+    margin: 2vh 0;
+}
+.loginPage-name-div label,
+.loginPage-email-div label,
+.loginPage-password-div label{
+    color: rgb(109, 107, 107);
+    position: absolute;
+    margin-left: 1vw;
+    padding: 0.4vh 0.5vw;
+    transition: 0.15s all ease-in;
+    font-size: 18px;
+}
+#Name,#Email,#Password{
+    height: 8vh;
+    width: 20vw;
+    border-radius: 5px;
+    border: 0.5px solid rgb(109, 107, 107);
+    font-size: 18px;
+    padding: 0 0.5vw;
+    position: relative;
+}
+#Name:focus,#Email:focus,#Password:focus{
+    outline: none;
+}
+label.emailClick,
+.loginPage-name-div #Name:focus ~ label,
+.loginPage-name-div #Name:valid ~ label,
+.loginPage-email-div #Email:focus ~ label,
+.loginPage-email-div #Email:valid ~ label,
+.loginPage-password-div #Password:focus ~ label,
+.loginPage-password-div #Password:valid ~ label{
+    color: rgb(243, 241, 241);
+    background-color: rgb(44,124,151);
+    font-size: 13px;    
+    transform: translate(10% ,-140%);
+    border-radius: 20px;
+
+}
+.showPassword-p{
+    position: absolute;
+    margin-left: 18vw;
+    cursor: pointer;
+}
+.forgotPassword{
+    font-size: 15px;
+    color: rgb(10,102,194);
+    cursor: pointer;
+    margin-bottom: 2vh;
+}
+.forgotPassword:hover{
+    text-decoration: underline;
+
+}
+.loginPage-submit-btn{
+    width: 20vw;
+    height: 6vh;
+    border-radius: 3vh;
+    background-color: rgb(10,102,194);
+    border: 0.5px solid rgb(10,102,194);
+    color: white;
+    font-size: 20px;
+}
+.loginPage-submit-btn:hover{
+    background-color: rgb(15, 79, 143);
+}
+.loginPage-error-div{
+    margin: 3vh 0;
+    border: 0.5px solid rgb(231, 73, 73);
+    border-radius: 10px;
+    padding: 2vh 0.5vw;
+    width:20vw;
+    color:rgb(231, 73, 73);
+}
+
+
+/* Navbar Styling */
+nav{
+    height: 10vh;
+    width: 100vw;
+    box-sizing: border-box;
+    display: flex;
+    padding:0.5vh 1vw;
+    align-items: center;
+    border-bottom: 0.01px solid rgb(231, 222, 222);
+    font-family: Arial, Helvetica, sans-serif;
+}
+.navbar-homepage img{
+    height: 7vh;
+    border-radius: 50%;
+    cursor: pointer;
+}
+.navbar-searchbar img{
+    height: 3.5vh;
+    position: absolute;
+    margin-left: 1.8vw;
+    margin-top: 1.3vh;
+}
+.navbar-searchbar input{
+    height: 6vh;
+    width: 12vw;
+    border-radius: 7.5vw;
+    background-color: rgb(240, 239, 239);
+    border: none;
+    margin-left: 1vw;
+    margin-right: 53vw;
+    padding: 0 1vw;
+    padding-left: 3vw;
+    font-size: 14px ;
+    outline: none;
+}
+
+.navbar-publish-div,
+.navbar-login-div,
+.navbar-signup-div,
+.navbar-logout-div{
+    font-size: 15px;
+    border: none;
+    color: var(--unselected);
+    display: flex;
+    align-items: center;
+    gap: 0.5vw;
+    margin: 0 1vw ;
+    cursor: pointer;
+}
+.navbar-publish-div img,
+.navbar-signup-div img{
+    height: 4vh;
+    margin-top: 0.5vh;
+}
+.navbar-logout-div img{
+    height: 3.2vh;
+}
+.navbar-userinfo{
+    font-size: 18px;
+    border: none;
+    /* color: rgb(119, 117, 117); */
+    display: flex;
+    align-items: center;
+    gap: 0.5vw;
+    margin: 0 1vw ;
+    cursor: pointer;
+}
+.LoginAndSignup,
+.UserInfoAndLogout{
+    display: flex;
+    align-items: center;
+}
+
+/* user Page styling */
+
+.userPage-div{
+    display: flex;
+}
+.userPage-content-section{
+    width: 60vw;
+    min-height: 90vh;
+    box-sizing: border-box;
+    border-right: 0.5px solid rgb(219, 219, 219);
+    padding: 0 8vw;
+    overflow: hidden;
+}
+.UserPage-userName{
+    font-size: 40px;
+    margin:8vh 0;
+}
+.userPage-routes{
+    color: var(--unselected);
+    display: flex;
+    gap: 2.5vw;
+    font-size: 14px;
+    padding-bottom: 2vh;
+    border-bottom: 0.5px solid rgb(219, 219, 219);
+}
+.UserPage-Articles-div{
+    padding-top: 4vh;
+}
+.userPage-article{
+    padding: 4vh 0;
+    border-bottom: 0.5px solid rgb(219, 219, 219);
+}
+.userPage-article-title{
+    font-family: 'Lora' ;
+    font-size: 22px;
+    color: var(--font-color);
+    margin-bottom: 2vh;
+}
+.userPage-article-data{
+    font-family: 'Lora' ;
+    color: rgb(66, 65, 65);
+    font-size: 15px;
+}
+.userPage-article-details{
+    display: flex;
+    box-sizing: border-box;
+    /* max-width: 44vw; */
+    padding-top: 4vh;
+}
+.userPage-article-tag{
+    font-family: 'Lora' ;
+    height: 4vh;
+    padding:0 0.5vw;
+    padding-top: 0.8vh;
+    background-color: rgb(233, 229, 229);
+    border-radius: 2.4vh;
+    font-size: 15px;
+}
+.userPage-article-save-div img{
+    height: 3vh;
+    margin-left: 33vw;
+}
+.userPage-article-dots-div img{
+    height: 4vh;
+    transform: translateY(-15%);
+    margin-left: 2vw;
+}
+#userPage-profilePicture{
+    display: none;
+}
+.userPage-Bio-section-profileImage{
+    height: 10vh;
+    width: 10vh;
+    border-radius: 50%;
+    object-fit: cover;
+}
