@@ -1,4 +1,4 @@
 server/node_modules/
-.env/
+server/.env/
 dist/
 .vscode/

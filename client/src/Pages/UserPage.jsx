@@ -16,12 +16,11 @@ export default function UserPage() {
     const [error, seterror] = useState(null);
     const [PageIsLoading, setPageIsLoading] = useState(true);
 
-
     const Navigate = useNavigate();
 
 
     async function fetchingData() {
-        const response = await fetch('http://localhost:3000/article', {
+        const response = await fetch(`http://localhost:3000/article/user/${user._id}`, {
             method: 'GET',
             headers: {
                 'content-type': 'application/json',
@@ -98,7 +97,7 @@ export default function UserPage() {
 function Home({ userArticles, deleteFunction }) {
 
     return (
-        <div className="UserPage-Articles-div">
+        <div className="userPage-Home-div">
             {userArticles.map(article => (
                 <Article key={article._id} article={article} />
             ))}
@@ -211,7 +210,7 @@ function Article({ article }) {
                 {article.title}
             </h1>
             <p className="userPage-article-data">
-                {article.article.split('').splice(0, 150)}...
+                {article.article.split('').splice(0, 200)}...
             </p>
 
             <div className="userPage-article-details">

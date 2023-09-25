@@ -26,7 +26,7 @@ export default function App(){
         <Route path="/profile/*" element={<UserPage/>}/>
         <Route path="/article/write" element={<PublishPage/>}/>
         <Route path="/user/accounts" element={<Accounts/>}/>
-        <Route path="/user/account/:id" element={<AccountProfilePage/>}/>
+        <Route path="/user/account/:id/*" element={<AccountProfilePage/>}/>
         <Route path="/searchpage/:id/*" element={<SearchPage/>}/>
         <Route path="/article/:id" element={<ArticlePage/>} />
       </Routes>

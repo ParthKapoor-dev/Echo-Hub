@@ -22,12 +22,12 @@ router.put('/list/add' , addtolist);
 
 router.put('/list/remove' , removeFromList);
 
-router.get('/:query' , displayArticle)
+router.delete('/:query',deleteArticles)
 
-router.get('/',displayArticles);
-
-router.delete('/',deleteArticles)
+router.get('/user/:query',displayArticles);
 
 router.post('/write',publishArticle);
+
+router.get('/:query' , displayArticle)
 
 module.exports = router;

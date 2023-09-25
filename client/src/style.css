@@ -221,8 +221,8 @@ nav{
     overflow: hidden;
 }
 .userPage-content-section{
-    width: 60vw;
-    min-height: 90vh;
+    width:65vw;
+    min-height: 100vh;
     box-sizing: border-box;
     border-right: 0.5px solid rgb(219, 219, 219);
     padding: 0 8vw;
@@ -241,10 +241,10 @@ nav{
     border-bottom: 0.5px solid rgb(219, 219, 219);
     cursor: pointer;
 }
-.userPage-routes:hover{
+.userPage-routes p:hover{
     text-decoration: underline;
 }
-.UserPage-Articles-div{
+.userPage-home-div{
     padding-top: 4vh;
 }
 .userPage-article{
@@ -265,7 +265,6 @@ nav{
 .userPage-article-details{
     display: flex;
     box-sizing: border-box;
-    /* max-width: 44vw; */
     padding-top: 4vh;
 }
 .userPage-article-tag{
@@ -290,7 +289,7 @@ nav{
 /* USER PAGE BIO SECTION */
 .userPage-Bio-section-div{
     box-sizing: border-box;
-    width: 40vw;
+    width: 35vw;
     padding: 4vh 3.5vw;
     /* position: fixed;
     right: 0px; */
@@ -321,7 +320,7 @@ nav{
     padding-top: 2.8vh;
     font-size: 15px;
     font-family: 'lora';
-    padding-right: 10vw;
+    padding-right: 2vw;
     color:var(--unselected);
 }
 .userPage-Bio-section-myBio-edit{
@@ -366,32 +365,382 @@ nav{
 /* dialog box */
 
 .userPage-Bio-section-editProfile-dialogBox{
-    padding: 2vh 3vw;
+    padding: 4vh 3vw;
     box-sizing: border-box;
+    height: 85vh;
     width: 40vw;
-    margin: 2vh 30vw;
+    margin: 7.5vh 30vw;
     border: 0.5px solid rgb(230, 225, 225);
-    border-radius: 10px;
+    border-radius: 8px;
 }
 .userPage-Bio-section-editProfile-Heading{
     display: flex;
     justify-content: space-between;
+    margin-bottom: 2vh;
+}
+.userPage-Bio-section-editProfile-Heading button{
+    background-color: white;
+    border: none;
+}
+.userPage-Bio-section-editProfile-Heading button img{
+    height: 4vh;
+    object-fit: cover;
 }
 .userPage-Bio-section-editProfile-dialogBox-form img{
-    height: 15vh;
-    width: 15vh;
+    height: 12vh;
+    width: 12vh;
     border-radius: 50%;
     object-fit: cover;
+    margin-right: 2vw;
+    margin-top: 1vh;
+}
+.editProfile-Image-container{
+    display: flex;
+    /* align-items: center; */
 }
 #editProfile-Image{
     display: none;
 }
 .editProfile-Image-div label {
-    margin-left: 2vw;
     color: rgb(18, 138, 18);
-    font-size: 16px;
+    font-size: 15px;
     letter-spacing: 0.3px;
     width: 5.5vw;
     margin: 2vh 0;
     cursor: pointer;
+}
+.editProfile-Image-remove{
+    color: rgb(218, 68, 68);
+    font-size: 15px;
+    letter-spacing: 0.3px;
+    width: 5.5vw;
+    margin: 2vh 0;
+    cursor: pointer;
+}
+.editProfile-bio-div input,
+.editProfile-name-div input{
+    border: none;
+    font-size: 16px;
+    border-bottom: 0.5px solid rgb(190, 186, 186);
+    padding: 1vh 0;
+    margin-top: 2vh;
+    width: 30vw;
+}
+.editProfile-name-div input:focus-visible,
+.editProfile-bio-div input:focus-visible{
+    outline: none;
+}
+.editProfile-Image-heading,
+.editProfile-bio-heading,
+.editProfile-name-heading{
+    margin-top: 5vh;
+    font-size: 15px;
+    color: rgb(92, 88, 88);
+}
+.editProfile-bio-details,
+.editProfile-name-details{
+    margin-top: 0.5vh;
+    color: rgb(160, 157, 157);
+    font-size: 13px;
+}
+.editPage-buttons-div{
+    margin-top: 4vh;
+    display: flex;
+    justify-content: flex-end;
+}
+.editPage-cancel-button{
+    background-color: white;
+    border: 1px solid rgb(31, 179, 31);
+    color: rgb(31, 179, 31);
+    height: 6vh;
+    width: 7vw;
+    font-size: 15px;
+    border-radius: 3.5vw;
+    cursor: pointer;
+}
+
+.editPage-save-button{
+    background-color: rgb(31, 179, 31);
+    border: none;
+    color: white;
+    height: 6vh;
+    width: 7vw;
+    font-size: 15px;
+    border-radius: 3.5vw;
+    margin-left: 1.5vw;
+    cursor: pointer;
+}
+.editPage-save-button:hover{
+    background-color: rgb(14, 112, 14);
+}
+.editPage-cancel-button:hover{
+    color: rgb(14, 112, 14);
+    border-color:  rgb(14, 112, 14);
+}
+.editPage-save-button:disabled{
+    background-color: rgb(187, 233, 187);
+}
+
+/* Account Page */
+
+
+.accountPage-div{
+    display: flex;
+    /* margin-top: 10vh; */
+    overflow: hidden;
+}
+.accountPage-content-section{
+    width:65vw;
+    min-height: 100vh;
+    box-sizing: border-box;
+    border-right: 0.5px solid rgb(219, 219, 219);
+    padding: 0 8vw;
+    overflow: hidden;
+}
+.accountPage-userName{
+    font-size: 40px;
+    margin:8vh 0;
+}
+.accountPage-routes{
+    color: var(--unselected);
+    display: flex;
+    gap: 2.5vw;
+    font-size: 14px;
+    padding-bottom: 2vh;
+    border-bottom: 0.5px solid rgb(219, 219, 219);
+    cursor: pointer;
+}
+.accountPage-routes p:hover{
+    text-decoration: underline;
+}
+.accountPage-home-div{
+    padding-top: 4vh;
+}
+.accountPage-article{
+    padding: 4vh 0;
+    border-bottom: 0.5px solid rgb(219, 219, 219);
+}
+.accountPage-article-title{
+    font-family: 'Lora' ;
+    font-size: 22px;
+    color: var(--font-color);
+    margin-bottom: 2vh;
+}
+.accountPage-article-data{
+    font-family: 'Lora' ;
+    color: rgb(66, 65, 65);
+    font-size: 15px;
+}
+.accountPage-article-details{
+    display: flex;
+    box-sizing: border-box;
+    padding-top: 4vh;
+}
+.accountPage-article-tag{
+    font-family: 'Lora' ;
+    height: 4vh;
+    padding:0 0.5vw;
+    padding-top: 0.8vh;
+    background-color: rgb(233, 229, 229);
+    border-radius: 2.4vh;
+    font-size: 15px;
+}
+.accountPage-article-save-div img{
+    height: 3vh;
+    margin-left: 33vw;
+}
+.accountPage-article-dots-div img{
+    height: 4vh;
+    transform: translateY(-15%);
+    margin-left: 2vw;
+}
+
+/* ACCOUNT PAGE BIO SECTION */
+.accountPage-Bio-section-div{
+    box-sizing: border-box;
+    width: 35vw;
+    padding: 4vh 3.5vw;
+    /* position: fixed;
+    right: 0px; */
+}
+#accountPage-profilePicture{
+    display: none;
+}
+.accountPage-Bio-section-profileImage{
+    height: 12vh;
+    width: 12vh;
+    border-radius: 50%;
+    object-fit: cover;
+}
+.accountPage-Bio-section-userName{
+    font-weight: 600;
+    color: rgb(46, 46, 46);
+    padding-top: 2.5vh;
+    font-family: 'lora';
+    font-size: 18px;
+}
+.accountPage-Bio-section-followers-count{
+    padding-top: 0.3vh;
+    font-family: 'lora';
+    font-size: 17px;
+    color: var(--unselected);
+}
+.accountPage-Bio-section-myBio{
+    padding-top: 2.8vh;
+    font-size: 15px;
+    font-family: 'lora';
+    padding-right: 2vw;
+    color:var(--unselected);
+}
+.accountPage-Bio-section-myBio-edit{
+    color: rgb(18, 138, 18);
+    font-size: 14px;
+    letter-spacing: 0.3px;
+    width: 5.5vw;
+    margin: 2vh 0;
+    cursor: pointer;
+}
+.accountPage-Bio-section-myBio-edit:hover{
+    color: rgb(18, 54, 18);
+}
+.accountPage-Bio-section-followings-header{
+    font-size: 15px;
+    padding: 1vh 0;
+    margin-bottom: 2vh;
+}
+.accountPage-Bio-section-following-details{
+    display: flex;
+    align-items: center;
+    padding: 1vh 1vw; 
+    font-family: 'lora';
+    font-size: 16px;
+    color: rgb(66, 65, 65);
+    cursor: pointer;
+    transition: all 0.25s ease-out;
+}
+.accountPage-Bio-section-following-details:hover{
+    color: rgb(163, 149, 19);
+}
+.accountPage-Bio-section-following-details img{
+    height: 4vh;
+    width: 4vh;
+    border-radius: 50%;
+    border: 0.1px solid rgb(192, 189, 189);
+    margin-right: 1vw;
+    font-weight: 100;
+    overflow: hidden;
+}
+.accountPage-Bio-section-Follow-btn{
+    background-color: rgb(31, 179, 31);
+    border: none;
+    color: white;
+    height: 5vh;
+    width: 7vw;
+    font-size: 15px;
+    border-radius: 3.5vw;
+    cursor: pointer;
+    margin: 4vh 0;
+}
+.accountPage-Bio-section-Following-btn{
+    background-color: white;
+    border: 1px solid rgb(31, 179, 31);
+    color: rgb(31, 179, 31);
+    height: 5vh;
+    width: 7vw;
+    font-size: 15px;
+    border-radius: 3.5vw;
+    cursor: pointer;
+    margin: 4vh 0;
+}
+#accountPage-Bio-section-toggleFollow-btn:disabled{
+    background-color: rgb(187, 233, 187);
+    border: none;
+}
+
+/* LandingPage */
+
+.landingPage-div{
+    display: flex;
+    /* margin-top: 10vh; */
+    overflow: hidden;
+}
+.landingPage-content-section{
+    width:65vw;
+    min-height: 100vh;
+    box-sizing: border-box;
+    border-right: 0.5px solid rgb(219, 219, 219);
+    padding: 0 8vw;
+    overflow: hidden;
+}
+.landingPage-userName{
+    font-size: 40px;
+    margin:8vh 0;
+}
+.landingPage-routes{
+    color: var(--unselected);
+    display: flex;
+    gap: 2.5vw;
+    font-size: 14px;
+    padding-bottom: 2vh;
+    border-bottom: 0.5px solid rgb(219, 219, 219);
+    cursor: pointer;
+}
+.landingPage-routes p:hover{
+    text-decoration: underline;
+}
+.landingPage-home-div{
+    padding-top: 4vh;
+}
+.landingPage-article{
+    padding: 4vh 0;
+    border-bottom: 0.5px solid rgb(219, 219, 219);
+}
+.landingPage-article-accountDetails{
+    display: flex;
+    align-items: center;
+}
+.landingPage-article-accountDetails p{
+    font-family: 'lora';
+}
+.landingPage-article-accountDetails img{
+    height: 5vh;
+    width: 5vh;
+    border-radius: 50%;
+    object-fit:cover;
+    border: 0.1px solid rgb(226, 222, 222);
+    margin-right: 1vw;
+}
+.landingPage-article-title{
+    font-family: 'Lora' ;
+    font-size: 22px;
+    color: var(--font-color);
+    margin-bottom: 2vh;
+}
+.landingPage-article-data{
+    font-family: 'Lora' ;
+    color: rgb(66, 65, 65);
+    font-size: 15px;
+}
+.landingPage-article-details{
+    display: flex;
+    box-sizing: border-box;
+    padding-top: 4vh;
+}
+.landingPage-article-tag{
+    font-family: 'Lora' ;
+    height: 4vh;
+    padding:0 0.5vw;
+    padding-top: 0.8vh;
+    background-color: rgb(233, 229, 229);
+    border-radius: 2.4vh;
+    font-size: 15px;
+}
+.landingPage-article-save-div img{
+    height: 3vh;
+    margin-left: 33vw;
+}
+.landingPage-article-dots-div img{
+    height: 4vh;
+    transform: translateY(-15%);
+    margin-left: 2vw;
 }

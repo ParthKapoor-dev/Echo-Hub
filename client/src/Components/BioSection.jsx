@@ -1,4 +1,5 @@
 import ProfilePic from "../../images/profilePicture.png"
+import CancelPng from "../../images/cancel.png"
 
 import { useEffect, useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
@@ -179,6 +180,10 @@ function EditProfile({ ConvertToBase64, editProfileRef }) {
         const base64 = await ConvertToBase64(file);
         setEditProfileImg(base64);
     }
+    async function handleProfileImageRemove() {
+        const base64 = await ConvertToBase64(ProfilePic);
+        setEditProfileImg(base64);
+    }
     function handleEditProfileClose(event) {
         if (event) event.preventDefault();
         if (user?.bio) setEditProfileBio(user.bio);
@@ -195,37 +200,59 @@ function EditProfile({ ConvertToBase64, editProfileRef }) {
         <dialog ref={editProfileRef} className="userPage-Bio-section-editProfile-dialogBox">
             <div className="userPage-Bio-section-editProfile-Heading">
                 <h2>Profile Information</h2>
-                <button onClick={handleEditProfileClose}>close</button>
+                <button onClick={handleEditProfileClose}>
+                    <img src={CancelPng} alt="X" />
+                </button>
             </div>
             <form className="userPage-Bio-section-editProfile-dialogBox-form">
                 <div className="editProfile-Image-div">
-                    <p htmlFor="editProfile-Image">
+                    <p className="editProfile-Image-heading">
                         Photo
                     </p>
-                    <img src={editProfileImg} />
-                    <input type="file" id="editProfile-Image" accept="image/*" onChange={handleProfileImageChange} />
-                    <label htmlFor="editProfile-Image">
-                        Update
-                    </label>
+                    <div className="editProfile-Image-container">
+                        <img src={editProfileImg} />
+
+                        <input type="file" id="editProfile-Image" accept="image/*" onChange={handleProfileImageChange} />
+
+                        <label htmlFor="editProfile-Image">
+                            Update
+                        </label>
+
+                        <p className="editProfile-Image-remove" onClick={handleProfileImageRemove}>
+                            Remove
+                        </p>
+                    </div>
                 </div>
 
                 <div className="editProfile-name-div">
-                    <label htmlFor="editProfile-name">
-                        Name
-                    </label>
+                    <p className="editProfile-name-heading">
+                        Name*
+                    </p>
                     <input type="text" id="editProfile-name" value={editProfileName} onChange={(e) => setEditProfileName(e.target.value)} />
+                    <p className="editProfile-name-details">
+                        Appears on your Profile page, as your byline, and in your responses.
+                    </p>
                 </div>
 
                 <div className="editProfile-bio-div">
-                    <label htmlFor="editProfile-bio">
+                    <p className="editProfile-bio-heading">
                         Bio
-                    </label>
+                    </p>
                     <input type="text" id="editProfile-bio" value={editProfileBio} onChange={(e) => setEditProfileBio(e.target.value)} />
+                    <p className="editProfile-bio-details">
+                        Appears on your Profile and next to your stories.
+                    </p>
                 </div>
 
+                <div className="editPage-buttons-div">
+                    <button className="editPage-cancel-button" onClick={handleEditProfileClose}>
+                        Cancel
+                    </button>
+                    <button className="editPage-save-button" disabled={handleSaveButtonDisabled()} ref={editProfileSaveRef} onClick={handleSaveProfile} >
+                        Save
+                    </button>
+                </div>
 
-                <button onClick={handleEditProfileClose}>Cancel</button>
-                <button disabled={handleSaveButtonDisabled()} ref={editProfileSaveRef} onClick={handleSaveProfile} >save</button>
             </form>
         </dialog>
     )

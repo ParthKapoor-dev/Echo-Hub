@@ -4,11 +4,17 @@ async function articleFeed(req , res){
     const userId = req.params.query;
 
     try{
-        const following = await User.find({_id : userId}).select('following');
+        const following = await User.find({_id : userId}).select('following name');
         const articles = await Promise.all(following[0].following.map( 
-            async (followId) => await Article.find({userId : followId})))
+            async (followId) =>{
+                const article = await Article.find({userId : followId})
+                const profilePicture = await User.find({_id : followId}).select('profilePicture');
 
-        const finalArticles = articles.filter(item => item.length)
+                const data = {...article , profilePicture : profilePicture[0].profilePicture};
+                return data;
+            }))
+        
+        const finalArticles = articles.filter(item =>item['0']);
         res.json(finalArticles)
     }catch(error){
         console.log(error);
@@ -78,7 +84,7 @@ async function removeFromList(req , res) {
     }
 }
 async function displayArticles(req , res){
-    const userId = req.user._id;
+    const userId = req.params.query;
     try{
         const articles = await Article.find({userId});
         res.json(articles);
