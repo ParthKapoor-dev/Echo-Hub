@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import useUserContext from "../hooks/useUserContext"
 import { useNavigate } from "react-router-dom";
 
@@ -39,14 +39,34 @@ export default function LandingPage() {
         if (token && user) fetchingData();
     }, [user, token])
 
+    function handleRemoveFromFeed(articleId){
+        const newArticles = Articles.map(articleData=>(
+            articleData.filter(article=>{
+                if( !article?._id || article?._id !== articleId) {
+                    return 1;
+                }
+                return 0;
+            })
+        ))
+        setArticles(newArticles)
+    }
+
     return (
         <>
             {!PageIsLoading ? (
                 <div className="landingPage-div">
                     <div className="landingPage-content-section">
-                        {Articles.map(article => (
-                            <Article key={article[0]._id} articleData={article} />
-                        ))}
+                        {Articles.map((articleData)=>{
+                            const profilePicture = articleData[articleData.length -1];
+                            return(
+                                articleData.map((article,index)=>{
+                                    if(index == articleData.length - 1) return
+                                    return (
+                                        <Article key={article._id} article={article} profilePicture={profilePicture} handleRemoveFromFeed={handleRemoveFromFeed} />
+                                    )
+                                })
+                            )
+                        })}
                     </div>
 
                 </div>
@@ -62,9 +82,8 @@ export default function LandingPage() {
 
     )
 }
-function Article({ articleData }) {
-    const article = articleData[0];
-    const profilePicture = articleData.profilePicture;
+function Article({ article ,profilePicture, handleRemoveFromFeed}) {
+    const OptionsRef = useRef();
     const { user, token, dispatch } = useUserContext();
     const Navigate = useNavigate();
     const [save, setSave] = useState(() => {
@@ -79,8 +98,19 @@ function Article({ articleData }) {
         if (dots == DotStaticPlain) setDots(DotHover);
     }
     function handleMouseUp() {
-        if (dots == DotStaticFilled) setDots(DotStaticPlain);
-        else setDots(DotStaticFilled);
+        if (dots == DotStaticFilled) {
+            setDots(DotStaticPlain);
+            OptionsRef.current.style.transform = "translateY(-20%)";
+            OptionsRef.current.style.opacity = 0;
+            setTimeout(() => OptionsRef.current.close(), 250);
+        }
+        else {
+            setDots(DotStaticFilled);
+            OptionsRef.current.show();
+            OptionsRef.current.style.opacity = 1;
+            OptionsRef.current.style.transform = "translateY(0)";
+        }
+
     }
     function handleArticlePage() {
         Navigate(`/article/${article.title}`, { state: { articleId: article._id } })
@@ -123,7 +153,7 @@ function Article({ articleData }) {
         <div className="landingPage-article">
 
             <div className="landingPage-article-accountDetails">
-                {profilePicture ? <img src={profilePicture}/> : <img src={ProfilePic}/>}
+                {profilePicture ? <img src={profilePicture} /> : <img src={ProfilePic} />}
                 <p className="landingPage-article-accountDetails-userName">
                     {article.userName}
                 </p>
@@ -148,6 +178,20 @@ function Article({ articleData }) {
                 <div className="landingPage-article-dots-div" >
                     <img src={dots} alt="settings" onMouseEnter={handleMouseEnter} onMouseUp={handleMouseUp} onMouseLeave={handleMouseLeave} />
                 </div>
+                <dialog ref={OptionsRef} className="landingPage-article-dialog">
+                    <div className="landingPage-article-dialog-settingsAndEdit">
+                        <p className="landingPage-article-dialog-muteAuthor">
+                            Mute this author
+                        </p>
+                        <p className="landingPage-article-dialog-Report">
+                            Report
+                        </p>
+                    </div>
+                    <p className="landingPage-article-dialog-removeFromFeed" onClick={()=>handleRemoveFromFeed(article._id)}>
+                        Remove from feed
+                    </p>
+
+                </dialog>
             </div>
         </div>
     )

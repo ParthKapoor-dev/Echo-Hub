@@ -285,6 +285,35 @@ nav{
     transform: translateY(-15%);
     margin-left: 2vw;
 }
+.userPage-article-dialog,
+.landingPage-article-dialog{
+    border : 0.5px solid rgb(218, 213, 213);
+    outline: none;
+    border-radius: 5px;
+    margin-left: 43.5vw;
+    margin-top: 4.5vh;
+    opacity: 0;
+    transform: translateY(-20%);
+    transition: all 0.25s ease-out;
+}
+.userPage-article-dialog-settingsAndEdit,
+.landingPage-article-dialog-settingsAndEdit {
+    border-bottom: 0.5px solid rgb(226, 223, 223);
+    margin-bottom: 2vh;
+}
+.userPage-article-dialog-deleteStory,
+.landingPage-article-dialog-removeFromFeed{
+    color: rgb(212, 51, 51) !important;
+}
+.landingPage-article-dialog p,
+.userPage-article-dialog p{
+    font-size: 15px;
+    font-family: 'lora';
+    color: rgb(56, 55, 55);
+    margin-bottom: 2vh;
+    cursor: pointer;
+}
+
 
 /* USER PAGE BIO SECTION */
 .userPage-Bio-section-div{

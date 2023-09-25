@@ -22,7 +22,7 @@ router.put('/list/add' , addtolist);
 
 router.put('/list/remove' , removeFromList);
 
-router.delete('/:query',deleteArticles)
+router.delete('/',deleteArticles)
 
 router.get('/user/:query',displayArticles);
 

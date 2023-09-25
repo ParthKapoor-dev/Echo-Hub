@@ -9,8 +9,7 @@ async function articleFeed(req , res){
             async (followId) =>{
                 const article = await Article.find({userId : followId})
                 const profilePicture = await User.find({_id : followId}).select('profilePicture');
-
-                const data = {...article , profilePicture : profilePicture[0].profilePicture};
+                const data = [...article , profilePicture[0].profilePicture];
                 return data;
             }))
         
@@ -94,9 +93,9 @@ async function displayArticles(req , res){
     }
 }
 async function deleteArticles(req , res){
-    const { userId , _id } = req.body;
+    const { _id } = req.body;
     try{
-        const articles = await Article.deleteOne({userId , _id});
+        const articles = await Article.findOneAndDelete({_id});
         res.json(articles)
     }catch(error){
         console.log(error);

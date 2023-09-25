@@ -154,7 +154,8 @@ function EditProfile({ ConvertToBase64, editProfileRef }) {
         const updatedProfile = {};
         if (editProfileBio !== user.bio) updatedProfile.bio = editProfileBio;
         if (editProfileName !== user.name) updatedProfile.name = editProfileName;
-        if (editProfileImg !== user.profilePicture) updatedProfile.profilePicture = editProfileImg;
+        if (editProfileImg === ProfilePic) updatedProfile.profilePicture = null;
+        else if (editProfileImg !== user.profilePicture) updatedProfile.profilePicture = editProfileImg;
         const response = await fetch(`http://localhost:3000/accounts/update/profile/${user._id}`, {
             method: "PUT",
             headers: {
@@ -181,8 +182,7 @@ function EditProfile({ ConvertToBase64, editProfileRef }) {
         setEditProfileImg(base64);
     }
     async function handleProfileImageRemove() {
-        const base64 = await ConvertToBase64(ProfilePic);
-        setEditProfileImg(base64);
+        setEditProfileImg(ProfilePic);
     }
     function handleEditProfileClose(event) {
         if (event) event.preventDefault();

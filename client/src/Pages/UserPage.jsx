@@ -36,15 +36,15 @@ export default function UserPage() {
             seterror(json.message)
         }
     }
-    async function handleDeleteArticle(event, userId, _id) {
+    async function handleDeleteArticle(event, _id) {
         event.preventDefault();
-        const response = await fetch('http://localhost:3000/article/', {
+        const response = await fetch('http://localhost:3000/article', {
             method: "DELETE",
             headers: {
                 'content-type': 'application/json',
                 'authorization': `Bearer ${token}`
             },
-            body: JSON.stringify({ userId, _id })
+            body: JSON.stringify({ _id})
         });
         const json = await response.json();
 
@@ -99,7 +99,7 @@ function Home({ userArticles, deleteFunction }) {
     return (
         <div className="userPage-Home-div">
             {userArticles.map(article => (
-                <Article key={article._id} article={article} />
+                <Article key={article._id} article={article} deleteFunction={deleteFunction} />
             ))}
         </div>
     )
@@ -149,8 +149,9 @@ function Lists() {
     )
 }
 
-function Article({ article }) {
+function Article({ article , deleteFunction }) {
     const { user, token, dispatch } = useUserContext();
+    const OptionsRef = useRef();
     const Navigate = useNavigate();
     const [save, setSave] = useState(() => {
         if (user?.list.includes(article._id)) return SaveFilledPng;
@@ -160,12 +161,24 @@ function Article({ article }) {
     function handleMouseLeave() {
         if (dots == DotHover) setDots(DotStaticPlain)
     }
+
     function handleMouseEnter() {
         if (dots == DotStaticPlain) setDots(DotHover);
     }
     function handleMouseUp() {
-        if (dots == DotStaticFilled) setDots(DotStaticPlain);
-        else setDots(DotStaticFilled);
+        if (dots == DotStaticFilled) {
+            setDots(DotStaticPlain);
+            OptionsRef.current.style.transform = "translateY(-20%)";
+            OptionsRef.current.style.opacity = 0;
+            setTimeout(()=>OptionsRef.current.close(),250);
+        }
+        else {
+            setDots(DotStaticFilled);
+            OptionsRef.current.show();
+            OptionsRef.current.style.opacity = 1;
+            OptionsRef.current.style.transform = "translateY(0)";
+        }
+
     }
     function handleArticlePage() {
         Navigate(`/article/${article.title}`, { state: { articleId: article._id } })
@@ -226,6 +239,21 @@ function Article({ article }) {
                 <div className="userPage-article-dots-div" >
                     <img src={dots} alt="settings" onMouseEnter={handleMouseEnter} onMouseUp={handleMouseUp} onMouseLeave={handleMouseLeave} />
                 </div>
+                <dialog ref={OptionsRef} className="userPage-article-dialog">
+                    <div className="userPage-article-dialog-settingsAndEdit">
+                        <p className="userPage-article-dialog-editStory">
+                            Edit Story
+                        </p>
+                        <p className="userPage-article-dialog-StorySettings">
+                            Story settings
+                        </p>
+                    </div>
+
+                    <p className="userPage-article-dialog-deleteStory" onClick={(e)=>deleteFunction(e,article._id)}>
+                        Delete Story
+                    </p>
+                </dialog>
+
             </div>
         </div>
     )
