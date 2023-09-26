@@ -7,7 +7,7 @@ async function userSearch(req , res){
         const users = await User.find({});
         const relatedUsers = users.filter(user=>user.name.toLowerCase().includes(query));
         res.json(relatedUsers);
-    }catch(error){
+    }catch(error){  
         console.log(error);
         res.json({message : error.message});
     }
@@ -18,7 +18,12 @@ async function articleSearch(req , res){
     try{
         const articles = await Article.find({});
         const relatedArticle = articles.filter(article=>article.title.toLowerCase().includes(query));
-        res.json(relatedArticle);
+        const finalArticles = await Promise.all(relatedArticle.map(async (article)=>{
+            const profilePicture = await User.findOne({_id : article.userId}).select('profilePicture');
+            const data = {...article._doc , profilePicture : profilePicture.profilePicture};
+            return data;
+        }))
+        res.json(finalArticles);
     }catch(error){
         console.log(error);
         res.json({message : error.message});

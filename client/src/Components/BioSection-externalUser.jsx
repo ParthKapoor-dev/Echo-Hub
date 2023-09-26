@@ -97,7 +97,7 @@ export default function BioSectionExternalUser({ AccountDetails , setAccountDeta
             }
         }
         if (token && user) fetchingData();
-    }, [user, token]);
+    }, [user, token , AccountDetails]);
 
 
     return (
@@ -128,12 +128,12 @@ export default function BioSectionExternalUser({ AccountDetails , setAccountDeta
 
             <div className="accountPage-Bio-section-followings">
                 <h4 className="accountPage-Bio-section-followings-header">Following</h4>
-                {followings.length && followings.map(item => (
+                {followings.length ? followings.map(item => (
                     <div key={item._id} className="accountPage-Bio-section-following-details" onClick={() => Navigate(`/user/account/${item._id}`, { state: { userId: item._id } })}>
                         {item.profilePicture ? (<img src={item.profilePicture} />) : (<img src={ProfilePic} />)}
                         {item.name}
                     </div>
-                ))}
+                )) : "No Followings"}
             </div>
 
 

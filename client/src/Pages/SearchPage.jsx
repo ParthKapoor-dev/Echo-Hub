@@ -1,45 +1,54 @@
-import { useLocation , useNavigate , Routes , Route } from "react-router-dom";
-import UserSearchPage from "../Components/userSearchPage";
-import ArticleSearchPage from "../Components/articleSearchPage";
-import { useEffect , useState } from "react";
-export default function SearchPage(){
-    const [searchQuery , setSearchQuery] = useState();
+import { useLocation, useNavigate, Routes, Route } from "react-router-dom";
+import UsersearchPage from "../Components/usersearchPage";
+import ArticlesearchPage from "../Components/articleSearchPage";
+import { useEffect, useState } from "react";
+export default function searchPage() {
+    const [searchQuery, setSearchQuery] = useState();
     const Navigate = useNavigate();
     const location = useLocation();
     const locationQuery = location.state
 
-    console.log('this is searchquery inside the searchpage');
-    console.log(searchQuery);
+    useEffect(() => {
 
-    useEffect(()=>{
-        
-        if(locationQuery) {
-            localStorage.setItem('searchQuery',JSON.stringify(locationQuery));
+        if (locationQuery) {
+            localStorage.setItem('searchQuery', JSON.stringify(locationQuery));
             setSearchQuery(locationQuery)
-        }else{
+        } else {
             const query = JSON.parse(localStorage.getItem('searchQuery'));
             setSearchQuery(query)
         }
-        
-    },[locationQuery ])
-    
-    function handleUsers(){
-        Navigate(`/searchpage/${searchQuery}/user`)
+
+    }, [locationQuery])
+
+    function handleUsers() {
+        Navigate(`/searchPage/${searchQuery}/user`)
     }
-    function handleArticles(){
-        Navigate(`/searchpage/${searchQuery}/article`)
+    function handleArticles() {
+        Navigate(`/searchPage/${searchQuery}/article`)
     }
     return (
-        <div className="searchpage-div">
-            <button className="searchusers" onClick={handleUsers}>Users</button>
-            <button className="searcharticles" onClick={handleArticles}>Articles</button>
+                <div className="searchPage-div">
+                    <div className="searchPage-content-section">
+                        <h3 className="searchPage-searchDetails"> 
+                         <span>Results For</span> {searchQuery} 
+                         </h3>
 
-            <Routes>
-                <Route path="/" element={<UserSearchPage searchQuery={searchQuery}/>} />
-                <Route path="/article" element={<ArticleSearchPage searchQuery={searchQuery} />} />
-                <Route path="/user" element={<UserSearchPage searchQuery={searchQuery}/>} />
-            </Routes>
-           
-        </div>
+                        <div className="searchPage-routes">
+                            <p className="searchPage-Home-route" onClick={handleArticles}>Articles</p>
+                            <p className="searchPage-Lists-route" onClick={handleUsers}>Users</p>
+                        </div>
+
+                        <Routes>
+                            <Route path="/" element={<ArticlesearchPage searchQuery={searchQuery}/>}/>
+                            <Route path="/article" element={<ArticlesearchPage searchQuery={searchQuery}/>}/>
+                            <Route path="/user" element={<UsersearchPage searchQuery={searchQuery}/>}/>
+
+                        </Routes>
+
+                    </div>
+
+                    {/* <BioSection /> */}
+                    {/* {error && <div className="error-div">{error}</div>} */}
+                </div>
     )
 }

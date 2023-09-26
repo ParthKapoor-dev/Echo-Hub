@@ -285,6 +285,7 @@ nav{
     transform: translateY(-15%);
     margin-left: 2vw;
 }
+.article-searchPage-dialog,
 .userPage-article-dialog,
 .landingPage-article-dialog{
     border : 0.5px solid rgb(218, 213, 213);
@@ -296,15 +297,18 @@ nav{
     transform: translateY(-20%);
     transition: all 0.25s ease-out;
 }
+.article-searchPage-dialog-settingsAndEdit,
 .userPage-article-dialog-settingsAndEdit,
 .landingPage-article-dialog-settingsAndEdit {
     border-bottom: 0.5px solid rgb(226, 223, 223);
     margin-bottom: 2vh;
 }
+.article-searchPage-dialog-removeFromFeed,
 .userPage-article-dialog-deleteStory,
 .landingPage-article-dialog-removeFromFeed{
     color: rgb(212, 51, 51) !important;
 }
+.article-searchPage-dialog p,
 .landingPage-article-dialog p,
 .userPage-article-dialog p{
     font-size: 15px;
@@ -772,4 +776,260 @@ nav{
     height: 4vh;
     transform: translateY(-15%);
     margin-left: 2vw;
+}
+
+/* Search Page */
+
+
+/* User Search Page */
+
+.searchPage-div{
+    display: flex;
+    /* margin-top: 10vh; */
+    overflow: hidden;
+}
+.searchPage-content-section{
+    width:65vw;
+    min-height: 100vh;
+    box-sizing: border-box;
+    border-right: 0.5px solid rgb(219, 219, 219);
+    padding: 0 8vw;
+    overflow: hidden;
+}
+.searchPage-searchDetails{
+    font-size: 40px;
+    margin:8vh 0;
+}
+.searchPage-routes{
+    color: var(--unselected);
+    display: flex;
+    gap: 2.5vw;
+    font-size: 14px;
+    padding-bottom: 2vh;
+    border-bottom: 0.5px solid rgb(219, 219, 219);
+    cursor: pointer;
+}
+.searchPage-routes p:hover{
+    text-decoration: underline;
+}
+.searchPage-home-div{
+    padding-top: 4vh;
+}
+.searchPage-article{
+    padding: 4vh 0;
+    border-bottom: 0.5px solid rgb(219, 219, 219);
+}
+.searchPage-article-title{
+    font-family: 'Lora' ;
+    font-size: 22px;
+    color: var(--font-color);
+    margin-bottom: 2vh;
+}
+.searchPage-article-data{
+    font-family: 'Lora' ;
+    color: rgb(66, 65, 65);
+    font-size: 15px;
+}
+.searchPage-article-details{
+    display: flex;
+    box-sizing: border-box;
+    padding-top: 4vh;
+}
+.searchPage-article-tag{
+    font-family: 'Lora' ;
+    height: 4vh;
+    padding:0 0.5vw;
+    padding-top: 0.8vh;
+    background-color: rgb(233, 229, 229);
+    border-radius: 2.4vh;
+    font-size: 15px;
+}
+.searchPage-article-save-div img{
+    height: 3vh;
+    margin-left: 33vw;
+}
+.searchPage-article-dots-div img{
+    height: 4vh;
+    transform: translateY(-15%);
+    margin-left: 2vw;
+}
+.searchPage-article-dialog{
+    border : 0.5px solid rgb(218, 213, 213);
+    outline: none;
+    border-radius: 5px;
+    margin-left: 43.5vw;
+    margin-top: 4.5vh;
+    opacity: 0;
+    transform: translateY(-20%);
+    transition: all 0.25s ease-out;
+}
+.searchPage-article-dialog-settingsAndEdit{
+    border-bottom: 0.5px solid rgb(226, 223, 223);
+    margin-bottom: 2vh;
+}
+.searchPage-article-dialog-deleteStory{
+    color: rgb(212, 51, 51) !important;
+}
+.SearchPage-article-dialog p{
+    font-size: 15px;
+    font-family: 'lora';
+    color: rgb(56, 55, 55);
+    margin-bottom: 2vh;
+    cursor: pointer;
+}
+
+.user-searchPage-account-div{
+    display: flex;
+    align-items: center;
+    padding: 4vh 0;
+    border-bottom: 0.5px solid rgb(214, 211, 211);
+}
+
+.user-searchPage-div img{
+    height: 8vh;
+    width: 8vh;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 0.1px solid rgb(216, 212, 212);
+    margin-right: 2vw;
+}
+.user-searchPage-account-details-div{
+    width: 35vw;
+}
+.user-searchPage-account-name{
+    font-family: 'lora';
+    font-size: 16px;
+}
+.user-searchPage-account-bio{
+    margin-top: 1vh;
+    font-family: 'lora';
+    font-size: 14px;
+    color: rgb(80, 77, 77);
+}
+/* Article Search Page */
+
+
+.article-searchPage-div{
+    display: flex;
+    /* margin-top: 10vh; */
+    overflow: hidden;
+}
+.article-searchPage-content-section{
+    width:65vw;
+    min-height: 100vh;
+    box-sizing: border-box;
+    border-right: 0.5px solid rgb(219, 219, 219);
+    padding: 0 8vw;
+    overflow: hidden;
+}
+.article-searchPage-userName{
+    font-size: 40px;
+    margin:8vh 0;
+}
+.article-searchPage-routes{
+    color: var(--unselected);
+    display: flex;
+    gap: 2.5vw;
+    font-size: 14px;
+    padding-bottom: 2vh;
+    border-bottom: 0.5px solid rgb(219, 219, 219);
+    cursor: pointer;
+}
+.article-searchPage-routes p:hover{
+    text-decoration: underline;
+}
+.article-searchPage-home-div{
+    padding-top: 4vh;
+}
+.article-searchPage-article{
+    padding: 4vh 0;
+    border-bottom: 0.5px solid rgb(219, 219, 219);
+}
+.article-searchPage-article-accountDetails{
+    display: flex;
+    align-items: center;
+}
+.article-searchPage-article-accountDetails p{
+    font-family: 'lora';
+}
+.article-searchPage-article-accountDetails img{
+    height: 5vh;
+    width: 5vh;
+    border-radius: 50%;
+    object-fit:cover;
+    border: 0.1px solid rgb(226, 222, 222);
+    margin-right: 1vw;
+}
+.article-searchPage-article-title{
+    font-family: 'Lora' ;
+    font-size: 22px;
+    color: var(--font-color);
+    margin-bottom: 2vh;
+}
+.article-searchPage-article-data{
+    font-family: 'Lora' ;
+    color: rgb(66, 65, 65);
+    font-size: 15px;
+}
+.article-searchPage-article-details{
+    display: flex;
+    box-sizing: border-box;
+    padding-top: 4vh;
+}
+.article-searchPage-article-tag{
+    font-family: 'Lora' ;
+    height: 4vh;
+    padding:0 0.5vw;
+    padding-top: 0.8vh;
+    background-color: rgb(233, 229, 229);
+    border-radius: 2.4vh;
+    font-size: 15px;
+}
+.article-searchPage-article-save-div img{
+    height: 3vh;
+    margin-left: 33vw;
+}
+.article-searchPage-article-dots-div img{
+    height: 4vh;
+    transform: translateY(-15%);
+    margin-left: 2vw;
+}
+
+
+/* Publish Article Page */
+
+.publishPage-form{
+    display: flex;
+    flex-direction: column;
+    padding: 7vh 20vw;
+}
+#publishPage-title::placeholder,
+#publishPage-article::placeholder{
+    color: rgb(182, 179, 179);
+}
+#publishPage-title{
+    font-size: 40px;
+    font-family: 'lora';
+    border: none;
+    outline: none;
+    color: rgb(49, 48, 48);
+}
+#publishPage-article{
+    padding: 1.5vh 0.1vw;
+    font-size: 20px;
+    font-family: 'lora';
+    border: none;
+    outline: none;
+    color: rgb(49, 48, 48);
+}
+.publishPage-submit{
+    background-color: rgb(31, 179, 31);
+    border: none;
+    color: white;
+    height: 5vh;
+    width: 7vw;
+    font-size: 15px;
+    border-radius: 3.5vw;
+    cursor: pointer;
+    margin: 4vh 0;
 }
