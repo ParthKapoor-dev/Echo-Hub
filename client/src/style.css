@@ -997,7 +997,6 @@ nav{
 
 
 /* Publish Article Page */
-
 .publishPage-form{
     display: flex;
     flex-direction: column;
@@ -1032,4 +1031,43 @@ nav{
     border-radius: 3.5vw;
     cursor: pointer;
     margin: 4vh 0;
+}
+
+/* Article Page */
+
+.articlePage-div{
+    display: flex;
+    flex-direction: column;
+    padding: 7vh 24vw;
+}
+.articlePage-title{
+    font-size: 40px;
+    font-family: 'lora';
+    border: none;
+    outline: none;
+    color: rgb(49, 48, 48);
+}
+.articlePage-user-details {
+    display: flex;
+    align-items: center;
+    margin: 3vh 0;
+}
+.articlePage-user-details img{
+    height: 7vh;
+    width: 7vh;
+    object-fit: cover;
+    border-radius: 50%;
+    margin-right: 1vw;
+}
+.articlePage-user-details p{
+    font-size: 17px;
+    font-family: 'lora';
+}
+.articlePage-article-div{
+    font-size: 20px;
+    font-family: 'lora';
+    border: none;
+    outline: none;
+    color: rgb(49, 48, 48);
+
 }

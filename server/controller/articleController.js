@@ -2,7 +2,7 @@ const Article = require('../model/articleModel');
 const User = require('../model/userModel')
 async function articleFeed(req , res){
     const userId = req.params.query;
-
+ 
     try{
         const following = await User.find({_id : userId}).select('following name');
         const articles = await Promise.all(following[0].following.map( 
@@ -40,17 +40,21 @@ async function displayArticle(req , res){
 
     try{
         const article = await Article.findOne({_id : searchQuery});
-        res.json(article);
+        const profilePicture = await User.findOne({_id : article.userId}).select('profilePicture');
+
+        const finalData = {...article._doc , profilePicture : profilePicture.profilePicture}
+        res.json(finalData);
     }catch(error){
         console.log(error);
         res.json({message : error.message})
     }
 }
 async function publishArticle(req , res ){
-    const { title , article , userName } = req.body;
+    const { title , article , userName , tags } = req.body;
     const userId = req.user._id;
+    const date = Date.now();
     try{
-        const articleResponse = await Article.create({title , article , userId , userName});
+        const articleResponse = await Article.create({title , article , userId , userName , likes : [] , comments: [] , date , tags});
         res.json(articleResponse)
     }catch(error){
         console.log(error)

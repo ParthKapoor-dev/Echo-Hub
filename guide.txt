@@ -1,0 +1,13 @@
+1) Making Hooks for the following :- 
+    Follow
+    Save 
+    Likes
+    Comments
+    
+3) Add Tags for a article
+
+2) Making Bio Section of Feed page and Search Page
+
+4) Background Images 
+
+5) Article Images

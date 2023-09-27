@@ -1,82 +1,26 @@
 import ProfilePic from "../../images/profilePicture.png"
 
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import useUserContext from "../hooks/useUserContext";
+import useFollow from "../hooks/useFollow";
 
 export default function BioSectionExternalUser({ AccountDetails , setAccountDetails}){
 
-    const { user, token, dispatch } = useUserContext();
+    const { user, token} = useUserContext();
     const [followings, setfollowings] = useState([]);
-    const [toggleFollow, setToggleFollow] = useState();
-    const [isLoading, setIsLoading] = useState(false);
     const Navigate = useNavigate();
+    const {handleFollowBtn , toggleFollow , isLoading , jsonData} = useFollow(AccountDetails._id);
 
-    useEffect(() => {
-        if (user?.following?.includes(AccountDetails._id)) setToggleFollow(true);
-        else setToggleFollow(false);
-    }, [user, AccountDetails])
-
-    async function follow(currentUserId, followedUserId) {
-        const response = await fetch('http://localhost:3000/accounts/follow', {
-            method: "PUT",
-            headers: {
-                'content-type': 'application/json',
-                'authorization': `bearer ${token}`
-            },
-            body: JSON.stringify({ currentUserId, followedUserId })
-        })
-        const json = await response.json();
-
-        if (response.ok) {
-            console.log(json);
-            setAccountDetails(json);
-            setIsLoading(false)
-
-        } else {
-            console.log(json);
-        }
-    }
-    async function unfollow(currentUserId, followedUserId) {
-        const response = await fetch('http://localhost:3000/accounts/unfollow', {
-            method: "PUT",
-            headers: {
-                'content-type': 'application/json',
-                'authorization': `bearer ${token}`
-            },
-            body: JSON.stringify({ currentUserId, followedUserId })
-        })
-        const json = await response.json();
-
-        if (response.ok) {
-            console.log(json);
-            setAccountDetails(json);
-            setIsLoading(false)
-        } else {
-            console.log(json);
-        }
-    }
-
-    async function handleFollowBtn(event) {
+    async function handleFollowedBtn(event){
         event.preventDefault();
-        const currentUserId = user._id;
-        const followedUserId = AccountDetails._id;
+        await handleFollowBtn();
 
-        setIsLoading(true)
-
-        if (toggleFollow) {
-            const following = user.following.filter((item) => item !== followedUserId)
-            setToggleFollow(false)
-            await unfollow(currentUserId, followedUserId);
-            dispatch({ type: "FOLLOWUPDATE", payload: following })
-        } else {
-            const following = [followedUserId, ...user.following];
-            setToggleFollow(true)
-            await follow(currentUserId, followedUserId);
-            dispatch({ type: "FOLLOWUPDATE", payload: following })
-        }
-
+        if(!isLoading && jsonData?._id == AccountDetails?._id) 
+            setAccountDetails(jsonData);
     }
+
+    
 
     useEffect(() => {
 
@@ -120,7 +64,7 @@ export default function BioSectionExternalUser({ AccountDetails , setAccountDeta
                 {AccountDetails?.bio && AccountDetails.bio}
             </div>
 
-            <button className={!toggleFollow ? ("accountPage-Bio-section-Follow-btn") : ("accountPage-Bio-section-Following-btn")} id="accountPage-Bio-section-toggleFollow-btn" disabled={isLoading} onClick={handleFollowBtn}>
+            <button className={!toggleFollow ? ("accountPage-Bio-section-Follow-btn") : ("accountPage-Bio-section-Following-btn")} id="accountPage-Bio-section-toggleFollow-btn" disabled={isLoading} onClick={handleFollowedBtn}>
                 {toggleFollow && "Following"}
                 {!toggleFollow && "Follow"}
             </button>

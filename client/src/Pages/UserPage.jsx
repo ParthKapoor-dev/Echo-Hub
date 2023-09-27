@@ -44,7 +44,7 @@ export default function UserPage() {
                 'content-type': 'application/json',
                 'authorization': `Bearer ${token}`
             },
-            body: JSON.stringify({ _id})
+            body: JSON.stringify({ _id })
         });
         const json = await response.json();
 
@@ -149,7 +149,7 @@ function Lists() {
     )
 }
 
-function Article({ article , deleteFunction }) {
+function Article({ article, deleteFunction }) {
     const { user, token, dispatch } = useUserContext();
     const OptionsRef = useRef();
     const Navigate = useNavigate();
@@ -170,7 +170,7 @@ function Article({ article , deleteFunction }) {
             setDots(DotStaticPlain);
             OptionsRef.current.style.transform = "translateY(-20%)";
             OptionsRef.current.style.opacity = 0;
-            setTimeout(()=>OptionsRef.current.close(),250);
+            setTimeout(() => OptionsRef.current.close(), 250);
         }
         else {
             setDots(DotStaticFilled);
@@ -227,9 +227,13 @@ function Article({ article , deleteFunction }) {
             </p>
 
             <div className="userPage-article-details">
-                <div className="userPage-article-tag">
-                    tag
-                </div>
+                {article.tags?.length ? (
+                    article.tags.map((tag,index) => (
+                        <div key={index} className="userPage-article-tag">
+                            {tag}
+                        </div>
+                    ))
+                ) : ("")}
                 <div className="userPage-article-save-div" onClick={handleSaveCLick} onMouseEnter={() => setSave(SaveGif)} onMouseLeave={() => setSave(() => {
                     if (user?.list.includes(article._id)) return SaveFilledPng;
                     return SavePng;
@@ -249,7 +253,7 @@ function Article({ article , deleteFunction }) {
                         </p>
                     </div>
 
-                    <p className="userPage-article-dialog-deleteStory" onClick={(e)=>deleteFunction(e,article._id)}>
+                    <p className="userPage-article-dialog-deleteStory" onClick={(e) => deleteFunction(e, article._id)}>
                         Delete Story
                     </p>
                 </dialog>

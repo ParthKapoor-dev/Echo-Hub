@@ -17,6 +17,22 @@ const ArticleSchema = new Schema({
     userName:{
         type:String , 
         required:true
+    },
+    likes:{
+        type: Array,
+        required:true
+    },
+    comments:{
+        type:Array,
+        required:true
+    },
+    date:{
+        type : Date,
+        required : true
+    },
+    tags:{
+        type : Array , 
+        required : true
     }
 })
 
