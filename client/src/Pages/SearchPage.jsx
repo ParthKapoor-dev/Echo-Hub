@@ -1,6 +1,6 @@
 import { useLocation, useNavigate, Routes, Route } from "react-router-dom";
-import UsersearchPage from "../Components/usersearchPage";
-import ArticlesearchPage from "../Components/articleSearchPage";
+import UsersearchPage from "../Components/SearchPage-User";
+import ArticlesearchPage from "../Components/SearchPage-Article";
 import { useEffect, useState } from "react";
 export default function searchPage() {
     const [searchQuery, setSearchQuery] = useState();

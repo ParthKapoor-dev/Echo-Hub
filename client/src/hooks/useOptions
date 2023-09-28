@@ -1,0 +1,33 @@
+import { useState } from "react";
+
+import DotStaticPlain from "../../images/three dots static plain.png"
+import DotStaticFilled from "../../images/three dots static filled.png"
+import DotHover from "../../images/three dots hover.gif"
+
+
+export default function useOptions(OptionsRef){
+    const [dots, setDots] = useState(DotStaticPlain);
+    function handleMouseLeave() {
+        if (dots == DotHover) setDots(DotStaticPlain)
+    }
+    function handleMouseEnter() {
+        if (dots == DotStaticPlain) setDots(DotHover);
+    }
+    function handleMouseUp() {
+        if (dots == DotStaticFilled) {
+            setDots(DotStaticPlain);
+            OptionsRef.current.style.transform = "translateY(-20%)";
+            OptionsRef.current.style.opacity = 0;
+            setTimeout(() => OptionsRef.current.close(), 250);
+        }
+        else {
+            setDots(DotStaticFilled);
+            OptionsRef.current.show();
+            OptionsRef.current.style.opacity = 1;
+            OptionsRef.current.style.transform = "translateY(0)";
+        }
+
+    }
+
+    return { dots , handleMouseEnter , handleMouseLeave , handleMouseUp}
+}

@@ -53,6 +53,8 @@ async function publishArticle(req , res ){
     const { title , article , userName , tags } = req.body;
     const userId = req.user._id;
     const date = Date.now();
+
+    console.log(date)
     try{
         const articleResponse = await Article.create({title , article , userId , userName , likes : [] , comments: [] , date , tags});
         res.json(articleResponse)

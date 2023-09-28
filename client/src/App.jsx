@@ -7,7 +7,6 @@ import LoginPage from "./Pages/LoginPage";
 import SignupPage from "./Pages/SignupPage";
 import UserPage from "./Pages/UserPage";
 import PublishPage from "./Pages/PublishPage";
-import Accounts from "./Pages/Accounts";
 import AccountProfilePage from "./Pages/accountProfile";
 import SearchPage from "./Pages/SearchPage";
 import ArticlePage from "./Pages/articlePage";
@@ -25,7 +24,6 @@ export default function App(){
         <Route path="/user/signup" element={!user ? <SignupPage/> : <Navigate to='/article/feed'/>}/>
         <Route path="/profile/*" element={<UserPage/>}/>
         <Route path="/article/write" element={<PublishPage/>}/>
-        <Route path="/user/accounts" element={<Accounts/>}/>
         <Route path="/user/account/:id/*" element={<AccountProfilePage/>}/>
         <Route path="/searchpage/:id/*" element={<SearchPage/>}/>
         <Route path="/article/:id" element={<ArticlePage/>} />
