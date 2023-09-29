@@ -10,10 +10,10 @@ export default function ExternalUserArticle({ article, profilePicture, handleRem
     const OptionsRef = useRef();
 
     const dateArray = article.date?.split(' ');
-    const date =()=>{
-        if(dateArray) return dateArray[1] + " " + dateArray[2];
+    const date = () => {
+        if (dateArray) return dateArray[1] + " " + dateArray[2];
         return null
-    } 
+    }
 
     const { save, handleSaveCLick, handleSaveLeave, handleSaveEnter } = useSave(article);
     const { dots, handleMouseEnter, handleMouseLeave, handleMouseUp } = useOptions(OptionsRef)
@@ -24,9 +24,9 @@ export default function ExternalUserArticle({ article, profilePicture, handleRem
         Navigate(`/article/${article.title}`, { state: { articleId: article._id } })
     }
     return (
-        <div className="landingPage-article">
+        <div className="ExternalUserArticle">
 
-            <div className="landingPage-article-accountDetails">
+            <div className="ExternalUserArticle-accountDetails">
 
                 {profilePicture ?
                     <img src={profilePicture} />
@@ -34,55 +34,53 @@ export default function ExternalUserArticle({ article, profilePicture, handleRem
                     <img src={ProfilePic} />
                 }
 
-                <p className="landingPage-article-accountDetails-userName">
+                <p className="ExternalUserArticle-accountDetails-userName">
                     {article.userName}
                 </p>
 
-
-                <p className="landingPage-article-accouhtDetails-date">
+                <p className="ExternalUserArticle-accouhtDetails-date">
                     · {date() && date()}
                 </p>
 
             </div>
 
-            <h1 className="landingPage-article-title" onClick={handleArticlePage}>
+            <h1 className="ExternalUserArticle-title" onClick={handleArticlePage}>
                 {article.title}
             </h1>
 
-
-
-            <p className="landingPage-article-data">
+            <p className="ExternalUserArticle-data">
                 {article.article.split('').splice(0, 200)}...
             </p>
 
-            <div className="landingPage-article-details">
+            <div className="ExternalUserArticle-details">
+
+                <div className="ExternalUserArticle-tags-div">
+                    <p>
+                        {article?.tags[0] ? (
+                            article?.tags[0]
+                        ) : ""}
+                    </p>
+                </div>
 
 
-                {article?.tags[0] ? (
-                    <div className="landingPage-article-tag">
-                        {article?.tags[0]}
-                    </div>
-
-                ) : ""}
-
-                <div className="landingPage-article-save-div" onClick={handleSaveCLick} onMouseEnter={handleSaveEnter} onMouseLeave={handleSaveLeave}>
+                <div className="ExternalUserArticle-save-div" onClick={handleSaveCLick} onMouseEnter={handleSaveEnter} onMouseLeave={handleSaveLeave}>
                     <img src={save} />
                 </div>
 
-                <div className="landingPage-article-dots-div" >
+                <div className="ExternalUserArticle-dots-div" >
                     <img src={dots} alt="settings" onMouseEnter={handleMouseEnter} onMouseUp={handleMouseUp} onMouseLeave={handleMouseLeave} />
                 </div>
 
-                <dialog ref={OptionsRef} className="landingPage-article-dialog">
-                    <div className="landingPage-article-dialog-settingsAndEdit">
-                        <p className="landingPage-article-dialog-muteAuthor">
+                <dialog ref={OptionsRef} className="ExternalUserArticle-dialog">
+                    <div className="ExternalUserArticle-dialog-settingsAndEdit">
+                        <p className="ExternalUserArticle-dialog-muteAuthor">
                             Mute this author
                         </p>
-                        <p className="landingPage-article-dialog-Report">
+                        <p className="ExternalUserArticle-dialog-Report">
                             Report
                         </p>
                     </div>
-                    <p className="landingPage-article-dialog-removeFromFeed" onClick={() => handleRemoveFromFeed(article._id)}>
+                    <p className="ExternalUserArticle-dialog-removeFromFeed" onClick={() => handleRemoveFromFeed(article._id)}>
                         Remove from feed
                     </p>
 

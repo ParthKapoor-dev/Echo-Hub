@@ -23,45 +23,46 @@ export default function UserArticle({ article, deleteFunction }) {
     }
 
     return (
-        <div className="userPage-article">
+        <div className="UserArticle">
 
-            <p className="userPage-article-accouhtDetails-date">
+            <p className="UserArticle-accouhtDetails-date">
                 {date() && date()}
             </p>
 
-            <h1 className="userPage-article-title" onClick={handleArticlePage}>
+            <h1 className="UserArticle-title" onClick={handleArticlePage}>
                 {article.title}
             </h1>
-            <p className="userPage-article-data">
+            <p className="UserArticle-data">
                 {article.article.split('').splice(0, 200)}...
             </p>
 
-            <div className="userPage-article-details">
+            <div className="UserArticle-details">
 
-                {article?.tags[0] ? (
-                    <div className="landingPage-article-tag">
-                        {article?.tags[0]}
-                    </div>
+                <div className="UserArticle-tags-div">
+                    <p>
+                        {article?.tags[0] ? (
+                            article?.tags[0]
+                        ) : ""}
+                    </p>
+                </div>
 
-                ) : ""}
-                
-                <div className="userPage-article-save-div" onClick={handleSaveCLick} onMouseEnter={handleSaveEnter} onMouseLeave={handleSaveLeave}>
+                <div className="UserArticle-save-div" onClick={handleSaveCLick} onMouseEnter={handleSaveEnter} onMouseLeave={handleSaveLeave}>
                     <img src={save} />
                 </div>
-                <div className="userPage-article-dots-div" >
+                <div className="UserArticle-dots-div" >
                     <img src={dots} alt="settings" onMouseEnter={handleMouseEnter} onMouseUp={handleMouseUp} onMouseLeave={handleMouseLeave} />
                 </div>
-                <dialog ref={OptionsRef} className="userPage-article-dialog">
-                    <div className="userPage-article-dialog-settingsAndEdit">
-                        <p className="userPage-article-dialog-editStory">
+                <dialog ref={OptionsRef} className="UserArticle-dialog">
+                    <div className="UserArticle-dialog-settingsAndEdit">
+                        <p className="UserArticle-dialog-editStory">
                             Edit Story
                         </p>
-                        <p className="userPage-article-dialog-StorySettings">
+                        <p className="UserArticle-dialog-StorySettings">
                             Story settings
                         </p>
                     </div>
 
-                    <p className="userPage-article-dialog-deleteStory" onClick={(e) => deleteFunction(e, article._id)}>
+                    <p className="UserArticle-dialog-deleteStory" onClick={(e) => deleteFunction(e, article._id)}>
                         Delete Story
                     </p>
                 </dialog>

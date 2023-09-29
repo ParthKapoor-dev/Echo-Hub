@@ -1,10 +1,10 @@
 1) Making Hooks for the following :- 
-    Follow
-    Save 
     Likes
     Comments
     
-3) Add Tags for a article
+-- changing styles of save and dots
+
+-- styling of tags addition in Publish Page + article and title line extending
 
 2) Making Bio Section of Feed page and Search Page
 
