@@ -333,8 +333,8 @@ nav{
     margin-left: 18vw;
 }
 .ExternalUserArticle-dots-div img{
-    height: 4vh;
-    transform: translateY(-15%);
+    height: 3.6vh;
+    transform: translateY(-10%);
     margin-left: 2vw;
 }
 .UserArticle-dialog,
@@ -897,7 +897,7 @@ nav{
 .articlePage-user-details {
     display: flex;
     align-items: center;
-    margin: 3vh 0;
+    margin: 4vh 0;
 }
 .articlePage-user-details img{
     height: 7vh;
@@ -944,4 +944,28 @@ nav{
     margin-top: 1vh;
     font-size: 15px;
     color: rgb(131, 128, 128);
+}
+.articlePage-actions-div{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 0.5px solid rgb(221, 216, 216);
+    border-bottom: 0.5px solid rgb(221, 216, 216);
+    padding: 2vh 1vw;
+    margin-bottom: 2vh;
+}
+.articlePage-likes-and-comments{
+    display: flex;
+    align-items: center;
+    gap: 2vw;
+}
+.articlePage-likes img,
+.articlePage-comments img{
+    height: 4vh;
+}
+.articlePage-likes,
+.articlePage-comments{
+    display: flex;
+    align-items: center;
+    gap: 0.5vw;
 }

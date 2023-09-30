@@ -4,6 +4,11 @@ import useUserContext from "../hooks/useUserContext";
 import useFollow from "../hooks/useFollow";
 
 import ProfilePic from "../../images/profilePicture.png"
+import LikeStaticPlain from "../../images/LikeStaticPlain.png"
+import LikeStaticFilled from "../../images/LikeStaticFilled.png"
+import LikeGif from "../../images/likegif.gif"
+import CommentsPng from "../../images/commentsPng.png"
+import CommentsGif from "../../images/commentsGif.gif"
 
 export default function ArticlePage() {
     const location = useLocation();
@@ -15,6 +20,8 @@ export default function ArticlePage() {
         if(articleData?.likes?.includes(user?._id)) return true;
         return false
     })
+    const [LikeHover , setLikeHover] = useState(false);
+    const [commentHover , setCommentHover] = useState(false);
 
     const { handleFollowBtn, toggleFollow, isLoading } = useFollow(articleData.userId);
 
@@ -118,12 +125,25 @@ export default function ArticlePage() {
 
             <div className="articlePage-actions-div">
                 <div className="articlePage-likes-and-comments">
-                    <p className="articlePage-likes" onClick={handleLike}>
-                        {Liked ? "UnLike" : "Like"}
-                        {articleData?.likes?.length}
+                    <p className="articlePage-likes" onClick={handleLike} onMouseEnter={()=>setLikeHover(true)} onMouseLeave={()=>setLikeHover(false)}>
+                        {!LikeHover ? (
+                            Liked ? (
+                                <img src={LikeStaticFilled}/>
+                            ): (
+                                <img src={LikeStaticPlain} />
+                            )
+                        ) : (
+                            <img src={LikeGif}/>
+                        )}
+                        {articleData.likes && articleData.likes.length}
                     </p>
-                    <p className="articlePage-comments" onClick={()=>commentDialogRef.current.show()}>
-                        Comment
+                    <p className="articlePage-comments" onClick={()=>commentDialogRef.current.showModal()} onMouseEnter={()=>setCommentHover(true)} onMouseLeave={()=>setCommentHover(false)}>
+                        {!commentHover ? (
+                            <img src={CommentsPng} />
+                        ):(
+                            <img src={CommentsGif} />
+                        )}
+                        {articleData.comments && articleData.comments.length}
                     </p>
                 </div>
             </div>
