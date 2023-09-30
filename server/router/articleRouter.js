@@ -8,7 +8,9 @@ const {
     addtolist,
     removeFromList,
     displayArticle,
-    deleteArticles
+    deleteArticles,
+    articleLike,
+    articleComment
 } = require('../controller/articleController');
 const requireAuth = require('../Middleware/requireAuth');
 
@@ -28,6 +30,10 @@ router.get('/user/:query',displayArticles);
 
 router.post('/write',publishArticle);
 
-router.get('/:query' , displayArticle)
+router.get('/:query' , displayArticle);
+
+router.put('/like' , articleLike);
+
+router.put('/comment' , articleComment);
 
 module.exports = router;

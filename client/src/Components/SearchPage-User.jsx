@@ -23,7 +23,7 @@ export default function UserSearchPage({ searchQuery }) {
             const json = await response.json();
 
             if (response.ok) {
-                setUserAccounts(json)
+                setUserAccounts(json);
             } else {
                 console.log(json);
             }

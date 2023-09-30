@@ -1,12 +1,13 @@
 1) Making Hooks for the following :- 
     Likes
     Comments
+
+2) Making Bio Section of Feed page and Search Page
     
 -- changing styles of save and dots
 
 -- styling of tags addition in Publish Page + article and title line extending
 
-2) Making Bio Section of Feed page and Search Page
 
 4) Background Images 
 

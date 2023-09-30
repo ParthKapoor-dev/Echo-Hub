@@ -107,6 +107,43 @@ async function deleteArticles(req , res){
         res.json({message : error.message})
     }
 }
+async function articleComment(req , res){
+    const {articleId , comment} = req.body;
+    const user = req.user;
+    
+    try{
+
+        const data = { userId : user._id , userName : user.name , UserProfilePicture : user.profilePicture , comment};
+
+        const article = await Article.findOne({_id : articleId});
+
+        article.comments.push(data);
+        await article.save();
+
+        res.json(article);
+    }catch(error){
+        res.json({message : error.message});
+    }
+}
+async function articleLike(req , res){
+    const _id = req.body.articleId;
+    const userId = req.user._id;
+    try{
+        const article = await Article.findOne({_id});
+        if(article.likes.includes(userId)){
+            article.likes = article.likes.filter(item=> item === userId);
+        }
+        else{
+            article.likes.push(userId);
+        }
+        await article.save();
+
+        res.json(article);
+    }catch(error){
+        console.log(error);
+        res.json({message : error?.message})
+    }
+}
 module.exports = {
     publishArticle,
     displayArticle,
@@ -115,5 +152,7 @@ module.exports = {
     addtolist,
     removeFromList,
     displayArticles,
-    deleteArticles
+    deleteArticles,
+    articleLike,
+    articleComment
 }
