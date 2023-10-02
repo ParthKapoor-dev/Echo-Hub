@@ -18,6 +18,14 @@ const ArticleSchema = new Schema({
         type:String , 
         required:true
     },
+    userProfilePicture : {
+        public_id : {
+            type : String
+        }, 
+        url : {
+            type : String
+        }
+    },
     likes:{
         type: Array,
         required:true

@@ -6,9 +6,9 @@ import ProfilePic from "../../images/profilePicture.png"
 import useOptions from "../hooks/useOptions";
 
 
-export default function ExternalUserArticle({ article, profilePicture, handleRemoveFromFeed }) {
+export default function ExternalUserArticle({ article, handleRemoveFromFeed }) {
     const OptionsRef = useRef();
-
+    console.log(article.userProfilePicture)
     const dateArray = article.date?.split(' ');
     const date = () => {
         if (dateArray) return dateArray[1] + " " + dateArray[2];
@@ -28,8 +28,8 @@ export default function ExternalUserArticle({ article, profilePicture, handleRem
 
             <div className="ExternalUserArticle-accountDetails">
 
-                {profilePicture ?
-                    <img src={profilePicture} />
+                {article?.userProfilePicture?.url !== "" ?
+                    <img src={article.userProfilePicture.url} />
                     :
                     <img src={ProfilePic} />
                 }

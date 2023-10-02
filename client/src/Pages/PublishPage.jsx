@@ -23,7 +23,7 @@ export default function PublishPage() {
                 'content-type': 'application/json',
                 'authorization': `Bearer ${token}`
             },
-            body: JSON.stringify({ title, article, userName: user.name , tags })
+            body: JSON.stringify({ title, article, userName: user.name , userProfilePicture : user.profilePicture, tags })
         })
         const json = await response.json();
 

@@ -16,7 +16,7 @@ export function handleReducerHook(prevState , action){
             return newUser;
         }
         case "PROFILEPICUPDATE":{
-            const newUser = { ...prevState , user : {...prevState.user,profilePicture : action.payload } };
+            const newUser = { ...prevState , user : {...action.payload } };
             localStorage.setItem('USER' , JSON.stringify(newUser))
             return newUser;
         }
@@ -32,8 +32,10 @@ export function handleReducerHook(prevState , action){
             return newUser;
         }
         case "UPDATEPROFILE":{
-            const newUser = { ...prevState , user : {...prevState.user , ...action.payload}};
+            const newUser = { ...prevState , user : {...action.payload } };
             localStorage.setItem('USER' , JSON.stringify(newUser))
+            console.log("Hello world");
+            console.log(newUser)
             return newUser;
         }
             

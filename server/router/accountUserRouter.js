@@ -8,7 +8,8 @@ const {
     UserProfile,
     uploadProfilePic,
     updateProfile,
-    userFollowings
+    userFollowings,
+    landingPageBio
 } = require('../controller/accountUserController');
 
 router.use(requireAuth);
@@ -25,6 +26,8 @@ router.put('/upload/profilePic/:query' , uploadProfilePic);
 
 router.put('/update/profile/:query' , updateProfile);
 
-router.get('/followings/:query' , userFollowings)
+router.get('/followings/:query' , userFollowings);
+
+router.get('/landingPage/Bio' , landingPageBio)
 
 module.exports = router;

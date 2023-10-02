@@ -31,6 +31,7 @@ export default function BioSection() {
             }
         }
         if (token && user) fetchingData();
+        console.log(user)
     }, [user, token]);
 
 
@@ -53,7 +54,7 @@ export default function BioSection() {
 
             if (response.ok) {
                 console.log(json);
-                dispatch({ type: 'PROFILEPICUPDATE', payload: base64File })
+                dispatch({ type: 'PROFILEPICUPDATE', payload: json })
             } else {
                 console.log(json);
             }
@@ -76,8 +77,8 @@ export default function BioSection() {
     }
     return (
         <div className="userPage-Bio-section-div">
-            {user?.profilePicture ? (
-                <img src={user.profilePicture} className="userPage-Bio-section-profileImage" />
+            {user?.profilePicture?.url ? (
+                <img src={user.profilePicture.url} className="userPage-Bio-section-profileImage" />
             ) : (
                 <form>
                     <input type="file" id="userPage-profilePicture" accept="image/*" onChange={handleProfilePictureUpdate} />
@@ -92,7 +93,7 @@ export default function BioSection() {
             </div>
 
             <div className="userPage-Bio-section-followers-count">
-                {user.followers.length} {user.followers.length == 1 ? "Follower" : "Followers"}
+                {user?.followers?.length} {user.followers.length == 1 ? "Follower" : "Followers"}
             </div>
 
             <div className="userPage-Bio-section-myBio">
@@ -131,7 +132,8 @@ function EditProfile({ ConvertToBase64, editProfileRef }) {
     const editProfileSaveRef = useRef();
 
     const [editProfileImg, setEditProfileImg] = useState(() => {
-        if (user) return user.name;
+        if (user.profilePicture.url !== "") return user.profilePicture.url;
+        if(user) return ProfilePic
         return ""
     })
     const [editProfileName, setEditProfileName] = useState(() => {
@@ -146,7 +148,7 @@ function EditProfile({ ConvertToBase64, editProfileRef }) {
         if (user) {
             setEditProfileBio(user.bio || "");
             setEditProfileName(user.name || "")
-            setEditProfileImg(user.profilePicture || "")
+            setEditProfileImg(user.profilePicture.url || ProfilePic)
         }
     }, [user])
     async function handleSaveProfile(event) {
@@ -167,8 +169,9 @@ function EditProfile({ ConvertToBase64, editProfileRef }) {
         const json = await response.json();
 
         if (response.ok) {
+            console.log("mera naam joker")
             console.log(json);
-            dispatch({ type: "UPDATEPROFILE", payload: updatedProfile });
+            dispatch({ type: "UPDATEPROFILE", payload: json });
             handleEditProfileClose();
             editProfileSaveRef.current.disabled = handleSaveButtonDisabled();
         } else {
@@ -192,7 +195,7 @@ function EditProfile({ ConvertToBase64, editProfileRef }) {
     }
     function handleSaveButtonDisabled() {
         if (!user) return true;
-        if (editProfileBio == user.bio && editProfileName == user.name && editProfileImg == user.profilePicture) return true;
+        if (editProfileBio == user.bio && editProfileName == user.name && editProfileImg == user.profilePicture.url) return true;
         return false;
     }
 

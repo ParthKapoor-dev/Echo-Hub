@@ -21,6 +21,7 @@ export default function LandingPage() {
             const json = await response.json();
 
             if (response.ok) {
+                console.log(json)
                 setArticles(json);
                 setPageIsLoading(false)
             } else {
@@ -45,22 +46,16 @@ export default function LandingPage() {
     }
 
     return (
-        <>
+        <> 
             {!PageIsLoading ? (
                 <div className="landingPage-div">
                     <div className="landingPage-content-section">
-                        {Articles.map((articleData)=>{
-                            const profilePicture = articleData[articleData.length -1];
-                            return(
-                                articleData.map((article,index)=>{
-                                    if(index == articleData.length - 1) return
-                                    return (
-                                        <ExternalUserArticle key={article._id} article={article} profilePicture={profilePicture} handleRemoveFromFeed={handleRemoveFromFeed} />
-                                    )
-                                })
-                            )
-                        })}
+                       {Articles.length && Articles.map(article => (
+                        <ExternalUserArticle key={article._id} article={article} />
+                       ))}
                     </div>
+
+                        <BioSection/>
 
                 </div>
             ) : (
@@ -73,5 +68,42 @@ export default function LandingPage() {
             )}
         </>
 
+    )
+}
+
+function BioSection(){
+    const { user , token } = useUserContext();
+    useEffect(()=>{
+        async function fetchingData(){
+            console.log('begin')
+            const response = await fetch('http://localhost:3000/accounts/landingPage/Bio',{
+                method:"GET",
+                headers:{
+                    'content-type' : 'application/json',
+                    'authorization' : `Bearer ${token}`
+                }
+            })
+            console.log('hello world')
+
+            const json = await response.json();
+
+            if(response.ok){
+                console.log(json)
+            }else{
+                console.log(json)
+            }
+        }
+
+        if(token) fetchingData();
+    } , [token])
+    return (
+        <div className="landingPage-Bio-Section">
+
+            <div className="landingPage-StaffPicks">
+                <p className="landingPage-StaffPicks-headings">
+                    Staff Picks
+                </p>
+            </div>
+        </div>
     )
 }
