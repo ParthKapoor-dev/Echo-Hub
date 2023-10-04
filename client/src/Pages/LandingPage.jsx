@@ -72,7 +72,7 @@ export default function LandingPage() {
 }
 
 function BioSection(){
-    const { user , token } = useUserContext();
+    const { token } = useUserContext();
     useEffect(()=>{
         async function fetchingData(){
             console.log('begin')
@@ -83,7 +83,6 @@ function BioSection(){
                     'authorization' : `Bearer ${token}`
                 }
             })
-            console.log('hello world')
 
             const json = await response.json();
 

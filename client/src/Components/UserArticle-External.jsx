@@ -8,7 +8,6 @@ import useOptions from "../hooks/useOptions";
 
 export default function ExternalUserArticle({ article, handleRemoveFromFeed }) {
     const OptionsRef = useRef();
-    console.log(article.userProfilePicture)
     const dateArray = article.date?.split(' ');
     const date = () => {
         if (dateArray) return dateArray[1] + " " + dateArray[2];

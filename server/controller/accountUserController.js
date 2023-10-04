@@ -153,46 +153,62 @@ async function userFollowings(req, res) {
     }
 }
 async function landingPageBio(req, res) {
-    console.log('hello ji')
     const user = req.user;
-    const userId = user._id
 
-    try {
+    function getLikedTags(likedArticles){
+        const tags = [];
 
-        async function getLikedArticles(userId) {
-            return await Article.find({ likes: userId });
-        };
+        for(const article of  likedArticles ){
+            if(article) tags.push(...article.tags)
+        }
+        const Finaltags = filterDuplicateItems(tags)
+        return Finaltags;
+    }
+    async function getArticlesByTags(tags) {
+        const articles = [];
 
-        async function getUsersByTags(tags) {
-            const users = [];
-            const articles = [];
+        for (const tag of tags) {
+            const taggedArticles = await Article.find({ tags: tag });
+            articles.push(...taggedArticles);
+        }
+        const Finalarticles = filterDuplicateItems(articles);
+        return Finalarticles;
+    }
 
-            for (const tag of tags) {
-                const taggedArticles = await Article.find({ tags: tag });
-                for (const taggedArticle of taggedArticles) {
-                    const user = await User.findOne({ _id: taggedArticle.userId });
-                    if (user) {
-                        users.push(user);
-                        const article = await Article.findOne({ userId });
-                        if (article) articles.push(article)
-                    }
-                }
+    async function getAccountsByArticles(articles){
+        const accounts = [];
+        for(const article of articles){
+            const user = await User.findOne({_id : article.userId});
+            if(user) accounts.push(user);
+        }
+        return accounts;
+    }
+
+    function filterDuplicateItems(ItemsArray){
+        const Items = [];
+
+        for(var i = 0 ; i < ItemsArray.length ; i++){
+            var flag = true
+            for(var j = i + 1 ; j < ItemsArray.length ; j++){
+                if(!(ItemsArray[i] == ItemsArray[j])) flag = false;
             }
+            if(flag) Items.push(ItemsArray[i]);
+        }
+        return Items;    
+    }
+    try {
+            console.log(user._id)
+        const LikedArticles = await Article.find({ likes: user._id });
+        const likedTags = getLikedTags(LikedArticles);
+        const LikedtagsArticles = await getArticlesByTags(likedTags);
+        const likedtagsAccounts = await getAccountsByArticles(LikedtagsArticles);
+        const finalAccounts = filterDuplicateItems(likedtagsAccounts);
 
-            return { users, articles };
-        };
-
-        const likedArticles = await getLikedArticles(userId);
-
-        const tags = likedArticles.map((article) => article.tags);
-
-        const LikedTaggedData = await getUsersByTags(tags);
-        const LikedTagsAccounts = LikedTaggedData.users;
-        const LikedTaggedArticles = LikedTaggedData.artilcles;
-
-        res.json({ tags, LikedTagsAccounts, LikedTaggedArticles });
+        res.json({likedTags , finalAccounts})
+        
     } catch (error) {
         console.log(error)
+        res.json({err : error.message})
     }
 }
 module.exports = {

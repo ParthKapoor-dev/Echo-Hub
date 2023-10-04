@@ -3,13 +3,34 @@ const User = require('../model/userModel')
 async function articleFeed(req, res) {
     const user = req.user
 
+    function getLikedTags(likedArticles){
+        const tags = [];
+
+        for(const article of  likedArticles ){
+            if(article) tags.push(...article.tags)
+        }
+
+        return tags;
+    }
+
+    function filterDuplicateItems(ItemsArray){
+        const Items = [];
+
+        for(var i = 0 ; i < ItemsArray.length ; i++){
+            var flag = true
+            for(var j = i + 1 ; j < ItemsArray.length ; j++){
+                if(!(ItemsArray[i] == ItemsArray[j])) flag = false;
+            }
+            if(flag) Items.push(ItemsArray[i]);
+        }
+        return Items;    
+    }
 
     async function getArticlesByFollowings(followings) {
         const articles = [];
 
         for (const userId of followings) {
             const userArticles = await Article.find({ userId });
-            console.log(userArticles);
             articles.push(...userArticles);
         }
 
@@ -21,7 +42,6 @@ async function articleFeed(req, res) {
 
         for (const tag of tags) {
             const taggedArticles = await Article.find({ tags: tag });
-            console.log(taggedArticles);
             articles.push(...taggedArticles);
         }
 
@@ -31,17 +51,19 @@ async function articleFeed(req, res) {
     try {
         const followings = await User.findOne({ _id: user._id }).select('following');
         const LikedArticles = await Article.find({ likes: user._id });
-        const LikedTags = LikedArticles.map(article => article.tags);
+        const LikedTags = getLikedTags(LikedArticles);
 
         const FollowingsArticles = await getArticlesByFollowings(followings.following);
-        console.log(FollowingsArticles);
 
         const LikedtagsArticles = await getArticlesByTags(LikedTags);
-        console.log(LikedtagsArticles);
 
         const articles = [...FollowingsArticles, ...LikedtagsArticles];
-        console.log(articles[0]?.title);
-        res.json(articles);
+        const finalArticles = filterDuplicateItems(articles);
+
+        // console.log(articles , finalArticles)
+
+        
+        res.json(finalArticles);
     } catch (error) {
         console.error(error);
         res.status(500).json({ error: 'Internal Server Error' });

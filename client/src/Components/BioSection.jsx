@@ -114,7 +114,7 @@ export default function BioSection() {
                 <h4 className="userPage-Bio-section-followings-header">Following</h4>
                 {followings.length && followings.map(item => (
                     <div key={item._id} className="userPage-Bio-section-following-details" onClick={() => Navigate(`/user/account/${item._id}`, { state: { userId: item._id } })}>
-                        {item.profilePicture ? (<img src={item.profilePicture} />) : (<img src={ProfilePic} />)}
+                        {item.profilePicture ? (<img src={item.profilePicture.url} />) : (<img src={ProfilePic} />)}
                         {item.name}
                     </div>
                 ))}
