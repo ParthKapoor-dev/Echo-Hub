@@ -3,28 +3,50 @@ const User = require('../model/userModel')
 async function articleFeed(req, res) {
     const user = req.user
 
-    function getLikedTags(likedArticles){
+    function getLikedTags(likedArticles) {
         const tags = [];
 
-        for(const article of  likedArticles ){
-            if(article) tags.push(...article.tags)
+        for (const article of likedArticles) {
+            if (article) tags.push(...article.tags)
         }
-
-        return tags;
+        const finalTags = filterDuplicateItems(tags);
+        return finalTags;
     }
 
-    function filterDuplicateItems(ItemsArray){
+    function filterDuplicateItems(ItemsArray) {
         const Items = [];
 
-        for(var i = 0 ; i < ItemsArray.length ; i++){
+        for (var i = 0; i < ItemsArray.length; i++) {
             var flag = true
-            for(var j = i + 1 ; j < ItemsArray.length ; j++){
-                if(!(ItemsArray[i] == ItemsArray[j])) flag = false;
+            for (var j = i + 1; j < ItemsArray.length; j++) {
+                if (ItemsArray[i] == ItemsArray[j]) flag = false;
             }
-            if(flag) Items.push(ItemsArray[i]);
+            if (flag) Items.push(ItemsArray[i]);
         }
-        return Items;    
+        return Items;
     }
+
+    function filterDuplicateArticles(ItemsArray) {
+        const Items = [];
+        for (var i = 0; i < ItemsArray.length; i++) {
+            var flag = true;
+            if(ItemsArray[i].userId.toString() === user._id.toString()){
+                flag = false;
+                continue;
+            }
+            for (var j = i + 1; j < ItemsArray.length; j++) {
+                if(ItemsArray[i]._id.toString() === ItemsArray[j]._id.toString()){
+                    flag = false;
+                    break;
+                }
+            }
+            if (flag) {
+                Items.push(ItemsArray[i]);
+            }
+        }
+        return Items;
+    }
+
 
     async function getArticlesByFollowings(followings) {
         const articles = [];
@@ -33,8 +55,8 @@ async function articleFeed(req, res) {
             const userArticles = await Article.find({ userId });
             articles.push(...userArticles);
         }
-
-        return articles;
+        const finalArticles = filterDuplicateItems(articles);
+        return finalArticles;
     }
 
     async function getArticlesByTags(tags) {
@@ -44,8 +66,8 @@ async function articleFeed(req, res) {
             const taggedArticles = await Article.find({ tags: tag });
             articles.push(...taggedArticles);
         }
-
-        return articles;
+        const finalArticles = filterDuplicateArticles(articles);
+        return finalArticles;
     }
 
     try {
@@ -58,11 +80,8 @@ async function articleFeed(req, res) {
         const LikedtagsArticles = await getArticlesByTags(LikedTags);
 
         const articles = [...FollowingsArticles, ...LikedtagsArticles];
-        const finalArticles = filterDuplicateItems(articles);
+        const finalArticles = filterDuplicateArticles(articles);
 
-        // console.log(articles , finalArticles)
-
-        
         res.json(finalArticles);
     } catch (error) {
         console.error(error);

@@ -33,10 +33,10 @@ export default function LandingPage() {
         if (token && user) fetchingData();
     }, [user, token])
 
-    function handleRemoveFromFeed(articleId){
-        const newArticles = Articles.map(articleData=>(
-            articleData.filter(article=>{
-                if( !article?._id || article?._id !== articleId) {
+    function handleRemoveFromFeed(articleId) {
+        const newArticles = Articles.map(articleData => (
+            articleData.filter(article => {
+                if (!article?._id || article?._id !== articleId) {
                     return 1;
                 }
                 return 0;
@@ -46,16 +46,16 @@ export default function LandingPage() {
     }
 
     return (
-        <> 
+        <>
             {!PageIsLoading ? (
                 <div className="landingPage-div">
                     <div className="landingPage-content-section">
-                       {Articles.length && Articles.map(article => (
-                        <ExternalUserArticle key={article._id} article={article} />
-                       ))}
+                        {Articles.length && Articles.map(article => (
+                            <ExternalUserArticle key={article._id} article={article} />
+                        ))}
                     </div>
 
-                        <BioSection/>
+                    <BioSection />
 
                 </div>
             ) : (
@@ -71,30 +71,34 @@ export default function LandingPage() {
     )
 }
 
-function BioSection(){
+function BioSection() {
     const { token } = useUserContext();
-    useEffect(()=>{
-        async function fetchingData(){
+    const [likedTags, setlikedTags] = useState([]);
+    const [likedTagsAccounts, setlikedtagsaccounts] = useState([]);
+    useEffect(() => {
+        async function fetchingData() {
             console.log('begin')
-            const response = await fetch('http://localhost:3000/accounts/landingPage/Bio',{
-                method:"GET",
-                headers:{
-                    'content-type' : 'application/json',
-                    'authorization' : `Bearer ${token}`
+            const response = await fetch('http://localhost:3000/accounts/landingPage/Bio', {
+                method: "GET",
+                headers: {
+                    'content-type': 'application/json',
+                    'authorization': `Bearer ${token}`
                 }
             })
 
             const json = await response.json();
 
-            if(response.ok){
+            if (response.ok) {
+                setlikedTags(json.likedTags);
+                setlikedtagsaccounts(json.finalAccounts);
                 console.log(json)
-            }else{
+            } else {
                 console.log(json)
             }
         }
 
-        if(token) fetchingData();
-    } , [token])
+        if (token) fetchingData();
+    }, [token])
     return (
         <div className="landingPage-Bio-Section">
 
@@ -102,6 +106,34 @@ function BioSection(){
                 <p className="landingPage-StaffPicks-headings">
                     Staff Picks
                 </p>
+            </div>
+
+            <div className="landingPage-Recommended-tags">
+                <p className="landingPage-Recommended-tags-headings">
+                    Recommended Tags
+                </p>
+
+                <div className="landingPage-Recommended-tags-div">
+                    {likedTags.map(tag => (
+                        <div key={tag} className="landingPage-recommended-tag">
+                            {tag}
+                        </div>
+                    ))}
+                </div>
+            </div>
+
+            <div className="landingPage-whoToFollow">
+                <p className="landingPage-whoToFollow-heading">
+                    Who To follow
+                </p>
+
+                <div className="landingPage-whoToFollow-div">
+                    {likedTagsAccounts.map(account => (
+                        <div key={account._id} className="landingPage-whoToFollow-account">
+                            {account.name}
+                        </div>
+                    ))}
+                </div>
             </div>
         </div>
     )

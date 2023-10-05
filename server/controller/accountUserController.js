@@ -98,7 +98,8 @@ async function updateProfile(req, res) {
     const { profilePicture, bio, name } = req.body;
     const updatedProfile = {};
     try {
-        if (user.profilePicture.public_id !== "" && profilePicture !== undefined){
+        if (user.profilePicture.public_id !== "" && profilePicture == null){
+            console.log('inside hrer')
             await cloudinary.uploader.destroy(user.profilePicture.public_id);
             updatedProfile.profilePicture = {
                 public_id : "",
@@ -107,6 +108,7 @@ async function updateProfile(req, res) {
         }
 
         if (profilePicture) {
+            console.log('here')
             const result = await cloudinary.uploader.upload(profilePicture, {
                 folder: "UserProfilePicture"
             })
@@ -120,7 +122,6 @@ async function updateProfile(req, res) {
 
         const updatedUser = await User.findOneAndUpdate(
             { _id: user._id }, { ...updatedProfile }, { new: true });
-
         res.json(updatedUser);
     } catch (error) {
         res.json({ message: error.message })
@@ -184,25 +185,44 @@ async function landingPageBio(req, res) {
         return accounts;
     }
 
+    function filterDuplicateAccounts(ItemsArray) {
+        const Items = [];
+        for (var i = 0; i < ItemsArray.length; i++) {
+            var flag = true;
+            if(ItemsArray[i]._id.toString() === user._id.toString()){
+                flag = false;
+                continue;
+            }
+            for (var j = i + 1; j < ItemsArray.length; j++) {
+                if(ItemsArray[i]._id.toString() === ItemsArray[j]._id.toString()){
+                    flag = false;
+                    break;
+                }
+            }
+            if (flag) {
+                Items.push(ItemsArray[i]);
+            }
+        }
+        return Items;
+    }
     function filterDuplicateItems(ItemsArray){
         const Items = [];
 
         for(var i = 0 ; i < ItemsArray.length ; i++){
             var flag = true
             for(var j = i + 1 ; j < ItemsArray.length ; j++){
-                if(!(ItemsArray[i] == ItemsArray[j])) flag = false;
+                if(ItemsArray[i] == ItemsArray[j]) flag = false;
             }
             if(flag) Items.push(ItemsArray[i]);
         }
         return Items;    
     }
     try {
-            console.log(user._id)
         const LikedArticles = await Article.find({ likes: user._id });
         const likedTags = getLikedTags(LikedArticles);
         const LikedtagsArticles = await getArticlesByTags(likedTags);
         const likedtagsAccounts = await getAccountsByArticles(LikedtagsArticles);
-        const finalAccounts = filterDuplicateItems(likedtagsAccounts);
+        const finalAccounts = filterDuplicateAccounts(likedtagsAccounts);
 
         res.json({likedTags , finalAccounts})
         

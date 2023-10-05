@@ -11,6 +11,7 @@ export default function BioSection() {
     const editProfileRef = useRef();
     const Navigate = useNavigate();
 
+    console.log(user)
 
     useEffect(() => {
 

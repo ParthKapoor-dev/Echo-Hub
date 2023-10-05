@@ -24,7 +24,6 @@ export default function ArticlePage() {
     const [commentHover , setCommentHover] = useState(false);
 
     const { handleFollowBtn, toggleFollow, isLoading } = useFollow(articleData.userId);
-
     useEffect(()=>{
         if(user) {
             if(articleData?.likes?.includes(user?._id)) setLiked(true);
@@ -88,6 +87,7 @@ export default function ArticlePage() {
 
         if (token && articleId) fetchingData();
     }, [articleId, token])
+
     return (
 
         <div className="articlePage-div">
@@ -98,8 +98,8 @@ export default function ArticlePage() {
 
             <div className="articlePage-user-details">
 
-                {articleData.profilePicture ? (
-                    <img src={articleData.profilePicture} />
+                {articleData.userProfilePicture  && articleData?.userProfilePicture?.url !== "" ? (
+                    <img src={articleData.userProfilePicture.url} />
                 ) : (
                     <img src={ProfilePic} />
                 )}
