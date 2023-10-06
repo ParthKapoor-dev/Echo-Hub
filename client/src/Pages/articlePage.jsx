@@ -24,6 +24,7 @@ export default function ArticlePage() {
     const [commentHover , setCommentHover] = useState(false);
 
     const { handleFollowBtn, toggleFollow, isLoading } = useFollow(articleData.userId);
+    
     useEffect(()=>{
         if(user) {
             if(articleData?.likes?.includes(user?._id)) setLiked(true);

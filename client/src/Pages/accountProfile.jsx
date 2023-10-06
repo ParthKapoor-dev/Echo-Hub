@@ -3,19 +3,13 @@ import { useLocation, useNavigate , Route , Routes } from 'react-router-dom'
 import useUserContext from '../hooks/useUserContext';
 import BioSectionExternalUser from "../Components/BioSection-externalUser";
 
-import SavePng from "../../images/save.png"
-import SaveFilledPng from "../../images/saveFilled.png"
-import SaveGif from "../../images/save.gif"
-import DotStaticPlain from "../../images/three dots static plain.png"
-import DotStaticFilled from "../../images/three dots static filled.png"
-import DotHover from "../../images/three dots hover.gif"
 import ExternalUserArticle from '../Components/UserArticle-External';
 
 
 export default function AccountProfilePage() {
     const location = useLocation();
     const userId = location.state.userId;
-    const { user, token, dispatch } = useUserContext();
+    const { user, token} = useUserContext();
     const [AccountDetails, setAccountDetails] = useState([]);
     const [PageIsLoading, setPageIsLoading] = useState(true);
     const Navigate = useNavigate();

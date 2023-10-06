@@ -775,6 +775,84 @@ nav{
 }
 
 
+/* Landing Page - Bio div */
+.searchPage-bio-section,
+.landingPage-Bio-Section{
+    width: 35vw;
+    box-sizing: border-box;
+    padding: 2vh 3vw;
+}
+.searchPage-bio-section-related-tags,
+.landingPage-Recommended-tags{
+    margin:  4vh 0;
+}
+.searchPage-bio-section-related-tags-headings,
+.landingPage-whoToFollow-heading,
+.landingPage-Recommended-tags-headings{
+    font-family: 'lora';
+    font-size: 16px;
+    color: rgb(43, 42, 42);
+    font-weight: 600;
+    margin-bottom: 3vh;
+}
+.searchPage-bio-section-related-tags-div,
+.landingPage-Recommended-tags-div{
+    width: 23vw;
+    display: flex;
+    flex-wrap: wrap;
+}
+.searchPage-bio-section-related-tag,
+.landingPage-recommended-tag{
+    font-family: 'Lora' ;
+    height: 4vh;
+    width: auto;
+    padding:0 1vw;
+    padding-top: 0.8vh;
+    background-color: rgb(235, 232, 232);
+    border-radius: 2.4vh;
+    font-size: 16px;
+    margin : 0.5vh 0.5vw;
+    cursor : pointer;
+}
+.landingPage-whoToFollow{
+    margin: 6vh 0;
+}
+.landingPage-whoToFollow-div{
+    display: flex;
+    flex-direction: column;
+}
+.landingPage-whoToFollow-account{
+    display: flex;
+    height: 10vh;
+    align-items: center;
+}
+.landingPage-whoToFollow-account img{
+    height: 5vh;
+    width: 5vh;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-right: 1vw;
+    cursor: pointer;
+}
+.landingPage-whoToFollow-account-userDetails{
+    width: 15vw;
+    margin-right: 0.5vw;
+    cursor: pointer;
+}
+.userDetails-name{
+    font-family: 'lora';
+    font-size: 17px;
+    font-weight: 600;
+    color: rgb(39, 38, 38);
+    letter-spacing: 0.1px;
+}
+.userDetails-bio{
+    font-family: 'lora';
+    color: rgb(100, 98, 98);
+    font-size: 14px;
+    letter-spacing: 0.2px;
+    margin-top: 0.4vh;
+}
 /* Search Page */
 
 .searchPage-div{
@@ -809,7 +887,9 @@ nav{
 .searchPage-home-div{
     padding-top: 4vh;
 }
-
+span{
+    color: rgb(139, 137, 137);
+}
 /* User Search Page */
 
 .user-searchPage-account-div{

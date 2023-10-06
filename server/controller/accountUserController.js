@@ -189,7 +189,8 @@ async function landingPageBio(req, res) {
         const Items = [];
         for (var i = 0; i < ItemsArray.length; i++) {
             var flag = true;
-            if(ItemsArray[i]._id.toString() === user._id.toString()){
+            if(ItemsArray[i]._id.toString() === user._id.toString() ||
+             ItemsArray[i].followers.includes(user._id)){
                 flag = false;
                 continue;
             }

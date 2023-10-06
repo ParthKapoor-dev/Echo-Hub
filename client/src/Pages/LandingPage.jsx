@@ -2,6 +2,9 @@ import { useEffect, useState } from "react"
 import useUserContext from "../hooks/useUserContext"
 import ExternalUserArticle from "../Components/UserArticle-External";
 
+import ProfilePic from "../../images/profilePicture.png"
+import useFollow from "../hooks/useFollow";
+import { useNavigate } from "react-router-dom";
 
 export default function LandingPage() {
 
@@ -33,17 +36,17 @@ export default function LandingPage() {
         if (token && user) fetchingData();
     }, [user, token])
 
-    function handleRemoveFromFeed(articleId) {
-        const newArticles = Articles.map(articleData => (
-            articleData.filter(article => {
-                if (!article?._id || article?._id !== articleId) {
-                    return 1;
-                }
-                return 0;
-            })
-        ))
-        setArticles(newArticles)
-    }
+    // function handleRemoveFromFeed(articleId) {
+    //     const newArticles = Articles.map(articleData => (
+    //         articleData.filter(article => {
+    //             if (!article?._id || article?._id !== articleId) {
+    //                 return 1;
+    //             }
+    //             return 0;
+    //         })
+    //     ))
+    //     setArticles(newArticles)
+    // }
 
     return (
         <>
@@ -75,6 +78,7 @@ function BioSection() {
     const { token } = useUserContext();
     const [likedTags, setlikedTags] = useState([]);
     const [likedTagsAccounts, setlikedtagsaccounts] = useState([]);
+
     useEffect(() => {
         async function fetchingData() {
             console.log('begin')
@@ -102,11 +106,11 @@ function BioSection() {
     return (
         <div className="landingPage-Bio-Section">
 
-            <div className="landingPage-StaffPicks">
+            {/* <div className="landingPage-StaffPicks">
                 <p className="landingPage-StaffPicks-headings">
                     Staff Picks
                 </p>
-            </div>
+            </div> */}
 
             <div className="landingPage-Recommended-tags">
                 <p className="landingPage-Recommended-tags-headings">
@@ -129,12 +133,41 @@ function BioSection() {
 
                 <div className="landingPage-whoToFollow-div">
                     {likedTagsAccounts.map(account => (
-                        <div key={account._id} className="landingPage-whoToFollow-account">
-                            {account.name}
-                        </div>
+                        <WhoToFollow key={account._id} account={account} />
                     ))}
                 </div>
             </div>
+        </div>
+    )
+}
+
+function WhoToFollow({ account }) {
+
+    const Navigate = useNavigate();
+    const { handleFollowBtn, toggleFollow, isLoading } = useFollow(account._id);
+    function handleUserAccountPage(){
+        Navigate('/user/account/'+ account._id , {state : {userId : account._id}} )
+    }
+
+    return (
+        <div key={account._id} className="landingPage-whoToFollow-account">
+            {account.profilePicture.url !== "" ? (
+                <img src={account.profilePicture.url} onClick={handleUserAccountPage} />
+            ) : (
+                <img src={ProfilePic} onClick={handleUserAccountPage} />
+            )}
+            <div className="landingPage-whoToFollow-account-userDetails" onClick={handleUserAccountPage}>
+                <p className="userDetails-name">
+                    {account.name}
+                </p>
+                <p className="userDetails-bio">
+                    {account.bio.split('').slice(0, 48)}...
+                </p>
+            </div>
+            <button className={!toggleFollow ? ("articlePage-Bio-section-Follow-btn") : ("articlePage-Bio-section-Following-btn")} id="articlePage-Bio-section-toggleFollow-btn" disabled={isLoading} onClick={handleFollowBtn}>
+                {toggleFollow && "Following"}
+                {!toggleFollow && "Follow"}
+            </button>
         </div>
     )
 }

@@ -5,8 +5,9 @@ import useUserContext from "../hooks/useUserContext"
 import ProfilePic from "../../images/profilePicture.png"
 import useFollow from "../hooks/useFollow";
 
-export default function UserSearchPage({ searchQuery }) {
+export default function UserSearchPage({ setTags}) {
 
+    const searchQuery = location.state;
     const { token } = useUserContext();
     const [UserAccounts, setUserAccounts] = useState([]);
 
@@ -23,7 +24,9 @@ export default function UserSearchPage({ searchQuery }) {
             const json = await response.json();
 
             if (response.ok) {
-                setUserAccounts(json);
+                console.log(json)
+                setUserAccounts(json.relatedUsers);
+                setTags(json.relatedTags)
             } else {
                 console.log(json);
             }
@@ -70,8 +73,8 @@ function Account({ userAccount , setUserAccounts }) {
     return (
         <div className="user-searchPage-account-div">
 
-            {userAccount.profilePicture ? (
-                <img src={userAccount.profilePicture} />
+            {userAccount.profilePicture.url !== "" ? (
+                <img src={userAccount.profilePicture.url} />
             ):(
                 <img src={ProfilePic} />
             )}
