@@ -1049,3 +1049,114 @@ span{
     align-items: center;
     gap: 0.5vw;
 }
+
+
+/* Comments Section */
+
+.Comments-dialog{
+    margin-left: 70vw;
+    width: 30vw;
+    height: 100vh;
+    outline: none;
+    border: none;
+    padding: 2vh 2vw;
+    box-sizing: border-box;
+    margin-bottom: 0;
+}
+.comments-dialog-heading{
+    font-size:20px;
+    font-family: 'lora';
+    font-weight: 600;
+    padding: 2vh 0;
+    letter-spacing: 1px;
+}
+.comments-dialog-inputBox{
+    margin : 1vh 0;
+    padding: 1vh 1vw;
+    border: 0.5px solid rgb(216, 212, 212);
+    border-radius: 1vh;
+    margin-bottom: 5vh;
+    height: 30vh;
+}
+.comments-dialog-inputBox textarea{
+    font-family: 'lora';
+    width: 20vw;
+    height: 16vh;
+    font-size: 16px;
+    border: none;
+    outline: none;
+}
+.comments-dialog-inputBox-buttons{
+    display: flex;
+    justify-content: end;
+}
+.inputBox-cancel-btn{
+    background-color: white;
+    border: 1px solid rgb(31, 179, 31);
+    color: rgb(31, 179, 31);
+    height: 5vh;
+    width: 6vw;
+    font-size: 14px;
+    border-radius: 3.5vw;
+    cursor: point
+}
+.inputBox-respond-btn{
+    background-color: rgb(31, 179, 31);
+    border: none;
+    color: white;
+    height: 5vh;
+    width: 6vw;
+    font-size: 14px;
+    border-radius: 3.5vw;
+    margin-left: 1.5vw;
+    cursor: pointer;
+}
+.inputBox-respond-btn:disabled{
+    background-color: rgb(187, 233, 187);
+}
+.comments-dialog-inputBox-userDetails{
+    display: flex;
+    align-items: center;
+    margin-bottom: 1vh;
+}
+.comments-dialog-inputBox-userDetails img{
+    height: 5vh;
+    width: 5vh;
+    object-fit: cover;
+    border-radius: 50%;
+    margin-right: 0.8vw;
+}
+.comments-dialog-inputBox-userDetails p{
+    font-size: 16;
+    font-family: 'lora';
+}
+
+.other-comments{
+
+}
+.other-comment{
+    margin: 1vh 0;
+    border-top: 0.5px solid rgb(235, 232, 232);
+    padding: 3vh 1vw;
+}
+.other-comments-user-details{
+    display: flex;
+    align-items: center;
+    margin-bottom: 2vh;
+}
+.other-comments-user-details img{
+    height: 5vh;
+    width: 5vh;
+    object-fit: cover;
+    border-radius: 50%;
+    margin-right: 1vw;
+}
+.other-comments-name{
+    font-size: 16;
+    font-family: 'lora';
+}
+.other-comments-theComment{
+    font-size: 15px;
+    font-family: 'lora';
+
+}

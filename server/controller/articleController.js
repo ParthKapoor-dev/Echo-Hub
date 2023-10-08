@@ -176,12 +176,12 @@ async function deleteArticles(req, res) {
     }
 }
 async function articleComment(req, res) {
-    const { articleId, comment } = req.body;
+    const { articleId, commentUserName , commentProfilePicture , comment } = req.body;
     const user = req.user;
 
     try {
 
-        const data = { userId: user._id, userName: user.name, UserProfilePicture: user.profilePicture, comment };
+        const data = { userId: user._id, commentUserName , commentProfilePicture , comment };
 
         const article = await Article.findOne({ _id: articleId });
 

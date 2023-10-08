@@ -13,24 +13,24 @@ import CommentsGif from "../../images/commentsGif.gif"
 export default function ArticlePage() {
     const location = useLocation();
     const articleId = location.state.articleId;
-    const { user , token } = useUserContext();
+    const { user, token } = useUserContext();
     const [articleData, setarticleData] = useState([]);
     const commentDialogRef = useRef();
-    const [Liked , setLiked ] = useState(()=>{
-        if(articleData?.likes?.includes(user?._id)) return true;
+    const [Liked, setLiked] = useState(() => {
+        if (articleData?.likes?.includes(user?._id)) return true;
         return false
     })
-    const [LikeHover , setLikeHover] = useState(false);
-    const [commentHover , setCommentHover] = useState(false);
+    const [LikeHover, setLikeHover] = useState(false);
+    const [commentHover, setCommentHover] = useState(false);
 
     const { handleFollowBtn, toggleFollow, isLoading } = useFollow(articleData.userId);
-    
-    useEffect(()=>{
-        if(user) {
-            if(articleData?.likes?.includes(user?._id)) setLiked(true);
+
+    useEffect(() => {
+        if (user) {
+            if (articleData?.likes?.includes(user?._id)) setLiked(true);
             else false
         }
-    },[user , articleData])
+    }, [user, articleData])
 
     const dateArray = articleData.date?.split(' ');
     const date = () => {
@@ -38,29 +38,29 @@ export default function ArticlePage() {
         return null
     }
 
-    async function handleLike(){
-        const response = await fetch('http://localhost:3000/article/like',{
-            method:"PUT",
-            headers:{
-                'content-type' : 'application/json',
-                'authorization' : `Bearer ${token}`
+    async function handleLike() {
+        const response = await fetch('http://localhost:3000/article/like', {
+            method: "PUT",
+            headers: {
+                'content-type': 'application/json',
+                'authorization': `Bearer ${token}`
             },
-            body : JSON.stringify({articleId : articleData._id})
+            body: JSON.stringify({ articleId: articleData._id })
         });
         const json = await response.json();
 
-        if(response.ok){
+        if (response.ok) {
             console.log(json);
-            setarticleData((prev)=>{
-                const newarticle = {...prev , likes : json.likes};
+            setarticleData((prev) => {
+                const newarticle = { ...prev, likes: json.likes };
                 console.log(newarticle);
                 return newarticle;
             })
-            setLiked(()=>{
-                if(json.likes.includes(user._id)) return true;
+            setLiked(() => {
+                if (json.likes.includes(user._id)) return true;
                 return false;
             })
-        }else{
+        } else {
             console.log(json)
         }
     }
@@ -99,7 +99,7 @@ export default function ArticlePage() {
 
             <div className="articlePage-user-details">
 
-                {articleData.userProfilePicture  && articleData?.userProfilePicture?.url !== "" ? (
+                {articleData.userProfilePicture && articleData?.userProfilePicture?.url !== "" ? (
                     <img src={articleData.userProfilePicture.url} />
                 ) : (
                     <img src={ProfilePic} />
@@ -117,8 +117,8 @@ export default function ArticlePage() {
                         </button>
                     </div>
                     <p className="articlePage-innerDetails-date">
-                    {date() && date()}
-                </p>
+                        {date() && date()}
+                    </p>
                 </div>
             </div>
 
@@ -126,76 +126,127 @@ export default function ArticlePage() {
 
             <div className="articlePage-actions-div">
                 <div className="articlePage-likes-and-comments">
-                    <p className="articlePage-likes" onClick={handleLike} onMouseEnter={()=>setLikeHover(true)} onMouseLeave={()=>setLikeHover(false)}>
+                    <p className="articlePage-likes" onClick={handleLike} onMouseEnter={() => setLikeHover(true)} onMouseLeave={() => setLikeHover(false)}>
                         {!LikeHover ? (
                             Liked ? (
-                                <img src={LikeStaticFilled}/>
-                            ): (
+                                <img src={LikeStaticFilled} />
+                            ) : (
                                 <img src={LikeStaticPlain} />
                             )
                         ) : (
-                            <img src={LikeGif}/>
+                            <img src={LikeGif} />
                         )}
                         {articleData.likes && articleData.likes.length}
                     </p>
-                    <p className="articlePage-comments" onClick={()=>commentDialogRef.current.showModal()} onMouseEnter={()=>setCommentHover(true)} onMouseLeave={()=>setCommentHover(false)}>
+                    <p className="articlePage-comments" onClick={() => commentDialogRef.current.showModal()} onMouseEnter={() => setCommentHover(true)} onMouseLeave={() => setCommentHover(false)}>
                         {!commentHover ? (
                             <img src={CommentsPng} />
-                        ):(
+                        ) : (
                             <img src={CommentsGif} />
                         )}
                         {articleData.comments && articleData.comments.length}
                     </p>
                 </div>
             </div>
-                    <CommentsDialog articleData={articleData} commentDialogRef={commentDialogRef} setarticleData={setarticleData}/>
+            <CommentsDialog articleData={articleData} commentDialogRef={commentDialogRef} setarticleData={setarticleData} />
             <div className="articlePage-article-div" dangerouslySetInnerHTML={{ __html: articleData.article }} />
 
         </div>
     )
 }
 
-function CommentsDialog({articleData , commentDialogRef , setarticleData}){
+function CommentsDialog({ articleData, commentDialogRef, setarticleData }) {
     const commentRef = useRef();
-    const { token } = useUserContext();
-    async function handleRespond(){
-        const response = await fetch(`http://localhost:3000/article/comment/`,{
-            method:"PUT",
-            headers:{
-                'content-type' : 'application/json',
-                'authorization' : `Bearer ${token}`
+    const { token, user } = useUserContext();
+    const [respondDisabled , setRespondDisabled ] = useState(true);
+
+    async function handleRespond() {
+        const response = await fetch(`http://localhost:3000/article/comment/`, {
+            method: "PUT",
+            headers: {
+                'content-type': 'application/json',
+                'authorization': `Bearer ${token}`
             },
-            body:JSON.stringify({
-                articleId : articleData._id,
-                comment : commentRef.current.value
+            body: JSON.stringify({
+                articleId: articleData._id,
+                commentUserName: user.name,
+                commentProfilePicture: user.profilePicture,
+                comment: commentRef.current.value
             })
         });
         const json = await response.json();
 
-        if(response.ok) {
+        if (response.ok) {
             console.log(json)
-            setarticleData((prev)=>{
-                const article = { ...prev , comments : json.comments};
+            setarticleData((prev) => {
+                const article = { ...prev, comments: json.comments };
                 return article;
             })
             commentRef.current.value = ""
-        }else{
+        } else {
             console.log(json)
         }
     }
+
+    function handleResponseClose() {
+        commentRef.current.value = ""
+        commentDialogRef.current.close();
+    }
+    // console.log(commentRef.current.value)
+    function handleTextAreaOnchange(){
+        if(commentRef.current.value == "") setRespondDisabled(true);
+        else setRespondDisabled(false)
+    }
     return (
         <dialog className="Comments-dialog" ref={commentDialogRef}>
+
+            <p className="comments-dialog-heading">
+                Respond ({articleData.comments && articleData.comments.length})
+            </p>
             <div className="comments-dialog-inputBox">
-                <input type="text" ref={commentRef} />
-                <button onClick={()=>commentDialogRef.current.close()}>Cancel</button>
-                <button onClick={handleRespond}>Respond</button>
+                <div className="comments-dialog-inputBox-userDetails">
+                    {user && (user.profilePicture.url !== "" ? (
+                        <img src={user.profilePicture.url} />
+                    ) : (
+                        <img src={ProfilePic} />
+                    ))}
+                    <p>
+                        {user && user.name}
+                    </p>
+                </div>
+
+                <textarea ref={commentRef} placeholder="What are your thoughts?" id="" cols="10" rows="10" onChange={handleTextAreaOnchange}/>
+                <br />
+                <div className="comments-dialog-inputBox-buttons">
+                    <button className="inputBox-cancel-btn" onClick={handleResponseClose}>Cancel</button>
+                    <button className="inputBox-respond-btn" onClick={handleRespond} disabled={respondDisabled}>Respond</button>
+                </div>
+
             </div>
 
-            {articleData.comments && articleData.comments.map((comment,index)=>(
-                <div key={index}>
-                    {comment.comment}
-                </div>
-            ))}
+            <div className="other-comments">
+                {articleData.comments && articleData.comments.map((comment, index) => (
+                    <div className="other-comment" key={index}>
+                        <div className="other-comments-user-details">
+
+                            {comment.commentProfilePicture.url !== "" ? (
+                                <img src={comment.commentProfilePicture.url} />
+                            ) : (
+                                <img src={ProfilePic} />
+                            )}
+
+                            <div className="other-comments-name-and-date">
+                                <p className="other-comments-name">
+                                    {comment.commentUserName}
+                                </p>
+                            </div>
+                        </div>
+                        <div className="other-comments-theComment">
+                            {comment.comment}
+                        </div>
+                    </div>
+                ))}
+            </div>
         </dialog>
     )
 }

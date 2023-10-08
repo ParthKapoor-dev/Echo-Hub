@@ -13,7 +13,6 @@ export default function ExternalUserArticle({ article, handleRemoveFromFeed }) {
         if (dateArray) return dateArray[1] + " " + dateArray[2];
         return null
     }
-
     const { save, handleSaveCLick, handleSaveLeave, handleSaveEnter } = useSave(article);
     const { dots, handleMouseEnter, handleMouseLeave, handleMouseUp } = useOptions(OptionsRef)
 

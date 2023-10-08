@@ -1,19 +1,20 @@
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom"
+import { useLocation, useNavigate } from "react-router-dom"
 import useUserContext from "../hooks/useUserContext"
 
 import ProfilePic from "../../images/profilePicture.png"
 import useFollow from "../hooks/useFollow";
 
 export default function UserSearchPage({ setTags}) {
-
+    const location = useLocation();
     const searchQuery = location.state;
+
     const { token } = useUserContext();
     const [UserAccounts, setUserAccounts] = useState([]);
 
-
     useEffect(() => {
         async function fetchingData() {
+
             const response = await fetch(`http://localhost:3000/search/user/${searchQuery}`, {
                 method: 'GET',
                 headers: {
@@ -22,7 +23,6 @@ export default function UserSearchPage({ setTags}) {
                 }
             })
             const json = await response.json();
-
             if (response.ok) {
                 console.log(json)
                 setUserAccounts(json.relatedUsers);
@@ -33,7 +33,7 @@ export default function UserSearchPage({ setTags}) {
         }
 
         if (token && searchQuery) fetchingData();
-    }, [token, searchQuery])
+    }, [token, searchQuery , setTags])
 
     return (
         <div className="user-searchPage-div">
