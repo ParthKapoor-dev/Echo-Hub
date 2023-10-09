@@ -10,7 +10,8 @@ const {
     displayArticle,
     deleteArticles,
     articleLike,
-    articleComment
+    articleComment,
+    deleteArticleComment
 } = require('../controller/articleController');
 const requireAuth = require('../Middleware/requireAuth');
 
@@ -36,4 +37,5 @@ router.put('/like' , articleLike);
 
 router.put('/comment' , articleComment);
 
+router.put('/comment/delete' , deleteArticleComment);
 module.exports = router;

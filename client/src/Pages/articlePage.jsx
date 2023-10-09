@@ -239,6 +239,9 @@ function CommentsDialog({ articleData, commentDialogRef, setarticleData }) {
                                 <p className="other-comments-name">
                                     {comment.commentUserName}
                                 </p>
+                                <p className="other-comments-date">
+                                    {comment.date.split(' ')[1]} {comment.date.split(' ')[2]} 
+                                </p>
                             </div>
                         </div>
                         <div className="other-comments-theComment">

@@ -121,7 +121,6 @@ async function publishArticle(req, res) {
     console.log(userProfilePicture)
     const userId = req.user._id;
     const date = new Date;
-
     try {
         const articleResponse = await Article.create({ title, article, userId, userName, likes: [], comments: [], date, tags, userProfilePicture });
         res.json(articleResponse)
@@ -175,17 +174,43 @@ async function deleteArticles(req, res) {
         res.json({ message: error.message })
     }
 }
+async function deleteArticleComment(req , res){
+    const { articleId , commentId} = req.body;
+
+    try{
+        const article = await Article.findOne({_id : articleId});
+
+        const updatedArticle = article.comments.filter(item => item.commentId !== commentId);
+
+        article.comments = updatedArticle;
+        await article.save();
+
+        res.json(article);
+    }catch(error){
+        console.log(error);
+        res.json(error);
+    }
+}
 async function articleComment(req, res) {
     const { articleId, commentUserName , commentProfilePicture , comment } = req.body;
     const user = req.user;
-
+    const date = new Date;
     try {
-
-        const data = { userId: user._id, commentUserName , commentProfilePicture , comment };
-
         const article = await Article.findOne({ _id: articleId });
 
-        article.comments.push(data);
+        const data = {
+            userId: user._id,
+            articleId ,
+            commentId : (article.comments[0] ? ++article.comments[0].commentId : 0 ) ,
+            commentUserName ,
+            commentProfilePicture ,
+            comment ,
+            date : date.toString() ,
+            likes : [] 
+        };
+
+
+        article.comments.unshift(data);
         await article.save();
 
         res.json(article);
@@ -222,5 +247,6 @@ module.exports = {
     displayArticles,
     deleteArticles,
     articleLike,
-    articleComment
+    articleComment,
+    deleteArticleComment
 }
