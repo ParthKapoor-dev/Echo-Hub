@@ -24,7 +24,7 @@ export default function PublishPage() {
                 'authorization': `Bearer ${token}`
             },
             body: JSON.stringify({ title, article, userName: user.name , userProfilePicture : user.profilePicture, tags })
-        })
+        });
         const json = await response.json();
 
         if (response.ok) {

@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { useLocation } from "react-router-dom"
 import useUserContext from "../hooks/useUserContext";
 import useFollow from "../hooks/useFollow";
+import CommentsDialog from "../Components/CommentsDialog";
 
 import ProfilePic from "../../images/profilePicture.png"
 import LikeStaticPlain from "../../images/LikeStaticPlain.png"
@@ -9,6 +10,7 @@ import LikeStaticFilled from "../../images/LikeStaticFilled.png"
 import LikeGif from "../../images/likegif.gif"
 import CommentsPng from "../../images/commentsPng.png"
 import CommentsGif from "../../images/commentsGif.gif"
+
 
 export default function ArticlePage() {
     const location = useLocation();
@@ -89,6 +91,11 @@ export default function ArticlePage() {
         if (token && articleId) fetchingData();
     }, [articleId, token])
 
+    function handleCommentSection(){
+        commentDialogRef.current.showModal();
+        commentDialogRef.current.style.transform  = "translateX(0)"
+    }
+
     return (
 
         <div className="articlePage-div">
@@ -138,7 +145,7 @@ export default function ArticlePage() {
                         )}
                         {articleData.likes && articleData.likes.length}
                     </p>
-                    <p className="articlePage-comments" onClick={() => commentDialogRef.current.showModal()} onMouseEnter={() => setCommentHover(true)} onMouseLeave={() => setCommentHover(false)}>
+                    <p className="articlePage-comments" onClick={handleCommentSection} onMouseEnter={() => setCommentHover(true)} onMouseLeave={() => setCommentHover(false)}>
                         {!commentHover ? (
                             <img src={CommentsPng} />
                         ) : (
@@ -152,104 +159,5 @@ export default function ArticlePage() {
             <div className="articlePage-article-div" dangerouslySetInnerHTML={{ __html: articleData.article }} />
 
         </div>
-    )
-}
-
-function CommentsDialog({ articleData, commentDialogRef, setarticleData }) {
-    const commentRef = useRef();
-    const { token, user } = useUserContext();
-    const [respondDisabled , setRespondDisabled ] = useState(true);
-
-    async function handleRespond() {
-        const response = await fetch(`http://localhost:3000/article/comment/`, {
-            method: "PUT",
-            headers: {
-                'content-type': 'application/json',
-                'authorization': `Bearer ${token}`
-            },
-            body: JSON.stringify({
-                articleId: articleData._id,
-                commentUserName: user.name,
-                commentProfilePicture: user.profilePicture,
-                comment: commentRef.current.value
-            })
-        });
-        const json = await response.json();
-
-        if (response.ok) {
-            console.log(json)
-            setarticleData((prev) => {
-                const article = { ...prev, comments: json.comments };
-                return article;
-            })
-            commentRef.current.value = ""
-        } else {
-            console.log(json)
-        }
-    }
-
-    function handleResponseClose() {
-        commentRef.current.value = ""
-        commentDialogRef.current.close();
-    }
-    // console.log(commentRef.current.value)
-    function handleTextAreaOnchange(){
-        if(commentRef.current.value == "") setRespondDisabled(true);
-        else setRespondDisabled(false)
-    }
-    return (
-        <dialog className="Comments-dialog" ref={commentDialogRef}>
-
-            <p className="comments-dialog-heading">
-                Respond ({articleData.comments && articleData.comments.length})
-            </p>
-            <div className="comments-dialog-inputBox">
-                <div className="comments-dialog-inputBox-userDetails">
-                    {user && (user.profilePicture.url !== "" ? (
-                        <img src={user.profilePicture.url} />
-                    ) : (
-                        <img src={ProfilePic} />
-                    ))}
-                    <p>
-                        {user && user.name}
-                    </p>
-                </div>
-
-                <textarea ref={commentRef} placeholder="What are your thoughts?" id="" cols="10" rows="10" onChange={handleTextAreaOnchange}/>
-                <br />
-                <div className="comments-dialog-inputBox-buttons">
-                    <button className="inputBox-cancel-btn" onClick={handleResponseClose}>Cancel</button>
-                    <button className="inputBox-respond-btn" onClick={handleRespond} disabled={respondDisabled}>Respond</button>
-                </div>
-
-            </div>
-
-            <div className="other-comments">
-                {articleData.comments && articleData.comments.map((comment, index) => (
-                    <div className="other-comment" key={index}>
-                        <div className="other-comments-user-details">
-
-                            {comment.commentProfilePicture.url !== "" ? (
-                                <img src={comment.commentProfilePicture.url} />
-                            ) : (
-                                <img src={ProfilePic} />
-                            )}
-
-                            <div className="other-comments-name-and-date">
-                                <p className="other-comments-name">
-                                    {comment.commentUserName}
-                                </p>
-                                <p className="other-comments-date">
-                                    {comment.date.split(' ')[1]} {comment.date.split(' ')[2]} 
-                                </p>
-                            </div>
-                        </div>
-                        <div className="other-comments-theComment">
-                            {comment.comment}
-                        </div>
-                    </div>
-                ))}
-            </div>
-        </dialog>
     )
 }

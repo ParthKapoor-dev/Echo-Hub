@@ -1,14 +1,14 @@
-1) Making Hooks for the following :- 
-    Likes
-    Comments
+1) Comments :- 
+    Likes (To be done at end)
+    delete Comments -- done
+    CSS Transitions -- done
 
-2) Making Bio Section of Feed page and Search Page
-    
--- changing styles of save and dots
+2) Publish Page dynamic Height
 
--- styling of tags addition in Publish Page + article and title line extending
+3) Publish Page tags
+    delete
+    CSS
 
+4) Loading Page CSS
 
-4) Background Images 
-
-5) Article Images
+5) Refactor Backend code for same pages

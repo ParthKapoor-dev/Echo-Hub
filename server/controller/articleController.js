@@ -1,5 +1,7 @@
 const Article = require('../model/articleModel');
-const User = require('../model/userModel')
+const User = require('../model/userModel');
+const { v4 : uuidv4 } = require('uuid');
+
 async function articleFeed(req, res) {
     const user = req.user
 
@@ -179,9 +181,7 @@ async function deleteArticleComment(req , res){
 
     try{
         const article = await Article.findOne({_id : articleId});
-
         const updatedArticle = article.comments.filter(item => item.commentId !== commentId);
-
         article.comments = updatedArticle;
         await article.save();
 
@@ -195,13 +195,22 @@ async function articleComment(req, res) {
     const { articleId, commentUserName , commentProfilePicture , comment } = req.body;
     const user = req.user;
     const date = new Date;
+
+    function uniqueCommentIdFunc (article){
+        const uniqueCommentId = uuidv4();
+        const isDuplicate = article.comments.some(item=> item.commentId === uniqueCommentId);
+
+        if(!isDuplicate) return uniqueCommentId;
+        return uniqueCommentIdFunc(article);
+    }
     try {
         const article = await Article.findOne({ _id: articleId });
+        const uniqueCommentId = uniqueCommentIdFunc(article);
 
         const data = {
             userId: user._id,
             articleId ,
-            commentId : (article.comments[0] ? ++article.comments[0].commentId : 0 ) ,
+            commentId : uniqueCommentId ,
             commentUserName ,
             commentProfilePicture ,
             comment ,
