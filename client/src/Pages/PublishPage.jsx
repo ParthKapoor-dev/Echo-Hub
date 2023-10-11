@@ -1,14 +1,16 @@
-import {  useState , useRef } from "react"
+import { useState, useRef } from "react"
 import useUserContext from "../hooks/useUserContext"
 import { useNavigate } from "react-router-dom";
+
 
 export default function PublishPage() {
     const [title, settitle] = useState('');
     const [article, setarticle] = useState('');
     const { token, user } = useUserContext();
     const [error, seterror] = useState(null);
-    const [tags , setTags ] = useState([]);
+    const [tags, setTags] = useState([]);
     const tagsRef = useRef();
+    const titleRef = useRef();
     const Navigate = useNavigate();
 
     async function handleSubmit(event) {
@@ -23,7 +25,7 @@ export default function PublishPage() {
                 'content-type': 'application/json',
                 'authorization': `Bearer ${token}`
             },
-            body: JSON.stringify({ title, article, userName: user.name , userProfilePicture : user.profilePicture, tags })
+            body: JSON.stringify({ title, article, userName: user.name, userProfilePicture: user.profilePicture, tags })
         });
         const json = await response.json();
 
@@ -39,23 +41,40 @@ export default function PublishPage() {
         }
     }
     function handleTitleInput(event) {
-        settitle(event.target.value);
+        settitle(event.target.value)
+
+        event.target.style.height = event.target.style.minHeight = 'auto';
+        event.target.style.minHeight = `${event.target.scrollHeight}px`;
+        event.target.style.height = `${event.target.scrollHeight}px`;
+
     }
-    function handleAddTags(event){
+
+    function handleArticleInput(event) {
+        setarticle(event.target.value);
+
+        event.target.style.height = event.target.style.minHeight = 'auto';
+        event.target.style.minHeight = `${event.target.scrollHeight}px`;
+        event.target.style.height = `${event.target.scrollHeight}px`;
+    }
+    function handleAddTags(event) {
         event.preventDefault();
         const newTag = tagsRef.current.value;
-        setTags(prev=>{
+        setTags(prev => {
             const newTags = [...prev];
             newTags.push(newTag)
             return newTags
         });
         tagsRef.current.value = "";
     }
+
+    function handleRemoveTag(removeThisTag) {
+        setTags(prev => prev.filter(item => item !== removeThisTag))
+    }
     return (
         <div className="publishPage-form" >
-            <textarea id="publishPage-title" rows='1' onChange={handleTitleInput} value={title} placeholder="Title" />
+            <textarea id="publishPage-title" ref={titleRef} rows='1' onChange={handleTitleInput} value={title} placeholder="Title" />
 
-            <textarea id="publishPage-article" cols="30" rows="10" value={article} onChange={(e) => setarticle(e.target.value)} placeholder="Write your article here" />
+            <textarea id="publishPage-article" cols="30" rows="10" value={article} onChange={handleArticleInput} placeholder="Write your article here" />
 
             <div className="publishPage-tags-div">
                 <p className="publishPage-tags-description">
@@ -67,8 +86,15 @@ export default function PublishPage() {
                 </button>
                 <div className="publishPage-tags-list">
                     {tags.length ? (
-                        tags.map(tag=>tag)
-                    ):("")}
+                        tags.map(tag => (
+                            <p key={tag}>
+                                {tag}
+                                <span className="publishPage-tags-p-remove" onClick={() => handleRemoveTag(tag)}>
+                                    X
+                                </span>
+                            </p>
+                        ))
+                    ) : ("")}
                 </div>
             </div>
 

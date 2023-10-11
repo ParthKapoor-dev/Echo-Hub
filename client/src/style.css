@@ -939,6 +939,7 @@ span{
     border: none;
     outline: none;
     color: rgb(49, 48, 48);
+    transition : 0.3s all ease-in-out;
 }
 #publishPage-article{
     padding: 1.5vh 0.1vw;
@@ -959,7 +960,60 @@ span{
     cursor: pointer;
     margin: 4vh 0;
 }
-
+.publishPage-tags-list{
+    display: flex;
+    gap: 1vw;
+    min-height: 4.8vh;
+}
+.publishPage-tags-list p{
+    font-family: 'Lora' ;
+    height: 4vh;
+    width: auto;
+    padding:0 0.5vw;
+    padding-top: 0.8vh;
+    background-color: rgb(231, 231, 231);
+    border-radius: 2.4vh;
+    font-size: 15px;
+}
+.publishPage-tags-p-remove {
+    margin-left: 0.6vw;
+    color: rgb(110, 108, 108);
+    font-size: 12px;
+    padding: 0.2vw 0.3vw;
+    border: 0.1px solid rgb(110, 108, 108);
+    border-radius: 2.2vw;
+    cursor: pointer;
+}
+.publishPage-tags-description{
+    font-size: 16px;
+    font-family: 'lora';
+}
+#publishPage-tags-input{
+    font-size: 18px;
+    font-family: 'lora';
+    outline: none;
+    border: 0.5px solid rgb(202, 198, 198);
+    border-radius: 10px;
+    padding: 0.8vh 0.8vw;
+    margin : 2vh 0;
+}
+.publishPage-tags-add-btn{
+    background-color: white;
+    border: 1px solid rgb(31, 179, 31);
+    color: rgb(31, 179, 31);
+    height: 5vh;
+    width: 3vw;
+    font-size: 14px;
+    border-radius: 3.5vw;
+    cursor: pointer;
+    margin-left: 2vw;
+    transition: 0.2s all ease-in-out;
+}
+.publishPage-tags-add-btn:hover{
+    border-color: rgb(65, 206, 65);
+    background-color: rgb(65, 206, 65);
+    color: white;
+}
 /* Article Page */
 
 .articlePage-div{
@@ -1100,7 +1154,7 @@ span{
     width: 6vw;
     font-size: 14px;
     border-radius: 3.5vw;
-    cursor: point
+    cursor: pointer;
 }
 .inputBox-respond-btn{
     background-color: rgb(31, 179, 31);
