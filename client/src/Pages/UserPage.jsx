@@ -1,9 +1,11 @@
-import { useEffect, useState} from "react";
+import { useEffect, useState } from "react";
 import useUserContext from "../hooks/useUserContext";
 import { Route, Routes, useNavigate } from "react-router-dom";
 import BioSection from "../Components/BioSection";
 import UserArticle from "../Components/UserArticle";
 
+
+import LoadingPageGif from "../../images/Loading Page animation1.gif"
 
 export default function UserPage() {
     const { user, token } = useUserContext();
@@ -79,8 +81,11 @@ export default function UserPage() {
                     {error && <div className="error-div">{error}</div>}
                 </div>
             ) : (
-                <div className="PageIsLoading-div">
-                    This Page is currently loading
+                <div className="PageisLoading-div">
+                    <img src={LoadingPageGif} />
+                    {error ?? (
+                        <div className="error-div">{error}</div>
+                    )}
                 </div>
             )}
         </>

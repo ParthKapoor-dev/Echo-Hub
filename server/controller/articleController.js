@@ -12,7 +12,7 @@ async function articleFeed(req, res) {
             if (article) tags.push(...article.tags)
         }
         const finalTags = filterDuplicateItems(tags);
-        return finalTags;
+        return finalTags; 
     }
 
     function filterDuplicateItems(ItemsArray) {
@@ -72,19 +72,54 @@ async function articleFeed(req, res) {
         return finalArticles;
     }
 
+    async function getAccountsByArticles(articles){
+        const accounts = [];
+        for(const article of articles){
+            const user = await User.findOne({_id : article.userId});
+            if(user) accounts.push(user);
+        }
+        return accounts;
+    } 
+
+    function filterDuplicateAccounts(ItemsArray) {
+        const Items = [];
+        for (var i = 0; i < ItemsArray.length; i++) {
+            var flag = true;
+            if(ItemsArray[i]._id.toString() === user._id.toString() ||
+             ItemsArray[i].followers.includes(user._id)){
+                flag = false;
+                continue;
+            }
+            for (var j = i + 1; j < ItemsArray.length; j++) {
+                if(ItemsArray[i]._id.toString() === ItemsArray[j]._id.toString()){
+                    flag = false;
+                    break;
+                }
+            }
+            if (flag) {
+                Items.push(ItemsArray[i]);
+            }
+        }
+        return Items;
+    }   
+
     try {
         const followings = await User.findOne({ _id: user._id }).select('following');
         const LikedArticles = await Article.find({ likes: user._id });
         const LikedTags = getLikedTags(LikedArticles);
 
         const FollowingsArticles = await getArticlesByFollowings(followings.following);
-
         const LikedtagsArticles = await getArticlesByTags(LikedTags);
-
         const articles = [...FollowingsArticles, ...LikedtagsArticles];
         const finalArticles = filterDuplicateArticles(articles);
 
-        res.json(finalArticles);
+
+        const likedtagsAccounts = await getAccountsByArticles(LikedtagsArticles);
+        const finalAccounts = filterDuplicateAccounts(likedtagsAccounts);
+
+
+
+        res.json({finalArticles , finalAccounts , LikedTags});
     } catch (error) {
         console.error(error);
         res.status(500).json({ error: 'Internal Server Error' });

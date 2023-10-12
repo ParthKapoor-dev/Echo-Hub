@@ -1,14 +1,16 @@
 import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom"
 import useUserContext from "../hooks/useUserContext"
-
-import ProfilePic from "../../images/profilePicture.png"
 import useFollow from "../hooks/useFollow";
 
-export default function UserSearchPage({ setTags}) {
+import ProfilePic from "../../images/profilePicture.png"
+import LoadingPageGif from "../../images/Loading Page animation1.gif"
+
+
+export default function UserSearchPage({ setTags }) {
     const location = useLocation();
     const searchQuery = location.state;
-
+    const [isPageLoading, setIsPageLoading] = useState(true);
     const { token } = useUserContext();
     const [UserAccounts, setUserAccounts] = useState([]);
 
@@ -33,35 +35,44 @@ export default function UserSearchPage({ setTags}) {
         }
 
         if (token && searchQuery) fetchingData();
-    }, [token, searchQuery , setTags])
+    }, [token, searchQuery, setTags])
 
     return (
-        <div className="user-searchPage-div">
-            { UserAccounts.length ? UserAccounts.map(account => (
-                <Account key={account._id} userAccount={account} setUserAccounts={setUserAccounts} />
-            )) : (
-                <div className="user-seachPage-no-Users">
-                    No users of This user name were found
-                </div>
-            )}
-        </div>
+        isPageLoading ? (
+            <div className="user-searchPage-div">
+                {UserAccounts.length ? UserAccounts.map(account => (
+                    <Account key={account._id} userAccount={account} setUserAccounts={setUserAccounts} />
+                )) : (
+                    <div className="user-seachPage-no-Users">
+                        No users of This user name were found
+                    </div>
+                )}
+            </div>
+        ) : (
+            <div className="PageisLoading-div">
+                <img src={LoadingPageGif} />
+                {/* {error ?? (
+                <div className="error-div">{error}</div>
+            )} */}
+            </div>
+        )
     )
 }
 
 
-function Account({ userAccount , setUserAccounts }) {
+function Account({ userAccount, setUserAccounts }) {
     const { user } = useUserContext();
     const Navigate = useNavigate();
 
-    const {handleFollowBtn , toggleFollow , isLoading , jsonData} = useFollow( userAccount._id);
+    const { handleFollowBtn, toggleFollow, isLoading, jsonData } = useFollow(userAccount._id);
 
-    async function handleFollowedBtn(event){
+    async function handleFollowedBtn(event) {
         event.preventDefault();
         await handleFollowBtn();
 
-        if(!isLoading && jsonData?._id == userAccount?._id) 
-            setUserAccounts(prevData=>prevData.map(account=>{
-                if(account._id == jsonData._id) return jsonData;
+        if (!isLoading && jsonData?._id == userAccount?._id)
+            setUserAccounts(prevData => prevData.map(account => {
+                if (account._id == jsonData._id) return jsonData;
                 return account;
             }));
     }
@@ -75,7 +86,7 @@ function Account({ userAccount , setUserAccounts }) {
 
             {userAccount.profilePicture.url !== "" ? (
                 <img src={userAccount.profilePicture.url} />
-            ):(
+            ) : (
                 <img src={ProfilePic} />
             )}
 
@@ -90,9 +101,9 @@ function Account({ userAccount , setUserAccounts }) {
 
             {userAccount._id !== user._id && (
                 <button className={!toggleFollow ? ("accountPage-Bio-section-Follow-btn") : ("accountPage-Bio-section-Following-btn")} id="accountPage-Bio-section-toggleFollow-btn" disabled={isLoading} onClick={handleFollowedBtn}>
-                {toggleFollow && "Following"}
-                {!toggleFollow && "Follow"}
-            </button>
+                    {toggleFollow && "Following"}
+                    {!toggleFollow && "Follow"}
+                </button>
             )}
 
         </div>

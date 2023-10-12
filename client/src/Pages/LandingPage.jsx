@@ -2,6 +2,7 @@ import { useEffect, useState } from "react"
 import useUserContext from "../hooks/useUserContext"
 import ExternalUserArticle from "../Components/UserArticle-External";
 
+import LoadingPageGif from "../../images/Loading Page animation1.gif"
 import ProfilePic from "../../images/profilePicture.png"
 import useFollow from "../hooks/useFollow";
 import { useNavigate } from "react-router-dom";
@@ -9,12 +10,14 @@ import { useNavigate } from "react-router-dom";
 export default function LandingPage() {
 
     const [Articles, setArticles] = useState([]);
+    const [ recommendedAccounts , setRecommendedAccounts ] = useState([]);
+    const [ recommendedTags , setRecommendedTags ] = useState([]);
     const [PageIsLoading, setPageIsLoading] = useState(true)
     const { user, token } = useUserContext();
     const [error, setError] = useState(null)
     useEffect(() => {
         async function fetchingData() {
-            const response = await fetch(`http://localhost:3000/article/feed/${user._id}`, {
+            const response = await fetch(`http://localhost:3000/article/feed`, {
                 method: "GET",
                 headers: {
                     'content-type': 'application/json',
@@ -25,7 +28,9 @@ export default function LandingPage() {
 
             if (response.ok) {
                 console.log(json)
-                setArticles(json);
+                setArticles(json.finalArticles);
+                setRecommendedAccounts(json.finalAccounts);
+                setRecommendedTags(json.LikedTags);
                 setPageIsLoading(false)
             } else {
                 console.log(json);
@@ -58,12 +63,12 @@ export default function LandingPage() {
                         ))}
                     </div>
 
-                    <BioSection />
+                    <BioSection likedTags={recommendedTags} likedTagsAccounts={recommendedAccounts} />
 
                 </div>
             ) : (
                 <div className="PageisLoading-div">
-                    Wait Page is Currently loading
+                    <img src={LoadingPageGif} />
                     {error ?? (
                         <div className="error-div">{error}</div>
                     )}
@@ -74,35 +79,7 @@ export default function LandingPage() {
     )
 }
 
-function BioSection() {
-    const { token } = useUserContext();
-    const [likedTags, setlikedTags] = useState([]);
-    const [likedTagsAccounts, setlikedtagsaccounts] = useState([]);
-
-    useEffect(() => {
-        async function fetchingData() {
-            console.log('begin')
-            const response = await fetch('http://localhost:3000/accounts/landingPage/Bio', {
-                method: "GET",
-                headers: {
-                    'content-type': 'application/json',
-                    'authorization': `Bearer ${token}`
-                }
-            })
-
-            const json = await response.json();
-
-            if (response.ok) {
-                setlikedTags(json.likedTags);
-                setlikedtagsaccounts(json.finalAccounts);
-                console.log(json)
-            } else {
-                console.log(json)
-            }
-        }
-
-        if (token) fetchingData();
-    }, [token])
+function BioSection( { likedTags , likedTagsAccounts }) {
     return (
         <div className="landingPage-Bio-Section">
 

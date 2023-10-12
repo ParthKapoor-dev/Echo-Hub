@@ -3,12 +3,14 @@ import useUserContext from "../hooks/useUserContext"
 import ExternalUserArticle from "./UserArticle-External";
 import { useLocation } from "react-router-dom";
 
+import LoadingPageGif from "../../images/Loading Page animation1.gif"
+
 export default function ArticleSearchPage({ setTags }) {
     const location = useLocation();
     const searchQuery = location.state;
     const { token } = useUserContext();
     const [Articles, setArticles] = useState([]);
-    const [PageIsLoading , setPageIsLoading] = useState(true)
+    const [PageIsLoading, setPageIsLoading] = useState(true)
     useEffect(() => {
         async function fetchingData() {
             const response = await fetch(`http://localhost:3000/search/articles/${searchQuery}`, {
@@ -32,17 +34,20 @@ export default function ArticleSearchPage({ setTags }) {
         }
 
         if (token && searchQuery) fetchingData();
-    }, [token, searchQuery , setTags])
+    }, [token, searchQuery, setTags])
 
     return (
         <>
             {!PageIsLoading ? (
-                        Articles.map(article=>(
-                            <ExternalUserArticle key={article._id} article={article}  />
-                        ))
+                Articles.map(article => (
+                    <ExternalUserArticle key={article._id} article={article} />
+                ))
             ) : (
                 <div className="PageisLoading-div">
-                    Wait Page is Currently loading
+                    <img src={LoadingPageGif} />
+                    {/* {error ?? (
+                        <div className="error-div">{error}</div>
+                    )} */}
                 </div>
             )}
         </>

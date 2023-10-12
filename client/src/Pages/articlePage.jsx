@@ -4,6 +4,8 @@ import useUserContext from "../hooks/useUserContext";
 import useFollow from "../hooks/useFollow";
 import CommentsDialog from "../Components/CommentsDialog";
 
+
+import LoadingPageGif from "../../images/Loading Page animation1.gif"
 import ProfilePic from "../../images/profilePicture.png"
 import LikeStaticPlain from "../../images/LikeStaticPlain.png"
 import LikeStaticFilled from "../../images/LikeStaticFilled.png"
@@ -16,6 +18,7 @@ export default function ArticlePage() {
     const location = useLocation();
     const articleId = location.state.articleId;
     const { user, token } = useUserContext();
+    const [isPageLoading, setIsPageLoading] = useState(true);
     const [articleData, setarticleData] = useState([]);
     const commentDialogRef = useRef();
     const [Liked, setLiked] = useState(() => {
@@ -82,7 +85,8 @@ export default function ArticlePage() {
                 console.log(json)
                 const newArticle = json.article.replace(/\n/g, "<br>");
                 json.article = newArticle;
-                setarticleData(json)
+                setarticleData(json);
+                setIsPageLoading(false);
             } else {
                 console.log(json)
             }
@@ -91,73 +95,82 @@ export default function ArticlePage() {
         if (token && articleId) fetchingData();
     }, [articleId, token])
 
-    function handleCommentSection(){
+    function handleCommentSection() {
         commentDialogRef.current.showModal();
-        commentDialogRef.current.style.transform  = "translateX(0)"
+        commentDialogRef.current.style.transform = "translateX(0)"
     }
 
     return (
+        !isPageLoading ? (
 
-        <div className="articlePage-div">
+            <div className="articlePage-div">
 
-            <h1 className="articlePage-title">
-                {articleData.title}
-            </h1>
+                <h1 className="articlePage-title">
+                    {articleData.title}
+                </h1>
 
-            <div className="articlePage-user-details">
+                <div className="articlePage-user-details">
 
-                {articleData.userProfilePicture && articleData?.userProfilePicture?.url !== "" ? (
-                    <img src={articleData.userProfilePicture.url} />
-                ) : (
-                    <img src={ProfilePic} />
-                )}
+                    {articleData.userProfilePicture && articleData?.userProfilePicture?.url !== "" ? (
+                        <img src={articleData.userProfilePicture.url} />
+                    ) : (
+                        <img src={ProfilePic} />
+                    )}
 
-                <div className="articlePage-InnerDetails">
-                    <div>
-                        <p className="articlePage-InnerDetails-userName">
-                            {articleData.userName} ·
+                    <div className="articlePage-InnerDetails">
+                        <div>
+                            <p className="articlePage-InnerDetails-userName">
+                                {articleData.userName} ·
+                            </p>
+
+                            <button className={!toggleFollow ? ("articlePage-Bio-section-Follow-btn") : ("articlePage-Bio-section-Following-btn")} id="articlePage-Bio-section-toggleFollow-btn" disabled={isLoading} onClick={handleFollowBtn}>
+                                {toggleFollow && "Following"}
+                                {!toggleFollow && "Follow"}
+                            </button>
+                        </div>
+                        <p className="articlePage-innerDetails-date">
+                            {date() && date()}
                         </p>
-
-                        <button className={!toggleFollow ? ("articlePage-Bio-section-Follow-btn") : ("articlePage-Bio-section-Following-btn")} id="articlePage-Bio-section-toggleFollow-btn" disabled={isLoading} onClick={handleFollowBtn}>
-                            {toggleFollow && "Following"}
-                            {!toggleFollow && "Follow"}
-                        </button>
                     </div>
-                    <p className="articlePage-innerDetails-date">
-                        {date() && date()}
-                    </p>
                 </div>
-            </div>
 
 
 
-            <div className="articlePage-actions-div">
-                <div className="articlePage-likes-and-comments">
-                    <p className="articlePage-likes" onClick={handleLike} onMouseEnter={() => setLikeHover(true)} onMouseLeave={() => setLikeHover(false)}>
-                        {!LikeHover ? (
-                            Liked ? (
-                                <img src={LikeStaticFilled} />
+                <div className="articlePage-actions-div">
+                    <div className="articlePage-likes-and-comments">
+                        <p className="articlePage-likes" onClick={handleLike} onMouseEnter={() => setLikeHover(true)} onMouseLeave={() => setLikeHover(false)}>
+                            {!LikeHover ? (
+                                Liked ? (
+                                    <img src={LikeStaticFilled} />
+                                ) : (
+                                    <img src={LikeStaticPlain} />
+                                )
                             ) : (
-                                <img src={LikeStaticPlain} />
-                            )
-                        ) : (
-                            <img src={LikeGif} />
-                        )}
-                        {articleData.likes && articleData.likes.length}
-                    </p>
-                    <p className="articlePage-comments" onClick={handleCommentSection} onMouseEnter={() => setCommentHover(true)} onMouseLeave={() => setCommentHover(false)}>
-                        {!commentHover ? (
-                            <img src={CommentsPng} />
-                        ) : (
-                            <img src={CommentsGif} />
-                        )}
-                        {articleData.comments && articleData.comments.length}
-                    </p>
+                                <img src={LikeGif} />
+                            )}
+                            {articleData.likes && articleData.likes.length}
+                        </p>
+                        <p className="articlePage-comments" onClick={handleCommentSection} onMouseEnter={() => setCommentHover(true)} onMouseLeave={() => setCommentHover(false)}>
+                            {!commentHover ? (
+                                <img src={CommentsPng} />
+                            ) : (
+                                <img src={CommentsGif} />
+                            )}
+                            {articleData.comments && articleData.comments.length}
+                        </p>
+                    </div>
                 </div>
-            </div>
-            <CommentsDialog articleData={articleData} commentDialogRef={commentDialogRef} setarticleData={setarticleData} />
-            <div className="articlePage-article-div" dangerouslySetInnerHTML={{ __html: articleData.article }} />
+                <CommentsDialog articleData={articleData} commentDialogRef={commentDialogRef} setarticleData={setarticleData} />
+                <div className="articlePage-article-div" dangerouslySetInnerHTML={{ __html: articleData.article }} />
 
-        </div>
+            </div>
+        ) : (
+            <div className="PageisLoading-div">
+                <img src={LoadingPageGif} />
+                {/* {error ?? (
+                <div className="error-div">{error}</div>
+            )} */}
+            </div>
+        )
     )
 }

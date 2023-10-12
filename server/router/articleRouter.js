@@ -17,7 +17,7 @@ const requireAuth = require('../Middleware/requireAuth');
 
 router.use(requireAuth);
 
-router.get('/feed/:query' , articleFeed);
+router.get('/feed' , articleFeed);
 
 router.get('/list/:query' , ListArticles)
 

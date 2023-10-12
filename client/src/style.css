@@ -213,7 +213,22 @@ nav{
     align-items: center;
 }
 
-/* UserArticle */
+
+
+/* Loading Page */
+
+.PageisLoading-div{
+    height: 100vh;
+    display: flex;
+    /* align-items: center; */
+    justify-content:center;
+}
+.PageisLoading-div img{
+    height: 50vh;
+    width: auto;
+    transform: translate(0, 20%);
+}
+/* rticle */
 
 .UserArticle{
     padding: 4vh 0;
@@ -706,6 +721,7 @@ nav{
 .accountPage-Bio-section-following-details img{
     height: 4vh;
     width: 4vh;
+    object-fit: cover;
     border-radius: 50%;
     border: 0.1px solid rgb(192, 189, 189);
     margin-right: 1vw;
@@ -797,7 +813,7 @@ nav{
 }
 .searchPage-bio-section-related-tags-div,
 .landingPage-Recommended-tags-div{
-    width: 23vw;
+    width: 25vw;
     display: flex;
     flex-wrap: wrap;
 }

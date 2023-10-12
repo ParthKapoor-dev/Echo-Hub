@@ -28,6 +28,4 @@ router.put('/update/profile/:query' , updateProfile);
 
 router.get('/followings/:query' , userFollowings);
 
-router.get('/landingPage/Bio' , landingPageBio)
-
 module.exports = router;

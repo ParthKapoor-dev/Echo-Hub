@@ -132,9 +132,6 @@ async function userFollowings(req, res) {
     try {
         const followings = await User.findOne({ _id: userId }).select('following')
         const newFollowings = followings.following.slice(0, 5);
-        // const finalFollowings = await Promise.all(newFollowings.map(
-        //     async (_id) => await User.findOne({ _id }).select('name profilePicture')
-        // ))
 
         async function getFollowingsById() {
             const users = [];
@@ -153,85 +150,7 @@ async function userFollowings(req, res) {
         res.json({ message: error.message })
     }
 }
-async function landingPageBio(req, res) {
-    const user = req.user;
 
-    function getLikedTags(likedArticles){
-        const tags = [];
-
-        for(const article of  likedArticles ){
-            if(article) tags.push(...article.tags)
-        }
-        const Finaltags = filterDuplicateItems(tags)
-        return Finaltags;
-    }
-    async function getArticlesByTags(tags) {
-        const articles = [];
-
-        for (const tag of tags) {
-            const taggedArticles = await Article.find({ tags: tag });
-            articles.push(...taggedArticles);
-        }
-        const Finalarticles = filterDuplicateItems(articles);
-        return Finalarticles;
-    }
-
-    async function getAccountsByArticles(articles){
-        const accounts = [];
-        for(const article of articles){
-            const user = await User.findOne({_id : article.userId});
-            if(user) accounts.push(user);
-        }
-        return accounts;
-    }
-
-    function filterDuplicateAccounts(ItemsArray) {
-        const Items = [];
-        for (var i = 0; i < ItemsArray.length; i++) {
-            var flag = true;
-            if(ItemsArray[i]._id.toString() === user._id.toString() ||
-             ItemsArray[i].followers.includes(user._id)){
-                flag = false;
-                continue;
-            }
-            for (var j = i + 1; j < ItemsArray.length; j++) {
-                if(ItemsArray[i]._id.toString() === ItemsArray[j]._id.toString()){
-                    flag = false;
-                    break;
-                }
-            }
-            if (flag) {
-                Items.push(ItemsArray[i]);
-            }
-        }
-        return Items;
-    }
-    function filterDuplicateItems(ItemsArray){
-        const Items = [];
-
-        for(var i = 0 ; i < ItemsArray.length ; i++){
-            var flag = true
-            for(var j = i + 1 ; j < ItemsArray.length ; j++){
-                if(ItemsArray[i] == ItemsArray[j]) flag = false;
-            }
-            if(flag) Items.push(ItemsArray[i]);
-        }
-        return Items;    
-    }
-    try {
-        const LikedArticles = await Article.find({ likes: user._id });
-        const likedTags = getLikedTags(LikedArticles);
-        const LikedtagsArticles = await getArticlesByTags(likedTags);
-        const likedtagsAccounts = await getAccountsByArticles(LikedtagsArticles);
-        const finalAccounts = filterDuplicateAccounts(likedtagsAccounts);
-
-        res.json({likedTags , finalAccounts})
-        
-    } catch (error) {
-        console.log(error)
-        res.json({err : error.message})
-    }
-}
 module.exports = {
     Allusers,
     follow,
@@ -239,6 +158,5 @@ module.exports = {
     UserProfile,
     uploadProfilePic,
     updateProfile,
-    userFollowings,
-    landingPageBio
+    userFollowings
 }
