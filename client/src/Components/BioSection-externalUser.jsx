@@ -25,7 +25,7 @@ export default function BioSectionExternalUser({ AccountDetails , setAccountDeta
     useEffect(() => {
 
         async function fetchingData() {
-            const response = await fetch(`http://localhost:3000/accounts/followings/${AccountDetails._id}`, {
+            const response = await fetch(`https://echo-hub-server.onrender.com/accounts/followings/${AccountDetails._id}`, {
                 method: 'GET',
                 headers: {
                     'content-type': 'application/json',

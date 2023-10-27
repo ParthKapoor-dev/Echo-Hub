@@ -16,7 +16,7 @@ export default function AccountProfilePage() {
     const Navigate = useNavigate();
     useEffect(() => {
         async function fetchingData() {
-            const response = await fetch(`http://localhost:3000/accounts/userProfile/${userId}`, {
+            const response = await fetch(`https://echo-hub-server.onrender.com/accounts/userProfile/${userId}`, {
                 method: "GET",
                 headers: {
                     'content-type': 'application/json',
@@ -84,7 +84,7 @@ function Home({ AccountDetails }) {
 
     useEffect(() => {
         async function fetchingData() {
-            const response = await fetch(`http://localhost:3000/article/user/${AccountDetails._id}`, {
+            const response = await fetch(`https://echo-hub-server.onrender.com/article/user/${AccountDetails._id}`, {
                 method: "GET",
                 headers: {
                     'content-type': `application/json`,
@@ -132,7 +132,7 @@ function Lists({ AccountDetails }) {
 
     useEffect(() => {
         async function fetchingData() {
-            const response = await fetch(`http://localhost:3000/article/list/${AccountDetails._id}`, {
+            const response = await fetch(`https://echo-hub-server.onrender.com/article/list/${AccountDetails._id}`, {
                 method: "GET",
                 headers: {
                     'content-type': `application/json`,

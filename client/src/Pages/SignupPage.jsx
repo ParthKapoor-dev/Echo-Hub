@@ -24,7 +24,7 @@ export default function SignupPage(){
     }
         async function handleSubmit(event){
             event.preventDefault();
-            const response = await fetch('http://localhost:3000/user/signup',{
+            const response = await fetch('https://echo-hub-server.onrender.com/user/signup',{
                 method:'POST',
                 headers:{
                     'content-type':'application/json'

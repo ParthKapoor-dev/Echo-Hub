@@ -44,7 +44,7 @@ export default function ArticlePage() {
     }
 
     async function handleLike() {
-        const response = await fetch('http://localhost:3000/article/like', {
+        const response = await fetch('https://echo-hub-server.onrender.com/article/like', {
             method: "PUT",
             headers: {
                 'content-type': 'application/json',
@@ -72,7 +72,7 @@ export default function ArticlePage() {
 
     useEffect(() => {
         async function fetchingData() {
-            const response = await fetch(`http://localhost:3000/article/${articleId}`, {
+            const response = await fetch(`https://echo-hub-server.onrender.com/article/${articleId}`, {
                 method: 'GET',
                 headers: {
                     'content-type': 'application/json',

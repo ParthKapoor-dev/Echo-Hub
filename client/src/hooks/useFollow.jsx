@@ -14,7 +14,7 @@ export default function useFollow(followedUserId){
     }, [user, followedUserId])
 
     async function follow(currentUserId, followedUserId) {
-        const response = await fetch('http://localhost:3000/accounts/follow', {
+        const response = await fetch('https://echo-hub-server.onrender.com/accounts/follow', {
             method: "PUT",
             headers: {
                 'content-type': 'application/json',
@@ -33,7 +33,7 @@ export default function useFollow(followedUserId){
         }
     }
     async function unfollow(currentUserId, followedUserId) {
-        const response = await fetch('http://localhost:3000/accounts/unfollow', {
+        const response = await fetch('https://echo-hub-server.onrender.com/accounts/unfollow', {
             method: "PUT",
             headers: {
                 'content-type': 'application/json',

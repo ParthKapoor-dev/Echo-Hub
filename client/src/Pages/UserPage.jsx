@@ -17,7 +17,7 @@ export default function UserPage() {
 
 
     async function fetchingData() {
-        const response = await fetch(`http://localhost:3000/article/user/${user._id}`, {
+        const response = await fetch(`https://echo-hub-server.onrender.com/article/user/${user._id}`, {
             method: 'GET',
             headers: {
                 'content-type': 'application/json',
@@ -35,7 +35,7 @@ export default function UserPage() {
     }
     async function handleDeleteArticle(event, _id) {
         event.preventDefault();
-        const response = await fetch('http://localhost:3000/article', {
+        const response = await fetch('https://echo-hub-server.onrender.com/article', {
             method: "DELETE",
             headers: {
                 'content-type': 'application/json',
@@ -110,7 +110,7 @@ function Lists() {
 
     useEffect(() => {
         async function fetchingData() {
-            const response = await fetch(`http://localhost:3000/article/list/${user._id}`, {
+            const response = await fetch(`https://echo-hub-server.onrender.com/article/list/${user._id}`, {
                 method: "GET",
                 headers: {
                     'content-type': `application/json`,

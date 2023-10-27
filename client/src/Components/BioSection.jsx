@@ -16,7 +16,7 @@ export default function BioSection() {
     useEffect(() => {
 
         async function fetchingData() {
-            const response = await fetch(`http://localhost:3000/accounts/followings/${user._id}`, {
+            const response = await fetch(`https://echo-hub-server.onrender.com/accounts/followings/${user._id}`, {
                 method: 'GET',
                 headers: {
                     'content-type': 'application/json',
@@ -41,7 +41,7 @@ export default function BioSection() {
         const base64File = await ConvertToBase64(file);
         console.log(base64File);
         if (file) {
-            const response = await fetch(`http://localhost:3000/accounts/upload/profilePic/${user._id}`, {
+            const response = await fetch(`https://echo-hub-server.onrender.com/accounts/upload/profilePic/${user._id}`, {
                 method: "PUT",
                 headers: {
                     'content-type': 'application/json',
@@ -159,7 +159,7 @@ function EditProfile({ ConvertToBase64, editProfileRef }) {
         if (editProfileName !== user.name) updatedProfile.name = editProfileName;
         if (editProfileImg === ProfilePic) updatedProfile.profilePicture = null;
         else if (editProfileImg !== user.profilePicture) updatedProfile.profilePicture = editProfileImg;
-        const response = await fetch(`http://localhost:3000/accounts/update/profile/${user._id}`, {
+        const response = await fetch(`https://echo-hub-server.onrender.com/accounts/update/profile/${user._id}`, {
             method: "PUT",
             headers: {
                 'content-type': 'application/json',

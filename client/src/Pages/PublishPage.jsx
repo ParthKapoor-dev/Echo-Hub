@@ -19,7 +19,7 @@ export default function PublishPage() {
             seterror('All fields must be filled');
             return;
         }
-        const response = await fetch('http://localhost:3000/article/write', {
+        const response = await fetch('https://echo-hub-server.onrender.com/article/write', {
             method: "POST",
             headers: {
                 'content-type': 'application/json',

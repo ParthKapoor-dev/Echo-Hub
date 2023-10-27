@@ -13,7 +13,7 @@ export default function ArticleSearchPage({ setTags }) {
     const [PageIsLoading, setPageIsLoading] = useState(true)
     useEffect(() => {
         async function fetchingData() {
-            const response = await fetch(`http://localhost:3000/search/articles/${searchQuery}`, {
+            const response = await fetch(`https://echo-hub-server.onrender.com/search/articles/${searchQuery}`, {
                 method: 'GET',
                 headers: {
                     'content-type': 'application/json',

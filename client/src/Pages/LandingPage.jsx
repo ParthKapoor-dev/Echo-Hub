@@ -17,7 +17,7 @@ export default function LandingPage() {
     const [error, setError] = useState(null)
     useEffect(() => {
         async function fetchingData() {
-            const response = await fetch(`http://localhost:3000/article/feed`, {
+            const response = await fetch(`https://echo-hub-server.onrender.com/article/feed`, {
                 method: "GET",
                 headers: {
                     'content-type': 'application/json',

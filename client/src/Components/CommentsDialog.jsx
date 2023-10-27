@@ -9,7 +9,7 @@ export default function CommentsDialog({ articleData, commentDialogRef, setartic
     const [respondDisabled, setRespondDisabled] = useState(true);
 
     async function handleRespond() {
-        const response = await fetch(`http://localhost:3000/article/comment/`, {
+        const response = await fetch(`https://echo-hub-server.onrender.com/article/comment/`, {
             method: "PUT",
             headers: {
                 'content-type': 'application/json',
@@ -143,7 +143,7 @@ function DeleteDialog({ OptionsRef, comment, setarticleData }) {
     async function handleDeleteComment() {
         console.log(comment.commentId);
         console.log('the end of the line for this commentID')
-        const response = await fetch('http://localhost:3000/article/comment/delete', {
+        const response = await fetch('https://echo-hub-server.onrender.com/article/comment/delete', {
             method: "PUT",
             headers: {
                 'content-type': 'application/json',

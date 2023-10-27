@@ -26,8 +26,8 @@ export default function useSave(article){
         if (!user.list) return;
         function setUrl() {
             if (user?.list.includes(article._id)) 
-                return 'http://localhost:3000/article/list/remove';
-            return 'http://localhost:3000/article/list/add'
+                return 'https://echo-hub-server.onrender.com/article/list/remove';
+            return 'https://echo-hub-server.onrender.com/article/list/add'
         }
         const url = setUrl();
         const response = await fetch(url, {
@@ -49,9 +49,9 @@ export default function useSave(article){
                 if (user?.list.includes(article._id)) return SaveFilledPng;
                 return SavePng;
             })
-            if (url === 'http://localhost:3000/article/list/add')
+            if (url === 'https://echo-hub-server.onrender.com/article/list/add')
                 dispatch({ type: 'ADDTOLIST', payload: article._id })
-            else if (url == 'http://localhost:3000/article/list/remove')
+            else if (url == 'https://echo-hub-server.onrender.com/article/list/remove')
                 dispatch({ type: 'REMOVEFROMLIST', payload: article._id })
             else
                 console.log('there is some error here')
