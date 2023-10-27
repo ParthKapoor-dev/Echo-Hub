@@ -1,5 +1,5 @@
-import ProfilePic from "../../images/profilePicture.png"
-import CancelPng from "../../images/cancel.png"
+import ProfilePic from "/images/profilePicture.png"
+import CancelPng from "/images/cancel.png"
 
 import { useEffect, useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";

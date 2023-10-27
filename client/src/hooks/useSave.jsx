@@ -1,9 +1,9 @@
 import { useState } from "react";
 import useUserContext from "./useUserContext";
 
-import SavePng from "../../images/save.png"
-import SaveFilledPng from "../../images/saveFilled.png"
-import SaveGif from "../../images/save.gif"
+import SavePng from "/images/save.png"
+import SaveFilledPng from "/images/saveFilled.png"
+import SaveGif from "/images/save.gif"
 
 export default function useSave(article){
     const { user, token, dispatch } = useUserContext();

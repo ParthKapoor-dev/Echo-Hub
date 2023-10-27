@@ -1,4 +1,4 @@
-import ProfilePic from "../../images/profilePicture.png"
+import ProfilePic from "/images/profilePicture.png"
 
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";

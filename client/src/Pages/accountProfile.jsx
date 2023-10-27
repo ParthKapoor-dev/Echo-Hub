@@ -4,7 +4,7 @@ import useUserContext from '../hooks/useUserContext';
 import BioSectionExternalUser from "../Components/BioSection-externalUser";
 import ExternalUserArticle from '../Components/UserArticle-External';
 
-import LoadingPageGif from "../../images/Loading Page animation1.gif"
+import LoadingPageGif from "/images/Loading Page animation1.gif"
 
 
 export default function AccountProfilePage() {

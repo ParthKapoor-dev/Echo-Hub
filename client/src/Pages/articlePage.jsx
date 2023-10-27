@@ -5,13 +5,13 @@ import useFollow from "../hooks/useFollow";
 import CommentsDialog from "../Components/CommentsDialog";
 
 
-import LoadingPageGif from "../../images/Loading Page animation1.gif"
-import ProfilePic from "../../images/profilePicture.png"
-import LikeStaticPlain from "../../images/LikeStaticPlain.png"
-import LikeStaticFilled from "../../images/LikeStaticFilled.png"
-import LikeGif from "../../images/likegif.gif"
-import CommentsPng from "../../images/commentsPng.png"
-import CommentsGif from "../../images/commentsGif.gif"
+import LoadingPageGif from "/images/Loading Page animation1.gif"
+import ProfilePic from "/images/profilePicture.png"
+import LikeStaticPlain from "/images/LikeStaticPlain.png"
+import LikeStaticFilled from "/images/LikeStaticFilled.png"
+import LikeGif from "/images/likegif.gif"
+import CommentsPng from "/images/commentsPng.png"
+import CommentsGif from "/images/commentsGif.gif"
 
 
 export default function ArticlePage() {

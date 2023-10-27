@@ -3,8 +3,8 @@ import { useLocation, useNavigate } from "react-router-dom"
 import useUserContext from "../hooks/useUserContext"
 import useFollow from "../hooks/useFollow";
 
-import ProfilePic from "../../images/profilePicture.png"
-import LoadingPageGif from "../../images/Loading Page animation1.gif"
+import ProfilePic from "/images/profilePicture.png"
+import LoadingPageGif from "/images/Loading Page animation1.gif"
 
 
 export default function UserSearchPage({ setTags }) {

@@ -1,7 +1,7 @@
 import { useRef, useState } from "react"
 import useUserContext from "../hooks/useUserContext";
-import EchoHub from "../../images/Echo Hub Image.jpg"
-import Animation from "../../images/userOne.gif"
+import EchoHub from "/images/Echo Hub Image.jpg"
+import Animation from "/images/userOne.gif"
 export default function LoginPage(){ 
     const [email , setEmail] = useState('');
     const [password , setPassword] = useState('');

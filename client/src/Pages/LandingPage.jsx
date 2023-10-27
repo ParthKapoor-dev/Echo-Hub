@@ -2,8 +2,8 @@ import { useEffect, useState } from "react"
 import useUserContext from "../hooks/useUserContext"
 import ExternalUserArticle from "../Components/UserArticle-External";
 
-import LoadingPageGif from "../../images/Loading Page animation1.gif"
-import ProfilePic from "../../images/profilePicture.png"
+import LoadingPageGif from "/images/Loading Page animation1.gif"
+import ProfilePic from "/images/profilePicture.png"
 import useFollow from "../hooks/useFollow";
 import { useNavigate } from "react-router-dom";
 

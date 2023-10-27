@@ -3,7 +3,7 @@ import useUserContext from "../hooks/useUserContext"
 import ExternalUserArticle from "./UserArticle-External";
 import { useLocation } from "react-router-dom";
 
-import LoadingPageGif from "../../images/Loading Page animation1.gif"
+import LoadingPageGif from "/images/Loading Page animation1.gif"
 
 export default function ArticleSearchPage({ setTags }) {
     const location = useLocation();

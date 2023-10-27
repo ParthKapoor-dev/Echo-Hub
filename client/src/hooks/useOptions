@@ -1,8 +1,8 @@
 import { useState } from "react";
 
-import DotStaticPlain from "../../images/three dots static plain.png"
-import DotStaticFilled from "../../images/three dots static filled.png"
-import DotHover from "../../images/three dots hover.gif"
+import DotStaticPlain from "/images/three dots static plain.png"
+import DotStaticFilled from "/images/three dots static filled.png"
+import DotHover from "/images/three dots hover.gif"
 
 
 export default function useOptions(OptionsRef){

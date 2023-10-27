@@ -5,7 +5,7 @@ import BioSection from "../Components/BioSection";
 import UserArticle from "../Components/UserArticle";
 
 
-import LoadingPageGif from "../../images/Loading Page animation1.gif"
+import LoadingPageGif from "/images/Loading Page animation1.gif"
 
 export default function UserPage() {
     const { user, token } = useUserContext();

@@ -2,7 +2,7 @@ import { useRef } from "react"
 import { useNavigate } from "react-router-dom"
 import useSave from "../hooks/useSave"
 
-import ProfilePic from "../../images/profilePicture.png"
+import ProfilePic from "/images/profilePicture.png"
 import useOptions from "../hooks/useOptions";
 
 

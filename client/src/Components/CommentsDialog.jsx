@@ -1,7 +1,7 @@
 import { useRef , useState } from "react"
 import useUserContext from "../hooks/useUserContext";
-import threeDots from "../../images/three dots static filled.png"
-import cancelPng from "../../images/cancel.png"
+import threeDots from "/images/three dots static filled.png"
+import cancelPng from "/images/cancel.png"
 
 export default function CommentsDialog({ articleData, commentDialogRef, setarticleData }) {
     const commentRef = useRef();
