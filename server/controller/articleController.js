@@ -1,6 +1,6 @@
 const Article = require('../model/articleModel');
 const User = require('../model/userModel');
-const { v4 : uuidv4 } = require('uuid');
+const { v4: uuidv4 } = require('uuid');
 
 async function articleFeed(req, res) {
     const user = req.user
@@ -12,7 +12,7 @@ async function articleFeed(req, res) {
             if (article) tags.push(...article.tags)
         }
         const finalTags = filterDuplicateItems(tags);
-        return finalTags; 
+        return finalTags;
     }
 
     function filterDuplicateItems(ItemsArray) {
@@ -32,12 +32,12 @@ async function articleFeed(req, res) {
         const Items = [];
         for (var i = 0; i < ItemsArray.length; i++) {
             var flag = true;
-            if(ItemsArray[i].userId.toString() === user._id.toString()){
+            if (ItemsArray[i].userId.toString() === user._id.toString()) {
                 flag = false;
                 continue;
             }
             for (var j = i + 1; j < ItemsArray.length; j++) {
-                if(ItemsArray[i]._id.toString() === ItemsArray[j]._id.toString()){
+                if (ItemsArray[i]._id.toString() === ItemsArray[j]._id.toString()) {
                     flag = false;
                     break;
                 }
@@ -72,26 +72,26 @@ async function articleFeed(req, res) {
         return finalArticles;
     }
 
-    async function getAccountsByArticles(articles){
+    async function getAccountsByArticles(articles) {
         const accounts = [];
-        for(const article of articles){
-            const user = await User.findOne({_id : article.userId});
-            if(user) accounts.push(user);
+        for (const article of articles) {
+            const user = await User.findOne({ _id: article.userId });
+            if (user) accounts.push(user);
         }
         return accounts;
-    } 
+    }
 
     function filterDuplicateAccounts(ItemsArray) {
         const Items = [];
         for (var i = 0; i < ItemsArray.length; i++) {
             var flag = true;
-            if(ItemsArray[i]._id.toString() === user._id.toString() ||
-             ItemsArray[i].followers.includes(user._id)){
+            if (ItemsArray[i]._id.toString() === user._id.toString() ||
+                ItemsArray[i].followers.includes(user._id)) {
                 flag = false;
                 continue;
             }
             for (var j = i + 1; j < ItemsArray.length; j++) {
-                if(ItemsArray[i]._id.toString() === ItemsArray[j]._id.toString()){
+                if (ItemsArray[i]._id.toString() === ItemsArray[j]._id.toString()) {
                     flag = false;
                     break;
                 }
@@ -101,7 +101,25 @@ async function articleFeed(req, res) {
             }
         }
         return Items;
-    }   
+    }
+    async function AddEditorsChoiceArticles(finalArticles) {
+        const articles = await Article.find({ tags: "Editor's Choice" });
+        const theFinalArticles = [...finalArticles, ...articles];
+        const returnedArticles = filterDuplicateArticles(theFinalArticles);
+        return returnedArticles
+    }
+    async function AddEditorsChoiceAccounts(finalAccounts) {
+        const editorsArticles = await Article.find({ tags: "Editor's Choice" });
+        const filteredEditorsArticles = filterDuplicateArticles(editorsArticles);
+        const editorsAccounts = [];
+        for (const article of filteredEditorsArticles) {
+            const user = await User.findOne({ _id: article.userId });
+            if (user) editorsAccounts.push(user);
+        }
+        const theFinalAccounts = [...finalAccounts, ...editorsAccounts];
+        const returnedAccounts = filterDuplicateAccounts(theFinalAccounts);
+        return returnedAccounts
+    }
 
     try {
         const followings = await User.findOne({ _id: user._id }).select('following');
@@ -111,15 +129,20 @@ async function articleFeed(req, res) {
         const FollowingsArticles = await getArticlesByFollowings(followings.following);
         const LikedtagsArticles = await getArticlesByTags(LikedTags);
         const articles = [...FollowingsArticles, ...LikedtagsArticles];
-        const finalArticles = filterDuplicateArticles(articles);
+        finalArticles = filterDuplicateArticles(articles);
 
+        if (finalArticles.length <= 3)
+            finalArticles = await AddEditorsChoiceArticles(finalArticles);
 
         const likedtagsAccounts = await getAccountsByArticles(LikedtagsArticles);
-        const finalAccounts = filterDuplicateAccounts(likedtagsAccounts);
+        finalAccounts = filterDuplicateAccounts(likedtagsAccounts);
+
+        if (finalAccounts.length <= 1)
+            finalAccounts = await AddEditorsChoiceAccounts(finalAccounts);
 
 
 
-        res.json({finalArticles , finalAccounts , LikedTags});
+        res.json({ finalArticles, finalAccounts, LikedTags });
     } catch (error) {
         console.error(error);
         res.status(500).json({ error: 'Internal Server Error' });
@@ -211,31 +234,31 @@ async function deleteArticles(req, res) {
         res.json({ message: error.message })
     }
 }
-async function deleteArticleComment(req , res){
-    const { articleId , commentId} = req.body;
+async function deleteArticleComment(req, res) {
+    const { articleId, commentId } = req.body;
 
-    try{
-        const article = await Article.findOne({_id : articleId});
+    try {
+        const article = await Article.findOne({ _id: articleId });
         const updatedArticle = article.comments.filter(item => item.commentId !== commentId);
         article.comments = updatedArticle;
         await article.save();
 
         res.json(article);
-    }catch(error){
+    } catch (error) {
         console.log(error);
         res.json(error);
     }
 }
 async function articleComment(req, res) {
-    const { articleId, commentUserName , commentProfilePicture , comment } = req.body;
+    const { articleId, commentUserName, commentProfilePicture, comment } = req.body;
     const user = req.user;
     const date = new Date;
 
-    function uniqueCommentIdFunc (article){
+    function uniqueCommentIdFunc(article) {
         const uniqueCommentId = uuidv4();
-        const isDuplicate = article.comments.some(item=> item.commentId === uniqueCommentId);
+        const isDuplicate = article.comments.some(item => item.commentId === uniqueCommentId);
 
-        if(!isDuplicate) return uniqueCommentId;
+        if (!isDuplicate) return uniqueCommentId;
         return uniqueCommentIdFunc(article);
     }
     try {
@@ -244,13 +267,13 @@ async function articleComment(req, res) {
 
         const data = {
             userId: user._id,
-            articleId ,
-            commentId : uniqueCommentId ,
-            commentUserName ,
-            commentProfilePicture ,
-            comment ,
-            date : date.toString() ,
-            likes : [] 
+            articleId,
+            commentId: uniqueCommentId,
+            commentUserName,
+            commentProfilePicture,
+            comment,
+            date: date.toString(),
+            likes: []
         };
 
 
