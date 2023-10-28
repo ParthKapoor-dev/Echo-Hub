@@ -9,12 +9,14 @@ export default function PublishPage() {
     const { token, user } = useUserContext();
     const [error, seterror] = useState(null);
     const [tags, setTags] = useState([]);
+    const [disabled , setDisabled ] = useState(false);
     const tagsRef = useRef();
     const titleRef = useRef();
     const Navigate = useNavigate();
     console.log(user.profilePicture.url)
     async function handleSubmit(event) {
         event.preventDefault();
+        setDisabled(true);
         if (title.length == 0 || article.length == 0) {
             seterror('All fields must be filled');
             return;
@@ -31,7 +33,7 @@ export default function PublishPage() {
 
         if (response.ok) {
             console.log(json);
-            Navigate('/profile')
+            Navigate('/profile');
         } else {
             seterror(json.message);
             settitle('');
@@ -39,6 +41,7 @@ export default function PublishPage() {
             setTags([]);
             console.log(json)
         }
+        setDisabled(false)
     }
     function handleTitleInput(event) {
         settitle(event.target.value)
@@ -98,7 +101,7 @@ export default function PublishPage() {
                 </div>
             </div>
 
-            <button className="publishPage-submit" onClick={handleSubmit} >
+            <button className="publishPage-submit" onClick={handleSubmit} disabled={disabled} >
                 Publish
             </button>
             {error && <div className="error-div">{error}</div>}

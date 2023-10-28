@@ -980,6 +980,9 @@ span{
     cursor: pointer;
     margin: 4vh 0;
 }
+.publishPage-submit:disabled{
+    background-color: rgb(84, 219, 84) ;
+}
 .publishPage-tags-list{
     display: flex;
     gap: 1vw;
