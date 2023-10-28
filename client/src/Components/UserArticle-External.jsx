@@ -21,10 +21,13 @@ export default function ExternalUserArticle({ article, handleRemoveFromFeed }) {
     function handleArticlePage() {
         Navigate(`/article/${article.title}`, { state: { articleId: article._id } })
     }
+    function handleUserPage(){
+        Navigate(`/user/account/${article.userName}`, {state : {userId : article.userId}})
+    }
     return (
         <div className="ExternalUserArticle">
 
-            <div className="ExternalUserArticle-accountDetails">
+            <div className="ExternalUserArticle-accountDetails" onClick={handleUserPage}>
 
                 {article?.userProfilePicture?.url !== "" ?
                     <img src={article.userProfilePicture.url} />

@@ -8,7 +8,6 @@ export default function CommentsDialog({ articleData, commentDialogRef, setartic
     const commentRef = useRef();
     const { token, user } = useUserContext();
     const [respondDisabled, setRespondDisabled] = useState(true);
-    console.log(user.profilePicture)
     async function handleRespond() {
         const response = await fetch(`https://echo-hub-server.onrender.com/article/comment/`, {
             method: "PUT",

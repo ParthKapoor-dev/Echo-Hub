@@ -12,7 +12,7 @@ export default function PublishPage() {
     const tagsRef = useRef();
     const titleRef = useRef();
     const Navigate = useNavigate();
-
+    console.log(user.profilePicture.url)
     async function handleSubmit(event) {
         event.preventDefault();
         if (title.length == 0 || article.length == 0) {
