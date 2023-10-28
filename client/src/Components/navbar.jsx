@@ -2,8 +2,8 @@ import { useNavigate } from "react-router-dom"
 import useUserContext from "../hooks/useUserContext";
 import { useState } from "react";
 
-import EchoHubIcon from "/images/Echo Hub Logo.jpg"
-import SearchIcon from "/images/search icon.png"
+import EchoHubIcon from "/images/Echo Hub logo.jpg"
+import SearchIcon from "/images/search Icon.png"
 import WriteIcon from "/images/write icon.png"
 import loginGif from "/images/login.gif"
 import signupIcon from "/images/signup.png"
