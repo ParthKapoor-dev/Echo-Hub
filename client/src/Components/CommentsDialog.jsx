@@ -2,12 +2,13 @@ import { useRef , useState } from "react"
 import useUserContext from "../hooks/useUserContext";
 import threeDots from "/images/three dots static filled.png"
 import cancelPng from "/images/cancel.png"
+import ProfilePic from "/images/profilePicture.png"
 
 export default function CommentsDialog({ articleData, commentDialogRef, setarticleData }) {
     const commentRef = useRef();
     const { token, user } = useUserContext();
     const [respondDisabled, setRespondDisabled] = useState(true);
-
+    console.log(user.profilePicture)
     async function handleRespond() {
         const response = await fetch(`https://echo-hub-server.onrender.com/article/comment/`, {
             method: "PUT",
