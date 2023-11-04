@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { useLocation } from "react-router-dom"
+import { useLocation, useNavigate } from "react-router-dom"
 import useUserContext from "../hooks/useUserContext";
 import useFollow from "../hooks/useFollow";
 import CommentsDialog from "../Components/CommentsDialog";
@@ -17,6 +17,7 @@ import CommentsGif from "/images/commentsGif.gif"
 export default function ArticlePage() {
     const location = useLocation();
     const articleId = location.state.articleId;
+    const Navigate = useNavigate();
     const { user, token } = useUserContext();
     const [isPageLoading, setIsPageLoading] = useState(true);
     const [articleData, setarticleData] = useState([]);
@@ -100,6 +101,10 @@ export default function ArticlePage() {
         commentDialogRef.current.style.transform = "translateX(0)"
     }
 
+    function handleUserPage(){
+        Navigate('/user/account/' +  articleData.userName , { state : { userId : articleData.userId}})
+    }
+
     return (
         !isPageLoading ? (
 
@@ -119,7 +124,7 @@ export default function ArticlePage() {
 
                     <div className="articlePage-InnerDetails">
                         <div>
-                            <p className="articlePage-InnerDetails-userName">
+                            <p className="articlePage-InnerDetails-userName" onClick={handleUserPage}>
                                 {articleData.userName} ·
                             </p>
 
