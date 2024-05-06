@@ -8,6 +8,7 @@ import WriteIcon from "/images/write icon.png"
 import loginGif from "/images/login.gif"
 import signupIcon from "/images/signup.png"
 import logoutIcon from "/images/logout.png"
+import UserProfile from "/images/userProfile.png"
 
 export default function Navbar() {
     const Navigate = useNavigate();
@@ -111,6 +112,7 @@ export default function Navbar() {
                     :
                     <div className="UserInfoAndLogout">
                         <div className="navbar-userinfo" onClick={handleUserClick}>
+                            <img src={UserProfile} />
                             Profile
                         </div>
                         <div className="navbar-logout-div" onClick={handleLogout}>

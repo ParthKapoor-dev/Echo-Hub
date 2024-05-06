@@ -303,33 +303,39 @@ nav {
     display: flex;
     box-sizing: border-box;
     padding-top: 4vh;
+    justify-content: space-between;
 }
 
 .UserArticle-tags-div {
-    width: 20vw;
+    width: fit-content;
     display: flex;
+
 }
 
 .UserArticle-tags-div p {
     font-family: 'Lora';
     height: 4vh;
     width: auto;
-    padding: 0 0.5vw;
-    padding-top: 0.8vh;
+    padding: 0 2vw;
     background-color: rgb(233, 229, 229);
     border-radius: 2.4vh;
     font-size: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .UserArticle-save-div img {
     height: 3vh;
-    margin-left: 18vw;
 }
 
 .UserArticle-dots-div img {
     height: 4vh;
     transform: translateY(-15%);
-    margin-left: 2vw;
+}
+.UserArticle-actions{
+    display: flex;
+    gap: 4vw;
 }
 
 /* ExternalUserArticle */
@@ -414,9 +420,8 @@ nav {
 }
 
 .ExternalUserArticle-actions {
-    display: flex;
-    ;
-    gap: 2vw
+    display: flex;    
+    gap: 2vw;
 }
 
 .ExternalUserArticle-save-div img {
@@ -1705,7 +1710,9 @@ span {
         height: 6vh;
         margin: 0 2vw;
     }
-
+    .navbar-userinfo{
+        font-size: 15px;
+    }
     .nav {
         justify-content: space-between;
         height: 9vh;
@@ -1743,5 +1750,11 @@ span {
 
     .loginPage-submit-btn:hover {
         background-color: rgb(10, 102, 194);
+    }
+
+    .userPage-Bio-section-profileImage {
+        height: 10vh;
+        width: 10vh;
+        margin-right: 3vw;
     }
 }

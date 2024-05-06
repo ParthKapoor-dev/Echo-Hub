@@ -45,27 +45,32 @@ export default function UserArticle({ article, deleteFunction }) {
                         ) : ""}
                     </p>
                 </div>
+                <div className="UserArticle-actions">
 
-                <div className="UserArticle-save-div" onClick={handleSaveCLick} onMouseEnter={handleSaveEnter} onMouseLeave={handleSaveLeave}>
-                    <img src={save} />
-                </div>
-                <div className="UserArticle-dots-div" >
-                    <img src={dots} alt="settings" onMouseEnter={handleMouseEnter} onMouseUp={handleMouseUp} onMouseLeave={handleMouseLeave} />
-                </div>
-                <dialog ref={OptionsRef} className="UserArticle-dialog">
-                    <div className="UserArticle-dialog-settingsAndEdit">
-                        <p className="UserArticle-dialog-editStory">
-                            Edit Story
-                        </p>
-                        <p className="UserArticle-dialog-StorySettings">
-                            Story settings
-                        </p>
+                    <div className="UserArticle-save-div" onClick={handleSaveCLick} onMouseEnter={handleSaveEnter} onMouseLeave={handleSaveLeave}>
+                        <img src={save} />
+                    </div>
+                    <div className="UserArticle-dots-div" >
+                        <img src={dots} alt="settings" onMouseEnter={handleMouseEnter} onMouseUp={handleMouseUp} onMouseLeave={handleMouseLeave} />
                     </div>
 
-                    <p className="UserArticle-dialog-deleteStory" onClick={(e) => deleteFunction(e, article._id)}>
-                        Delete Story
-                    </p>
-                </dialog>
+                    <dialog ref={OptionsRef} className="UserArticle-dialog">
+                        <div className="UserArticle-dialog-settingsAndEdit">
+                            <p className="UserArticle-dialog-editStory">
+                                Edit Story
+                            </p>
+                            <p className="UserArticle-dialog-StorySettings">
+                                Story settings
+                            </p>
+                        </div>
+
+                        <p className="UserArticle-dialog-deleteStory" onClick={(e) => deleteFunction(e, article._id)}>
+                            Delete Story
+                        </p>
+                    </dialog>
+
+                </div>
+
 
             </div>
         </div>
