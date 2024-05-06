@@ -92,11 +92,12 @@ export default function Navbar() {
             </div>
 
             <div className="navbar-userlinks-mobile-div" ref={LinksRef} onClick={handleOpen}>
-                <div className="navbar-publish-div" onClick={handlePublishBtn}>
-                    <img src={WriteIcon} alt="" />
-                    Write
-                </div>
-
+                {user && (
+                    <div className="navbar-publish-div" onClick={handlePublishBtn}>
+                        <img src={WriteIcon} alt="" />
+                        Write
+                    </div>
+                )}
                 {!user ? <div className="LoginAndSignup">
                     <div className="navbar-login-div" onClick={handleLogin}>
                         <img src={loginGif} alt="" />

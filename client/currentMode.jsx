@@ -8,4 +8,4 @@ const prodMode = {
   serverUrl: "https://echo-hub-server.onrender.com"
 }
 
-export const CurrentMode = devMode
+export const CurrentMode = prodMode
