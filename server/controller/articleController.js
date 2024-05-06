@@ -6,13 +6,12 @@ async function articleFeed(req, res) {
     const user = req.user
 
     function getLikedTags(likedArticles) {
-        const tags = [];
+        const tags = [`The Editor's Choice`];
 
         for (const article of likedArticles) {
             if (article) tags.push(...article.tags)
         }
         const finalTags = filterDuplicateItems(tags);
-        if (finalTags == null) finalTags.push(...[`The Editor's Choice`, `Welcome`]);
         return finalTags;
     }
 
