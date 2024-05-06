@@ -1,6 +1,7 @@
 import { useState, useRef } from "react"
 import useUserContext from "../hooks/useUserContext"
 import { useNavigate } from "react-router-dom";
+import { CurrentMode } from "../../currentMode";
 
 
 export default function PublishPage() {
@@ -21,7 +22,8 @@ export default function PublishPage() {
             seterror('All fields must be filled');
             return;
         }
-        const response = await fetch('https://echo-hub-server.onrender.com/article/write', {
+        const url = CurrentMode.serverUrl + '/article/write';
+        const response = await fetch(url, {
             method: "POST",
             headers: {
                 'content-type': 'application/json',

@@ -63,6 +63,7 @@ export default function ExternalUserArticle({ article, handleRemoveFromFeed }) {
                     </p>
                 </div>
 
+                <div className="ExternalUserArticle-actions">
 
                 <div className="ExternalUserArticle-save-div" onClick={handleSaveCLick} onMouseEnter={handleSaveEnter} onMouseLeave={handleSaveLeave}>
                     <img src={save} />
@@ -85,7 +86,9 @@ export default function ExternalUserArticle({ article, handleRemoveFromFeed }) {
                         Remove from feed
                     </p>
 
-                </dialog>
+                    </dialog>
+                </div>
+
             </div>
         </div>
     )

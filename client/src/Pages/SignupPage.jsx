@@ -2,6 +2,7 @@ import { useState , useRef } from "react"
 import useUserContext from "../hooks/useUserContext";
 import EchoHub from "/images/Echo Hub Image.jpg"
 import Animation from "/images/userTwo.gif"
+import { CurrentMode } from "../../currentMode";
 export default function SignupPage(){
     const [name , setname] = useState('');
     const [email , setEmail ] = useState('');
@@ -24,7 +25,8 @@ export default function SignupPage(){
     }
         async function handleSubmit(event){
             event.preventDefault();
-            const response = await fetch('https://echo-hub-server.onrender.com/user/signup',{
+            const url = CurrentMode.serverUrl + '/user/signup'
+            const response = await fetch(url,{
                 method:'POST',
                 headers:{
                     'content-type':'application/json'

@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import useUserContext from "../hooks/useUserContext";
 import useFollow from "../hooks/useFollow";
+import { CurrentMode } from "../../currentMode";
 
 export default function BioSectionExternalUser({ AccountDetails , setAccountDetails}){
 
@@ -25,7 +26,8 @@ export default function BioSectionExternalUser({ AccountDetails , setAccountDeta
     useEffect(() => {
 
         async function fetchingData() {
-            const response = await fetch(`https://echo-hub-server.onrender.com/accounts/followings/${AccountDetails._id}`, {
+            const url = CurrentMode.serverUrl + `/accounts/followings/${AccountDetails._id}`;
+            const response = await fetch(url, {
                 method: 'GET',
                 headers: {
                     'content-type': 'application/json',

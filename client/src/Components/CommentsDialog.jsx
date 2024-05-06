@@ -3,13 +3,15 @@ import useUserContext from "../hooks/useUserContext";
 import threeDots from "/images/three dots static filled.png"
 import cancelPng from "/images/cancel.png"
 import ProfilePic from "/images/profilePicture.png"
+import { CurrentMode } from "../../currentMode";
 
 export default function CommentsDialog({ articleData, commentDialogRef, setarticleData }) {
     const commentRef = useRef();
     const { token, user } = useUserContext();
     const [respondDisabled, setRespondDisabled] = useState(true);
     async function handleRespond() {
-        const response = await fetch(`https://echo-hub-server.onrender.com/article/comment/`, {
+        const url = CurrentMode.serverUrl + '/article/comment'
+        const response = await fetch(url, {
             method: "PUT",
             headers: {
                 'content-type': 'application/json',
@@ -141,9 +143,8 @@ function DeleteDialog({ OptionsRef, comment, setarticleData }) {
     const { token } = useUserContext();
 
     async function handleDeleteComment() {
-        console.log(comment.commentId);
-        console.log('the end of the line for this commentID')
-        const response = await fetch('https://echo-hub-server.onrender.com/article/comment/delete', {
+        const url = CurrentMode.serverUrl + '/article/comment/delete'
+        const response = await fetch(url, {
             method: "PUT",
             headers: {
                 'content-type': 'application/json',

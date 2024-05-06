@@ -4,6 +4,7 @@ import useUserContext from "./useUserContext";
 import SavePng from "/images/save.png"
 import SaveFilledPng from "/images/saveFilled.png"
 import SaveGif from "/images/save.gif"
+import { CurrentMode } from "../../currentMode";
 
 export default function useSave(article){
     const { user, token, dispatch } = useUserContext();
@@ -26,8 +27,8 @@ export default function useSave(article){
         if (!user.list) return;
         function setUrl() {
             if (user?.list.includes(article._id)) 
-                return 'https://echo-hub-server.onrender.com/article/list/remove';
-            return 'https://echo-hub-server.onrender.com/article/list/add'
+                return CurrentMode.serverUrl + '/article/list/remove';
+            return CurrentMode.serverUrl + '/article/list/add'
         }
         const url = setUrl();
         const response = await fetch(url, {
@@ -49,9 +50,9 @@ export default function useSave(article){
                 if (user?.list.includes(article._id)) return SaveFilledPng;
                 return SavePng;
             })
-            if (url === 'https://echo-hub-server.onrender.com/article/list/add')
+            if (url === CurrentMode.serverUrl + '/article/list/add')
                 dispatch({ type: 'ADDTOLIST', payload: article._id })
-            else if (url == 'https://echo-hub-server.onrender.com/article/list/remove')
+            else if (url == CurrentMode.serverUrl + '/article/list/remove')
                 dispatch({ type: 'REMOVEFROMLIST', payload: article._id })
             else
                 console.log('there is some error here')

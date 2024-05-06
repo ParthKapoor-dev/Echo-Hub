@@ -1,72 +1,81 @@
 @import url('https://fonts.googleapis.com/css2?family=Lora&display=swap');
-*{
+
+* {
     margin: 0px;
-    font-family:helvetica;
+    font-family: helvetica;
     overflow-x: hidden;
     /* font-family: 'Lora'; */
 }
 
-.light{
-    --bg-color : white;
-    --font-color : rgb(36,36,36); 
-    --unselected :  rgb(119, 117, 117);
-    
+.light {
+    --bg-color: white;
+    --font-color: rgb(36, 36, 36);
+    --unselected: rgb(119, 117, 117);
+
 }
-.loginPage-div{
+
+.loginPage-div {
     display: flex;
     box-sizing: border-box;
-    padding:2vh 4vw;
+    padding: 2vh 4vw;
     /* width: 100vw; */
 }
-.loginPage-div img{
+
+.loginPage-div img {
     height: 80vh;
 }
-.signupPage-loginSection{
-    margin:2vh 8vw;
+
+.signupPage-loginSection {
+    margin: 2vh 8vw;
     padding: 0vh 2vw;
     width: 22vw;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items:flex-start;
+    align-items: flex-start;
     font-size: 20px;
     color: var(--font-color);
     border: 0.5px solid rgb(177, 176, 176);
     border-radius: 10px;
 }
-.loginPage-loginSection{
-    margin:8vh 8vw;
+
+.loginPage-loginSection {
+    margin: 8vh 8vw;
     padding: 0vh 2vw;
     width: 22vw;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items:flex-start;
+    align-items: flex-start;
     font-size: 20px;
     color: var(--font-color);
     border: 0.5px solid rgb(177, 176, 176);
     border-radius: 10px;
 }
+
 .signupPage-loginSection img,
-.loginPage-loginSection img{
+.loginPage-loginSection img {
     height: 5vh;
     margin-left: 2vw;
 }
-.loginPage-Login-title{
+
+.loginPage-Login-title {
     display: flex;
     font-size: 30px;
     padding-bottom: 2vh;
 }
+
 .loginPage-name-div,
 .loginPage-email-div,
-.loginPage-password-div{
+.loginPage-password-div {
     display: flex;
-    align-items:center;
+    align-items: center;
     margin: 2vh 0;
 }
+
 .loginPage-name-div label,
 .loginPage-email-div label,
-.loginPage-password-div label{
+.loginPage-password-div label {
     color: rgb(109, 107, 107);
     position: absolute;
     margin-left: 1vw;
@@ -74,7 +83,10 @@
     transition: 0.15s all ease-in;
     font-size: 18px;
 }
-#Name,#Email,#Password{
+
+#Name,
+#Email,
+#Password {
     height: 8vh;
     width: 20vw;
     border-radius: 5px;
@@ -83,67 +95,81 @@
     padding: 0 0.5vw;
     position: relative;
 }
-#Name:focus,#Email:focus,#Password:focus{
+
+#Name:focus,
+#Email:focus,
+#Password:focus {
     outline: none;
 }
+
 label.emailClick,
-.loginPage-name-div #Name:focus ~ label,
-.loginPage-name-div #Name:valid ~ label,
-.loginPage-email-div #Email:focus ~ label,
-.loginPage-email-div #Email:valid ~ label,
-.loginPage-password-div #Password:focus ~ label,
-.loginPage-password-div #Password:valid ~ label{
+.loginPage-name-div #Name:focus~label,
+.loginPage-name-div #Name:valid~label,
+.loginPage-email-div #Email:focus~label,
+.loginPage-email-div #Email:valid~label,
+.loginPage-password-div #Password:focus~label,
+.loginPage-password-div #Password:valid~label {
     color: rgb(243, 241, 241);
-    background-color: rgb(44,124,151);
-    font-size: 13px;    
-    transform: translate(10% ,-140%);
+    background-color: rgb(44, 124, 151);
+    font-size: 13px;
+    transform: translate(10%, -140%);
     border-radius: 20px;
 
 }
-.showPassword-p{
+
+.showPassword-p {
     position: absolute;
     margin-left: 18vw;
     cursor: pointer;
 }
-.forgotPassword{
+
+.forgotPassword {
     font-size: 15px;
-    color: rgb(10,102,194);
+    color: rgb(10, 102, 194);
     cursor: pointer;
     margin-bottom: 2vh;
 }
-.forgotPassword:hover{
+
+.forgotPassword:hover {
     text-decoration: underline;
 
 }
-.loginPage-submit-btn{
+
+.loginPage-submit-btn {
     width: 20vw;
     height: 6vh;
     border-radius: 3vh;
-    background-color: rgb(10,102,194);
-    border: 0.5px solid rgb(10,102,194);
+    background-color: rgb(10, 102, 194);
+    border: 0.5px solid rgb(10, 102, 194);
     color: white;
     font-size: 20px;
 }
-.loginPage-submit-btn:hover{
+
+.loginPage-submit-btn:disabled {
+    background-color: rgb(144, 187, 230);
+}
+
+.loginPage-submit-btn:hover {
     background-color: rgb(15, 79, 143);
 }
-.loginPage-error-div{
+
+.loginPage-error-div {
     margin: 3vh 0;
     border: 0.5px solid rgb(231, 73, 73);
     border-radius: 10px;
     padding: 2vh 0.5vw;
-    width:20vw;
-    color:rgb(231, 73, 73);
+    width: 20vw;
+    color: rgb(231, 73, 73);
 }
 
 
 /* Navbar Styling */
-nav{
+nav {
     height: 10vh;
     width: 100vw;
     box-sizing: border-box;
     display: flex;
-    padding:0.5vh 1vw;
+    padding: 0.5vh 1vw;
     align-items: center;
     border-bottom: 0.01px solid rgb(231, 222, 222);
     font-family: Arial, Helvetica, sans-serif;
@@ -151,18 +177,30 @@ nav{
     top: 0px; */
     background-color: white;
 }
-.navbar-homepage img{
+
+.navbar-homepage img {
     height: 7vh;
     border-radius: 50%;
     cursor: pointer;
 }
-.navbar-searchbar img{
+
+.navbar-searchbar img {
     height: 3.5vh;
     position: absolute;
     margin-left: 1.8vw;
     margin-top: 1.3vh;
 }
-.navbar-searchbar input{
+
+.navbar-userlinks-comp {
+    display: flex;
+}
+
+.navbar-userlinks-mobile-div,
+.navbar-userlinks-open {
+    display: none;
+}
+
+.navbar-searchbar input {
     height: 6vh;
     width: 12vw;
     border-radius: 7.5vw;
@@ -172,43 +210,47 @@ nav{
     margin-right: 53vw;
     padding: 0 1vw;
     padding-left: 3vw;
-    font-size: 14px ;
+    font-size: 14px;
     outline: none;
 }
 
 .navbar-publish-div,
 .navbar-login-div,
 .navbar-signup-div,
-.navbar-logout-div{
+.navbar-logout-div {
     font-size: 15px;
     border: none;
     color: var(--unselected);
     display: flex;
     align-items: center;
     gap: 0.5vw;
-    margin: 0 1vw ;
+    margin: 0 1vw;
     cursor: pointer;
 }
+
 .navbar-publish-div img,
-.navbar-signup-div img{
+.navbar-signup-div img {
     height: 4vh;
     margin-top: 0.5vh;
 }
-.navbar-logout-div img{
+
+.navbar-logout-div img {
     height: 3.2vh;
 }
-.navbar-userinfo{
+
+.navbar-userinfo {
     font-size: 18px;
     border: none;
     /* color: rgb(119, 117, 117); */
     display: flex;
     align-items: center;
     gap: 0.5vw;
-    margin: 0 1vw ;
+    margin: 0 1vw;
     cursor: pointer;
 }
+
 .LoginAndSignup,
-.UserInfoAndLogout{
+.UserInfoAndLogout {
     display: flex;
     align-items: center;
 }
@@ -217,64 +259,74 @@ nav{
 
 /* Loading Page */
 
-.PageisLoading-div{
+.PageisLoading-div {
     height: 100vh;
     display: flex;
     /* align-items: center; */
-    justify-content:center;
+    justify-content: center;
 }
-.PageisLoading-div img{
+
+.PageisLoading-div img {
     height: 50vh;
     width: auto;
     transform: translate(0, 20%);
 }
+
 /* rticle */
 
-.UserArticle{
+.UserArticle {
     padding: 4vh 0;
     border-bottom: 0.5px solid rgb(219, 219, 219);
 }
-.UserArticle-accouhtDetails-date{
+
+.UserArticle-accouhtDetails-date {
     color: rgb(119, 115, 115);
     font-family: 'lora';
     font-size: 16px;
     margin-bottom: 2vh;
 }
-.UserArticle-title{
-    font-family: 'Lora' ;
+
+.UserArticle-title {
+    font-family: 'Lora';
     font-size: 22px;
     color: var(--font-color);
     margin-bottom: 2vh;
 }
-.UserArticle-data{
-    font-family: 'Lora' ;
+
+.UserArticle-data {
+    font-family: 'Lora';
     color: rgb(66, 65, 65);
     font-size: 15px;
 }
-.UserArticle-details{
+
+.UserArticle-details {
     display: flex;
     box-sizing: border-box;
     padding-top: 4vh;
 }
-.UserArticle-tags-div{
+
+.UserArticle-tags-div {
     width: 20vw;
     display: flex;
 }
-.UserArticle-tags-div p{
-    font-family: 'Lora' ;
+
+.UserArticle-tags-div p {
+    font-family: 'Lora';
     height: 4vh;
     width: auto;
-    padding:0 0.5vw;
+    padding: 0 0.5vw;
     padding-top: 0.8vh;
     background-color: rgb(233, 229, 229);
     border-radius: 2.4vh;
     font-size: 15px;
 }
-.UserArticle-save-div img{
+
+.UserArticle-save-div img {
     height: 3vh;
     margin-left: 18vw;
 }
-.UserArticle-dots-div img{
+
+.UserArticle-dots-div img {
     height: 4vh;
     transform: translateY(-15%);
     margin-left: 2vw;
@@ -282,83 +334,105 @@ nav{
 
 /* ExternalUserArticle */
 
-.ExternalUserArticle{
+.ExternalUserArticle {
     padding: 4vh 0;
     border-bottom: 0.5px solid rgb(219, 219, 219);
 }
-.ExternalUserArticle-accountDetails{
+
+.ExternalUserArticle-accountDetails {
     display: flex;
     align-items: center;
     margin-bottom: 1.7vh;
 }
-.ExternalUserArticle-accountDetails p{
+
+.ExternalUserArticle-accountDetails p {
     font-family: 'lora';
     cursor: pointer;
 }
-.ExternalUserArticle-accountDetails-userName{
+
+.ExternalUserArticle-accountDetails-userName {
     /* font-family: Arial, Helvetica, sans-serif; */
-    margin-right:0.2vw;
+    margin-right: 0.2vw;
     color: black;
     /* font-weight: 600; */
     font-size: 15px;
 }
-.ExternalUserArticle-accouhtDetails-date{
+
+.ExternalUserArticle-accouhtDetails-date {
     color: rgb(66, 65, 65);
     font-size: 14px;
 }
-.ExternalUserArticle-accountDetails img{
+
+.ExternalUserArticle-accountDetails img {
     height: 4vh;
     width: 4vh;
     border-radius: 50%;
-    object-fit:cover;
+    object-fit: cover;
     border: 0.1px solid rgb(226, 222, 222);
     margin-right: 0.6vw;
     cursor: pointer;
 }
-.ExternalUserArticle-title{
-    font-family: 'Lora' ;
+
+.ExternalUserArticle-title {
+    font-family: 'Lora';
     font-size: 22px;
     color: var(--font-color);
     margin-bottom: 2vh;
     cursor: pointer;
 }
-.ExternalUserArticle-data{
-    font-family: 'Lora' ;
+
+.ExternalUserArticle-data {
+    font-family: 'Lora';
     color: rgb(66, 65, 65);
     font-size: 15px;
     cursor: pointer;
 }
-.ExternalUserArticle-details{
+
+.ExternalUserArticle-details {
     display: flex;
     box-sizing: border-box;
     padding-top: 4vh;
+    justify-content: space-between;
 }
-.ExternalUserArticle-tags-div{
-    width: 20vw;
+
+.ExternalUserArticle-tags-div {
+    width: fit-content;
     display: flex;
 }
-.ExternalUserArticle-tags-div p{
-    font-family: 'Lora' ;
-    width:auto;
+
+.ExternalUserArticle-tags-div p {
+    font-family: 'Lora';
+    width: auto;
     height: 4vh;
-    padding:0 0.8vw;
-    padding-top: 0.8vh;
+    padding: 0 2vw;
     background-color: rgb(233, 229, 229);
     border-radius: 2.4vh;
     font-size: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
-.ExternalUserArticle-save-div img{
+
+.ExternalUserArticle-actions {
+    display: flex;
+    ;
+    gap: 2vw
+}
+
+.ExternalUserArticle-save-div img {
     height: 3vh;
-    margin-left: 18vw;
+    /* margin-left: 18vw; */
 }
-.ExternalUserArticle-dots-div img{
+
+.ExternalUserArticle-dots-div img {
     height: 3.6vh;
-    transform: translateY(-10%);
-    margin-left: 2vw;
+    /* transform: translateY(-10%); */
+    /* margin-left: 2vw; */
 }
+
 .UserArticle-dialog,
-.ExternalUserArticle-dialog{
-    border : 0.5px solid rgb(218, 213, 213);
+.ExternalUserArticle-dialog {
+    border: 0.5px solid rgb(218, 213, 213);
     outline: none;
     border-radius: 5px;
     margin-left: 43.5vw;
@@ -367,17 +441,20 @@ nav{
     transform: translateY(-20%);
     transition: all 0.25s ease-out;
 }
+
 .UserArticle-dialog-settingsAndEdit,
 .ExternalUserArticle-dialog-settingsAndEdit {
     border-bottom: 0.5px solid rgb(226, 223, 223);
     margin-bottom: 2vh;
 }
+
 .UserArticle-dialog-deleteStory,
-.ExternalUserArticle-dialog-removeFromFeed{
+.ExternalUserArticle-dialog-removeFromFeed {
     color: rgb(212, 51, 51) !important;
 }
+
 .ExternalUserArticle-dialog p,
-.UserArticle-dialog p{
+.UserArticle-dialog p {
     font-size: 15px;
     font-family: 'lora';
     color: rgb(56, 55, 55);
@@ -389,24 +466,27 @@ nav{
 
 /* user Page styling */
 
-.userPage-div{
+.userPage-div {
     display: flex;
     /* margin-top: 10vh; */
     overflow: hidden;
 }
-.userPage-content-section{
-    width:65vw;
+
+.userPage-content-section {
+    width: 65vw;
     min-height: 100vh;
     box-sizing: border-box;
     border-right: 0.5px solid rgb(219, 219, 219);
     padding: 0 8vw;
     overflow: hidden;
 }
-.UserPage-userName{
+
+.UserPage-userName {
     font-size: 40px;
-    margin:8vh 0;
+    margin: 8vh 0;
 }
-.userPage-routes{
+
+.userPage-routes {
     color: var(--unselected);
     display: flex;
     gap: 2.5vw;
@@ -415,53 +495,61 @@ nav{
     border-bottom: 0.5px solid rgb(219, 219, 219);
     cursor: pointer;
 }
-.userPage-routes p:hover{
+
+.userPage-routes p:hover {
     text-decoration: underline;
 }
-.userPage-home-div{
+
+.userPage-home-div {
     padding-top: 4vh;
 }
 
 
 /* USER PAGE BIO SECTION */
 
-.userPage-Bio-section-div{
+.userPage-Bio-section-div {
     box-sizing: border-box;
     width: 35vw;
     padding: 4vh 3.5vw;
     /* position: fixed;
     right: 0px; */
 }
-#userPage-profilePicture{
+
+#userPage-profilePicture {
     display: none;
 }
-.userPage-Bio-section-profileImage{
+
+.userPage-Bio-section-profileImage {
     height: 12vh;
     width: 12vh;
     border-radius: 50%;
     object-fit: cover;
 }
-.userPage-Bio-section-userName{
+
+.userPage-Bio-section-userName {
     font-weight: 600;
     color: rgb(46, 46, 46);
     padding-top: 2.5vh;
     font-family: 'lora';
     font-size: 18px;
 }
-.userPage-Bio-section-followers-count{
+
+.userPage-Bio-section-followers-count {
     padding-top: 0.3vh;
     font-family: 'lora';
     font-size: 17px;
     color: var(--unselected);
 }
-.userPage-Bio-section-myBio{
+
+.userPage-Bio-section-myBio {
     padding-top: 2.8vh;
     font-size: 15px;
     font-family: 'lora';
     padding-right: 2vw;
-    color:var(--unselected);
+    color: var(--unselected);
 }
-.userPage-Bio-section-myBio-edit{
+
+.userPage-Bio-section-myBio-edit {
     color: rgb(18, 138, 18);
     font-size: 14px;
     letter-spacing: 0.3px;
@@ -469,28 +557,33 @@ nav{
     margin: 2vh 0;
     cursor: pointer;
 }
-.userPage-Bio-section-myBio-edit:hover{
+
+.userPage-Bio-section-myBio-edit:hover {
     color: rgb(18, 54, 18);
 }
-.userPage-Bio-section-followings-header{
+
+.userPage-Bio-section-followings-header {
     font-size: 15px;
     padding: 1vh 0;
     margin-bottom: 2vh;
 }
-.userPage-Bio-section-following-details{
+
+.userPage-Bio-section-following-details {
     display: flex;
     align-items: center;
-    padding: 1vh 1vw; 
+    padding: 1vh 1vw;
     font-family: 'lora';
     font-size: 16px;
     color: rgb(66, 65, 65);
     cursor: pointer;
     transition: all 0.25s ease-out;
 }
-.userPage-Bio-section-following-details:hover{
+
+.userPage-Bio-section-following-details:hover {
     color: rgb(163, 149, 19);
 }
-.userPage-Bio-section-following-details img{
+
+.userPage-Bio-section-following-details img {
     height: 4vh;
     width: 4vh;
     border-radius: 50%;
@@ -503,7 +596,7 @@ nav{
 
 /* dialog box */
 
-.userPage-Bio-section-editProfile-dialogBox{
+.userPage-Bio-section-editProfile-dialogBox {
     padding: 4vh 3vw;
     box-sizing: border-box;
     height: 85vh;
@@ -512,20 +605,24 @@ nav{
     border: 0.5px solid rgb(230, 225, 225);
     border-radius: 8px;
 }
-.userPage-Bio-section-editProfile-Heading{
+
+.userPage-Bio-section-editProfile-Heading {
     display: flex;
     justify-content: space-between;
     margin-bottom: 2vh;
 }
-.userPage-Bio-section-editProfile-Heading button{
+
+.userPage-Bio-section-editProfile-Heading button {
     background-color: white;
     border: none;
 }
-.userPage-Bio-section-editProfile-Heading button img{
+
+.userPage-Bio-section-editProfile-Heading button img {
     height: 4vh;
     object-fit: cover;
 }
-.userPage-Bio-section-editProfile-dialogBox-form img{
+
+.userPage-Bio-section-editProfile-dialogBox-form img {
     height: 12vh;
     width: 12vh;
     border-radius: 50%;
@@ -533,13 +630,16 @@ nav{
     margin-right: 2vw;
     margin-top: 1vh;
 }
-.editProfile-Image-container{
+
+.editProfile-Image-container {
     display: flex;
     /* align-items: center; */
 }
-#editProfile-Image{
+
+#editProfile-Image {
     display: none;
 }
+
 .editProfile-Image-div label {
     color: rgb(18, 138, 18);
     font-size: 15px;
@@ -548,7 +648,8 @@ nav{
     margin: 2vh 0;
     cursor: pointer;
 }
-.editProfile-Image-remove{
+
+.editProfile-Image-remove {
     color: rgb(218, 68, 68);
     font-size: 15px;
     letter-spacing: 0.3px;
@@ -556,8 +657,9 @@ nav{
     margin: 2vh 0;
     cursor: pointer;
 }
+
 .editProfile-bio-div input,
-.editProfile-name-div input{
+.editProfile-name-div input {
     border: none;
     font-size: 16px;
     border-bottom: 0.5px solid rgb(190, 186, 186);
@@ -565,29 +667,34 @@ nav{
     margin-top: 2vh;
     width: 30vw;
 }
+
 .editProfile-name-div input:focus-visible,
-.editProfile-bio-div input:focus-visible{
+.editProfile-bio-div input:focus-visible {
     outline: none;
 }
+
 .editProfile-Image-heading,
 .editProfile-bio-heading,
-.editProfile-name-heading{
+.editProfile-name-heading {
     margin-top: 5vh;
     font-size: 15px;
     color: rgb(92, 88, 88);
 }
+
 .editProfile-bio-details,
-.editProfile-name-details{
+.editProfile-name-details {
     margin-top: 0.5vh;
     color: rgb(160, 157, 157);
     font-size: 13px;
 }
-.editPage-buttons-div{
+
+.editPage-buttons-div {
     margin-top: 4vh;
     display: flex;
     justify-content: flex-end;
 }
-.editPage-cancel-button{
+
+.editPage-cancel-button {
     background-color: white;
     border: 1px solid rgb(31, 179, 31);
     color: rgb(31, 179, 31);
@@ -598,7 +705,7 @@ nav{
     cursor: pointer;
 }
 
-.editPage-save-button{
+.editPage-save-button {
     background-color: rgb(31, 179, 31);
     border: none;
     color: white;
@@ -609,38 +716,44 @@ nav{
     margin-left: 1.5vw;
     cursor: pointer;
 }
-.editPage-save-button:hover{
+
+.editPage-save-button:hover {
     background-color: rgb(14, 112, 14);
 }
-.editPage-cancel-button:hover{
+
+.editPage-cancel-button:hover {
     color: rgb(14, 112, 14);
-    border-color:  rgb(14, 112, 14);
+    border-color: rgb(14, 112, 14);
 }
-.editPage-save-button:disabled{
+
+.editPage-save-button:disabled {
     background-color: rgb(187, 233, 187);
 }
 
 /* Account Page */
 
 
-.accountPage-div{
+.accountPage-div {
     display: flex;
     /* margin-top: 10vh; */
     overflow: hidden;
 }
-.accountPage-content-section{
-    width:65vw;
+
+.accountPage-content-section {
+    width: 65vw;
     min-height: 100vh;
     box-sizing: border-box;
     border-right: 0.5px solid rgb(219, 219, 219);
     padding: 0 8vw;
     overflow: hidden;
 }
-.accountPage-userName{
+
+.accountPage-userName {
     font-size: 40px;
-    margin:8vh 0;
+    margin: 8vh 0;
 }
-.accountPage-routes{
+
+.accountPage-routes {
     color: var(--unselected);
     display: flex;
     gap: 2.5vw;
@@ -649,51 +762,59 @@ nav{
     border-bottom: 0.5px solid rgb(219, 219, 219);
     cursor: pointer;
 }
-.accountPage-routes p:hover{
+
+.accountPage-routes p:hover {
     text-decoration: underline;
 }
-.accountPage-home-div{
+
+.accountPage-home-div {
     padding-top: 4vh;
 }
 
 /* ACCOUNT PAGE BIO SECTION */
-.accountPage-Bio-section-div{
+.accountPage-Bio-section-div {
     box-sizing: border-box;
     width: 35vw;
     padding: 4vh 3.5vw;
     /* position: fixed;
     right: 0px; */
 }
-#accountPage-profilePicture{
+
+#accountPage-profilePicture {
     display: none;
 }
-.accountPage-Bio-section-profileImage{
+
+.accountPage-Bio-section-profileImage {
     height: 12vh;
     width: 12vh;
     border-radius: 50%;
     object-fit: cover;
 }
-.accountPage-Bio-section-userName{
+
+.accountPage-Bio-section-userName {
     font-weight: 600;
     color: rgb(46, 46, 46);
     padding-top: 2.5vh;
     font-family: 'lora';
     font-size: 18px;
 }
-.accountPage-Bio-section-followers-count{
+
+.accountPage-Bio-section-followers-count {
     padding-top: 0.3vh;
     font-family: 'lora';
     font-size: 17px;
     color: var(--unselected);
 }
-.accountPage-Bio-section-myBio{
+
+.accountPage-Bio-section-myBio {
     padding-top: 2.8vh;
     font-size: 15px;
     font-family: 'lora';
     padding-right: 2vw;
-    color:var(--unselected);
+    color: var(--unselected);
 }
-.accountPage-Bio-section-myBio-edit{
+
+.accountPage-Bio-section-myBio-edit {
     color: rgb(18, 138, 18);
     font-size: 14px;
     letter-spacing: 0.3px;
@@ -701,28 +822,33 @@ nav{
     margin: 2vh 0;
     cursor: pointer;
 }
-.accountPage-Bio-section-myBio-edit:hover{
+
+.accountPage-Bio-section-myBio-edit:hover {
     color: rgb(18, 54, 18);
 }
-.accountPage-Bio-section-followings-header{
+
+.accountPage-Bio-section-followings-header {
     font-size: 15px;
     padding: 1vh 0;
     margin-bottom: 2vh;
 }
-.accountPage-Bio-section-following-details{
+
+.accountPage-Bio-section-following-details {
     display: flex;
     align-items: center;
-    padding: 1vh 1vw; 
+    padding: 1vh 1vw;
     font-family: 'lora';
     font-size: 16px;
     color: rgb(66, 65, 65);
     cursor: pointer;
     transition: all 0.25s ease-out;
 }
-.accountPage-Bio-section-following-details:hover{
+
+.accountPage-Bio-section-following-details:hover {
     color: rgb(163, 149, 19);
 }
-.accountPage-Bio-section-following-details img{
+
+.accountPage-Bio-section-following-details img {
     height: 4vh;
     width: 4vh;
     object-fit: cover;
@@ -732,7 +858,8 @@ nav{
     font-weight: 100;
     overflow: hidden;
 }
-.accountPage-Bio-section-Follow-btn{
+
+.accountPage-Bio-section-Follow-btn {
     background-color: rgb(31, 179, 31);
     border: none;
     color: white;
@@ -743,7 +870,8 @@ nav{
     cursor: pointer;
     margin: 4vh 0;
 }
-.accountPage-Bio-section-Following-btn{
+
+.accountPage-Bio-section-Following-btn {
     background-color: white;
     border: 1px solid rgb(31, 179, 31);
     color: rgb(31, 179, 31);
@@ -754,31 +882,35 @@ nav{
     cursor: pointer;
     margin: 4vh 0;
 }
-#accountPage-Bio-section-toggleFollow-btn:disabled{
+
+#accountPage-Bio-section-toggleFollow-btn:disabled {
     background-color: rgb(187, 233, 187);
     border: none;
 }
 
 /* LandingPage */
 
-.landingPage-div{
+.landingPage-div {
     display: flex;
     /* margin-top: 10vh; */
     overflow: hidden;
 }
-.landingPage-content-section{
-    width:65vw;
+
+.landingPage-content-section {
+    width: 65vw;
     min-height: 100vh;
     box-sizing: border-box;
     border-right: 0.5px solid rgb(219, 219, 219);
     padding: 0 8vw;
     overflow: hidden;
 }
-.landingPage-userName{
+
+.landingPage-userName {
     font-size: 40px;
-    margin:8vh 0;
+    margin: 8vh 0;
 }
-.landingPage-routes{
+
+.landingPage-routes {
     color: var(--unselected);
     display: flex;
     gap: 2.5vw;
@@ -787,66 +919,81 @@ nav{
     border-bottom: 0.5px solid rgb(219, 219, 219);
     cursor: pointer;
 }
-.landingPage-routes p:hover{
+
+.landingPage-routes p:hover {
     text-decoration: underline;
 }
-.landingPage-home-div{
+
+.landingPage-home-div {
     padding-top: 4vh;
 }
 
 
 /* Landing Page - Bio div */
+
+
 .searchPage-bio-section,
-.landingPage-Bio-Section{
+.landingPage-Bio-Section {
     width: 35vw;
     box-sizing: border-box;
     padding: 2vh 3vw;
 }
+
 .searchPage-bio-section-related-tags,
-.landingPage-Recommended-tags{
-    margin:  4vh 0;
+.landingPage-Recommended-tags {
+    margin: 4vh 0;
 }
+
 .searchPage-bio-section-related-tags-headings,
 .landingPage-whoToFollow-heading,
-.landingPage-Recommended-tags-headings{
+.landingPage-Recommended-tags-headings {
     font-family: 'lora';
     font-size: 16px;
     color: rgb(43, 42, 42);
     font-weight: 600;
     margin-bottom: 3vh;
 }
+
 .searchPage-bio-section-related-tags-div,
-.landingPage-Recommended-tags-div{
+.landingPage-Recommended-tags-div {
     width: 25vw;
     display: flex;
     flex-wrap: wrap;
 }
+
 .searchPage-bio-section-related-tag,
-.landingPage-recommended-tag{
-    font-family: 'Lora' ;
+.landingPage-recommended-tag {
+    font-family: 'Lora';
     height: 4vh;
     width: auto;
-    padding:0 1vw;
+    padding: 0 1vw;
     padding-top: 0.8vh;
     background-color: rgb(235, 232, 232);
     border-radius: 2.4vh;
     font-size: 16px;
-    margin : 0.5vh 0.5vw;
-    cursor : pointer;
+    margin: 0.5vh 0.5vw;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
-.landingPage-whoToFollow{
+
+.landingPage-whoToFollow {
     margin: 6vh 0;
 }
-.landingPage-whoToFollow-div{
+
+.landingPage-whoToFollow-div {
     display: flex;
     flex-direction: column;
 }
-.landingPage-whoToFollow-account{
+
+.landingPage-whoToFollow-account {
     display: flex;
     height: 10vh;
     align-items: center;
 }
-.landingPage-whoToFollow-account img{
+
+.landingPage-whoToFollow-account img {
     height: 5vh;
     width: 5vh;
     border-radius: 50%;
@@ -854,45 +1001,52 @@ nav{
     margin-right: 1vw;
     cursor: pointer;
 }
-.landingPage-whoToFollow-account-userDetails{
+
+.landingPage-whoToFollow-account-userDetails {
     width: 15vw;
     margin-right: 0.5vw;
     cursor: pointer;
 }
-.userDetails-name{
+
+.userDetails-name {
     font-family: 'lora';
     font-size: 17px;
     font-weight: 600;
     color: rgb(39, 38, 38);
     letter-spacing: 0.1px;
 }
-.userDetails-bio{
+
+.userDetails-bio {
     font-family: 'lora';
     color: rgb(100, 98, 98);
     font-size: 14px;
     letter-spacing: 0.2px;
     margin-top: 0.4vh;
 }
+
 /* Search Page */
 
-.searchPage-div{
+.searchPage-div {
     display: flex;
     /* margin-top: 10vh; */
     overflow: hidden;
 }
-.searchPage-content-section{
-    width:65vw;
+
+.searchPage-content-section {
+    width: 65vw;
     min-height: 100vh;
     box-sizing: border-box;
     border-right: 0.5px solid rgb(219, 219, 219);
     padding: 0 8vw;
     overflow: hidden;
 }
-.searchPage-searchDetails{
+
+.searchPage-searchDetails {
     font-size: 40px;
-    margin:8vh 0;
+    margin: 8vh 0;
 }
-.searchPage-routes{
+
+.searchPage-routes {
     color: var(--unselected);
     display: flex;
     gap: 2.5vw;
@@ -901,25 +1055,29 @@ nav{
     border-bottom: 0.5px solid rgb(219, 219, 219);
     cursor: pointer;
 }
-.searchPage-routes p:hover{
+
+.searchPage-routes p:hover {
     text-decoration: underline;
 }
-.searchPage-home-div{
+
+.searchPage-home-div {
     padding-top: 4vh;
 }
-span{
+
+span {
     color: rgb(139, 137, 137);
 }
+
 /* User Search Page */
 
-.user-searchPage-account-div{
+.user-searchPage-account-div {
     display: flex;
     align-items: center;
     padding: 4vh 0;
     border-bottom: 0.5px solid rgb(214, 211, 211);
 }
 
-.user-searchPage-div img{
+.user-searchPage-div img {
     height: 8vh;
     width: 8vh;
     object-fit: cover;
@@ -927,43 +1085,49 @@ span{
     border: 0.1px solid rgb(216, 212, 212);
     margin-right: 2vw;
 }
-.user-searchPage-account-details-div{
+
+.user-searchPage-account-details-div {
     width: 35vw;
 }
-.user-searchPage-account-name{
+
+.user-searchPage-account-name {
     font-family: 'lora';
     font-size: 16px;
     cursor: pointer;
 }
-.user-searchPage-account-bio{
+
+.user-searchPage-account-bio {
     margin-top: 1vh;
     font-family: 'lora';
     font-size: 14px;
     color: rgb(80, 77, 77);
-    cursor:default;
+    cursor: default;
 }
 
 
 /* Publish Article Page */
 
-.publishPage-form{
+.publishPage-form {
     display: flex;
     flex-direction: column;
     padding: 7vh 20vw;
 }
+
 #publishPage-title::placeholder,
-#publishPage-article::placeholder{
+#publishPage-article::placeholder {
     color: rgb(182, 179, 179);
 }
-#publishPage-title{
+
+#publishPage-title {
     font-size: 40px;
     font-family: 'lora';
     border: none;
     outline: none;
     color: rgb(49, 48, 48);
-    transition : 0.3s all ease-in-out;
+    transition: 0.3s all ease-in-out;
 }
-#publishPage-article{
+
+#publishPage-article {
     padding: 1.5vh 0.1vw;
     font-size: 20px;
     font-family: 'lora';
@@ -971,7 +1135,8 @@ span{
     outline: none;
     color: rgb(49, 48, 48);
 }
-.publishPage-submit{
+
+.publishPage-submit {
     background-color: rgb(31, 179, 31);
     border: none;
     color: white;
@@ -982,24 +1147,28 @@ span{
     cursor: pointer;
     margin: 4vh 0;
 }
-.publishPage-submit:disabled{
-    background-color: rgb(84, 219, 84) ;
+
+.publishPage-submit:disabled {
+    background-color: rgb(84, 219, 84);
 }
-.publishPage-tags-list{
+
+.publishPage-tags-list {
     display: flex;
     gap: 1vw;
     min-height: 4.8vh;
 }
-.publishPage-tags-list p{
-    font-family: 'Lora' ;
+
+.publishPage-tags-list p {
+    font-family: 'Lora';
     height: 4vh;
     width: auto;
-    padding:0 0.5vw;
+    padding: 0 0.5vw;
     padding-top: 0.8vh;
     background-color: rgb(231, 231, 231);
     border-radius: 2.4vh;
     font-size: 15px;
 }
+
 .publishPage-tags-p-remove {
     margin-left: 0.6vw;
     color: rgb(110, 108, 108);
@@ -1009,20 +1178,23 @@ span{
     border-radius: 2.2vw;
     cursor: pointer;
 }
-.publishPage-tags-description{
+
+.publishPage-tags-description {
     font-size: 16px;
     font-family: 'lora';
 }
-#publishPage-tags-input{
+
+#publishPage-tags-input {
     font-size: 18px;
     font-family: 'lora';
     outline: none;
     border: 0.5px solid rgb(202, 198, 198);
     border-radius: 10px;
     padding: 0.8vh 0.8vw;
-    margin : 2vh 0;
+    margin: 2vh 0;
 }
-.publishPage-tags-add-btn{
+
+.publishPage-tags-add-btn {
     background-color: white;
     border: 1px solid rgb(31, 179, 31);
     color: rgb(31, 179, 31);
@@ -1034,39 +1206,45 @@ span{
     margin-left: 2vw;
     transition: 0.2s all ease-in-out;
 }
-.publishPage-tags-add-btn:hover{
+
+.publishPage-tags-add-btn:hover {
     border-color: rgb(65, 206, 65);
     background-color: rgb(65, 206, 65);
     color: white;
 }
+
 /* Article Page */
 
-.articlePage-div{
+.articlePage-div {
     display: flex;
     flex-direction: column;
     padding: 7vh 24vw;
 }
-.articlePage-title{
+
+.articlePage-title {
     font-size: 40px;
     font-family: 'lora';
     border: none;
     outline: none;
     color: rgb(49, 48, 48);
 }
+
 .articlePage-user-details {
     display: flex;
     align-items: center;
     margin: 4vh 0;
     cursor: pointer;
 }
-.articlePage-user-details img{
+
+.articlePage-user-details img {
     height: 7vh;
     width: 7vh;
     object-fit: cover;
     border-radius: 50%;
     margin-right: 1vw;
 }
-.articlePage-article-div{
+
+.articlePage-article-div {
     font-size: 20px;
     font-family: 'lora';
     border: none;
@@ -1074,38 +1252,45 @@ span{
     color: rgb(49, 48, 48);
 
 }
-.articlePage-InnerDetails-userName{
+
+.articlePage-InnerDetails-userName {
     font-family: 'lora';
     font-size: 18px;
 }
-.articlePage-InnerDetails div{
+
+.articlePage-InnerDetails div {
     display: flex;
     align-items: center;
 }
-.articlePage-Bio-section-Follow-btn{
+
+.articlePage-Bio-section-Follow-btn {
     color: rgb(21, 148, 21);
     border: none;
     background-color: white;
     font-size: 15.5px;
     cursor: pointer;
 }
-.articlePage-Bio-section-Following-btn{
+
+.articlePage-Bio-section-Following-btn {
     border: none;
     background-color: white;
-    color: rgb(105, 155, 105);    
+    color: rgb(105, 155, 105);
     font-size: 15.5px;
     cursor: pointer;
 }
-#articlePage-Bio-section-toggleFollow-btn:disabled{
+
+#articlePage-Bio-section-toggleFollow-btn:disabled {
     color: rgb(207, 202, 202);
     border: none;
 }
-.articlePage-innerDetails-date{
+
+.articlePage-innerDetails-date {
     margin-top: 1vh;
     font-size: 15px;
     color: rgb(131, 128, 128);
 }
-.articlePage-actions-div{
+
+.articlePage-actions-div {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -1114,17 +1299,20 @@ span{
     padding: 2vh 1vw;
     margin-bottom: 2vh;
 }
-.articlePage-likes-and-comments{
+
+.articlePage-likes-and-comments {
     display: flex;
     align-items: center;
     gap: 2vw;
 }
+
 .articlePage-likes img,
-.articlePage-comments img{
+.articlePage-comments img {
     height: 4vh;
 }
+
 .articlePage-likes,
-.articlePage-comments{
+.articlePage-comments {
     display: flex;
     align-items: center;
     gap: 0.5vw;
@@ -1133,7 +1321,7 @@ span{
 
 /* Comments Section */
 
-.Comments-dialog{
+.Comments-dialog {
     margin-left: 70vw;
     width: 30vw;
     height: 100vh;
@@ -1143,24 +1331,27 @@ span{
     box-sizing: border-box;
     margin-bottom: 0;
     transform: translateX(100%);
-    transition : all 0.3s ease-out;
+    transition: all 0.3s ease-out;
 }
-.comments-dialog-heading{
-    font-size:20px;
+
+.comments-dialog-heading {
+    font-size: 20px;
     font-family: 'lora';
     font-weight: 600;
     padding: 2vh 0;
     letter-spacing: 1px;
 }
-.comments-dialog-inputBox{
-    margin : 1vh 0;
+
+.comments-dialog-inputBox {
+    margin: 1vh 0;
     padding: 1vh 1vw;
     border: 0.5px solid rgb(216, 212, 212);
     border-radius: 1vh;
     margin-bottom: 5vh;
     height: 30vh;
 }
-.comments-dialog-inputBox textarea{
+
+.comments-dialog-inputBox textarea {
     font-family: 'lora';
     width: 20vw;
     height: 16vh;
@@ -1168,11 +1359,13 @@ span{
     border: none;
     outline: none;
 }
-.comments-dialog-inputBox-buttons{
+
+.comments-dialog-inputBox-buttons {
     display: flex;
     justify-content: end;
 }
-.inputBox-cancel-btn{
+
+.inputBox-cancel-btn {
     background-color: white;
     border: 1px solid rgb(31, 179, 31);
     color: rgb(31, 179, 31);
@@ -1182,7 +1375,8 @@ span{
     border-radius: 3.5vw;
     cursor: pointer;
 }
-.inputBox-respond-btn{
+
+.inputBox-respond-btn {
     background-color: rgb(31, 179, 31);
     border: none;
     color: white;
@@ -1193,66 +1387,76 @@ span{
     margin-left: 1.5vw;
     cursor: pointer;
 }
-.inputBox-respond-btn:disabled{
+
+.inputBox-respond-btn:disabled {
     background-color: rgb(187, 233, 187);
 }
-.comments-dialog-inputBox-userDetails{
+
+.comments-dialog-inputBox-userDetails {
     display: flex;
     align-items: center;
     margin-bottom: 1vh;
 }
-.comments-dialog-inputBox-userDetails img{
+
+.comments-dialog-inputBox-userDetails img {
     height: 5vh;
     width: 5vh;
     object-fit: cover;
     border-radius: 50%;
     margin-right: 0.8vw;
 }
-.comments-dialog-inputBox-userDetails p{
+
+.comments-dialog-inputBox-userDetails p {
     font-size: 16;
     font-family: 'lora';
 }
 
-.other-comments{
+.other-comments {}
 
-}
-.other-comment{
+.other-comment {
     margin: 1vh 0;
     border-top: 0.5px solid rgb(235, 232, 232);
     padding: 3vh 1vw;
 }
-.other-comments-user-details{
+
+.other-comments-user-details {
     display: flex;
     align-items: center;
     margin-bottom: 2vh;
 }
-.other-comments-user-details img{
+
+.other-comments-user-details img {
     height: 5vh;
     width: 5vh;
     object-fit: cover;
     border-radius: 50%;
     margin-right: 1vw;
 }
-.other-comments-name{
+
+.other-comments-name {
     font-size: 16;
     width: 10vw;
     font-family: 'lora';
 }
-.other-comments-theComment{
+
+.other-comments-theComment {
     font-size: 15px;
     font-family: 'lora';
 
 }
-.other-comments-date{
+
+.other-comments-date {
     font-family: 'lora';
     font-size: 12px;
     color: rgb(185, 180, 180);
 }
-.other-comments-options{
+
+.other-comments-options {
     display: flex;
     margin-left: 6vw;
 }
-.other-comments-options img{
+
+.other-comments-options img {
     height: 2vh;
     width: 2vh;
     cursor: pointer;
@@ -1261,8 +1465,8 @@ span{
 
 /* Delete Dialog  */
 .commentBox-report-dialog,
-.commentBox-delete-dialog{
-    border : 0.5px solid rgb(218, 213, 213);
+.commentBox-delete-dialog {
+    border: 0.5px solid rgb(218, 213, 213);
     outline: none;
     border-radius: 5px;
     margin-left: 20.5vw;
@@ -1271,13 +1475,273 @@ span{
     transform: translateY(-20%);
     transition: all 0.25s ease-out;
 }
+
 .commentBox-report,
-.commentBox-delete{
+.commentBox-delete {
     color: rgb(212, 51, 51) !important;
     cursor: pointer;
 }
-.commentBox-close img{
+
+.commentBox-close img {
     height: 3vh;
     width: 3vh;
     cursor: pointer;
+}
+
+
+@media (max-width : 600px) {
+    .landingPage-Bio-Section {
+        display: none;
+        width: 0;
+    }
+
+    .landingPage-content-section {
+        width: 100vw;
+    }
+
+    .articlePage-div {
+        padding: 7vh 8vw;
+    }
+
+    .Comments-dialog {
+        width: 80vw;
+        margin-left: 20vw;
+    }
+
+    .inputBox-respond-btn,
+    .inputBox-cancel-btn {
+        width: 18vw;
+    }
+
+    .comments-dialog-inputBox textarea {
+        width: 70vw;
+    }
+
+    .publishPage-form {
+        padding: 7vh 10vw;
+    }
+
+    #publishPage-title {
+        font-size: 30px;
+        font-weight: 600;
+    }
+
+    .publishPage-submit {
+        width: 80vw;
+    }
+
+    .publishPage-tags-add-btn {
+        width: 10vw;
+    }
+
+    .publishPage-tags-list p {
+        padding: 0.5vh 2vw;
+    }
+
+
+
+
+    .userPage-div {
+        flex-direction: column;
+    }
+
+    .UserPage-userName {
+        font-size: 35px;
+        margin: 4vh 0;
+    }
+
+    .userPage-content-section {
+        width: 100vw;
+        min-height: fit-content;
+    }
+
+    .userPage-Bio-section-div {
+        width: 100vw;
+        padding: 4vh 8vw;
+
+    }
+
+    .userPage-Bio-section-personal-details {
+        display: flex;
+        /* margin-left: 7vw; */
+    }
+
+    .userPage-Bio-section-userName {
+        font-size: 25px;
+    }
+
+    .userPage-Bio-section-myBio-edit {
+        width: 40vw;
+    }
+
+    .userPage-Bio-section-editProfile-dialogBox {
+        width: 84vw;
+        margin: 7.5vh 8vw;
+        padding: 4vh 8vw;
+    }
+
+    .editProfile-btns-container {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .editProfile-Image-div label,
+    .editProfile-Image-remove {
+        width: 20vw;
+    }
+
+    .editProfile-bio-div input,
+    .editProfile-name-div input {
+        width: 76vw;
+    }
+
+    .editPage-save-button,
+    .editPage-cancel-button {
+        width: 18vw;
+        font-size: 17px;
+        margin-left: 3vw;
+    }
+
+
+    .searchPage-div {
+        flex-direction: column;
+    }
+
+    .searchPage-content-section {
+        width: 100vw;
+        min-height: fit-content;
+    }
+
+    .searchPage-bio-section {
+        width: 100vw;
+        padding: 2vh 8vw;
+    }
+
+    .searchPage-bio-section-related-tags-div {
+        width: fit-content;
+
+    }
+
+    .searchPage-bio-section-related-tag {
+        padding: 0 3vw;
+    }
+
+    .accountPage-Bio-section-Follow-btn,
+    .accountPage-Bio-section-Following-btn {
+        width: 18vw;
+        font-size: 14px;
+    }
+
+    .user-searchPage-account-div {
+        padding: 2vh 0;
+    }
+
+    .user-searchPage-div img {
+        height: 6vh;
+        width: 6vh;
+        margin-right: 3vw;
+    }
+
+    .user-searchPage-account-details-div {
+        width: 50vw;
+    }
+
+    .navbar-userlinks-comp {
+        display: none;
+    }
+
+    .navbar-userlinks-open {
+        display: flex;
+        width: fit-content;
+        justify-content: end;
+        align-items: flex-end;
+    }
+
+    .navbar-userlinks-mobile-div {
+        position: absolute;
+        top: 11vh;
+        right: 5vw;
+        flex-direction: column;
+        backdrop-filter: blur(10);
+        background-color: white;
+        border: 0.5px solid rgb(199, 195, 195);
+        border-radius: 2px;
+        padding: 2vh 4vw;
+        gap: 2px
+    }
+
+    .UserInfoAndLogout {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+        color: var(--unselected);
+        font-size: 15px;
+        align-items: start;
+    }
+
+    .navbar-publish-div img,
+    .navbar-signup-div img {
+        height: 2.5vh;
+    }
+
+    .navbar-logout-div img {
+        height: 2vh;
+    }
+
+    .navbar-searchbar {
+        width: 57vw;
+    }
+
+    .navbar-searchbar input {
+        width: 40vw;
+        height: 5vh;
+    }
+
+    .navbar-searchbar img {
+        display: none;
+    }
+
+    .navbar-homepage img {
+        height: 6vh;
+        margin: 0 2vw;
+    }
+
+    .nav {
+        justify-content: space-between;
+        height: 9vh;
+    }
+
+    .ExternalUserArticle-actions {
+        gap: 4vw;
+    }
+
+    .loginPage-div img {
+        display: none;
+    }
+
+    .loginPage-loginSection,
+    .signupPage-loginSection {
+        width: 100vw;
+        padding: 2vh 10vw;
+        margin: 8vh 5vw;
+    }
+
+    #Name,
+    #Email,
+    #Password {
+        height: 6vh;
+        width: fit-content
+    }
+
+    .showPassword-p {
+        margin-left: 45vw;
+    }
+
+    .loginPage-submit-btn {
+        width: 60vw;
+    }
+
+    .loginPage-submit-btn:hover {
+        background-color: rgb(10, 102, 194);
+    }
 }

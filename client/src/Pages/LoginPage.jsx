@@ -2,75 +2,82 @@ import { useRef, useState } from "react"
 import useUserContext from "../hooks/useUserContext";
 import EchoHub from "/images/Echo Hub Image.jpg"
 import Animation from "/images/userOne.gif"
-export default function LoginPage(){ 
-    const [email , setEmail] = useState('');
-    const [password , setPassword] = useState('');
+import { CurrentMode } from "../../currentMode";
+export default function LoginPage() {
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
     const [error, seterror] = useState(null);
-    const {dispatch} = useUserContext();
-    const [show , setshow] = useState(false);
+    const { dispatch } = useUserContext();
+    const [show, setshow] = useState(false);
+    const [disabled, setDisabled] = useState(false)
     const passwordRef = useRef();
     const emailRef = useRef();
 
-    function handleShow(){
+    function handleShow() {
         passwordRef.current.type = !show ? "text" : "password";
-        setshow(prev=>!prev);
+        setshow(prev => !prev);
     }
-    function handleEmail(event){
-        if(email !== '') emailRef.current.className = "emailClick"
+    function handleEmail(event) {
+        if (email !== '') emailRef.current.className = "emailClick"
         else emailRef.current.className = "";
 
         setEmail(event.target.value);
     }
-    async function handleSubmit(event){
+    async function handleSubmit(event) {
         event.preventDefault();
-        const response = await fetch('https://echo-hub-server.onrender.com/user/login',{
-            method:'POST',
-            headers:{                    
-                'content-type' : 'application/json'
+        setDisabled(true)
+        const url = CurrentMode.serverUrl + '/user/login'
+        const response = await fetch(url, {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json'
             },
-            body:JSON.stringify({email , password})
+            body: JSON.stringify({ email, password })
         })
         const json = await response.json();
 
-        if(response.ok){
+        if (response.ok) {
             console.log(json)
-            localStorage.setItem('USER' , JSON.stringify(json));
-            dispatch({type:"LOGIN" , payload:json});
+            localStorage.setItem('USER', JSON.stringify(json));
+            dispatch({ type: "LOGIN", payload: json });
             setEmail('');
             setPassword('')
-        }else{
+        } else {
             seterror(json.message);
-            if(json.message == "Incorrect Email for login") setEmail('');
-            if(json.message == "Incorrect Password") setPassword('');
+            setDisabled(false);
+            if (json.message == "Incorrect Email for login") setEmail('');
+            if (json.message == "Incorrect Password") setPassword('');
         }
-        }
-        
-    
-    return(
+    }
+
+
+    return (
         <div className="loginPage-div">
             <img src={EchoHub} alt="" />
-        <form className="loginPage-loginSection" onSubmit={handleSubmit}>
-            <div className="loginPage-Login-title">
-                Log In
-                <img src={Animation} alt="" />
-            </div>
-            <div className="loginPage-email-div">
-                <input type="email" id="Email" required={true} autoComplete="off" value={email} onChange={handleEmail} />
-                <label htmlFor="Email" ref={emailRef}>EMAIL</label>
-            </div>
+            <form className="loginPage-loginSection" onSubmit={handleSubmit}>
+                <div className="loginPage-Login-title">
+                    Log In
+                    <img src={Animation} alt="" />
+                </div>
+                <div className="loginPage-email-div">
+                    <input type="email" id="Email" required={true} autoComplete="off" value={email} onChange={handleEmail} />
+                    <label htmlFor="Email" ref={emailRef}>EMAIL</label>
+                </div>
 
 
-            <div className="loginPage-password-div">
-                <input type="password" id="Password" required={true} autoComplete="off" value={password} ref={passwordRef} onChange={(e)=>setPassword(e.target.value)} />
-                <label htmlFor="Password" >PASSWORD</label>
-                <p className="showPassword-p" onClick={handleShow}>{!show ? "🔒" : "😎"}</p>
-            </div>
+                <div className="loginPage-password-div">
+                    <input type="password" id="Password" required={true} autoComplete="off" value={password} ref={passwordRef} onChange={(e) => setPassword(e.target.value)} />
+                    <label htmlFor="Password" >PASSWORD</label>
+                    <p className="showPassword-p" onClick={handleShow}>{!show ? "🔒" : "😎"}</p>
+                </div>
 
-            <h3 className="forgotPassword">Forgot password?</h3>
+                <h3 className="forgotPassword">Forgot password?</h3>
 
-            <button className="loginPage-submit-btn">Login</button>
-            {error &&  <div className="loginPage-error-div">{error}</div>}
-        </form>
+                <button disabled={disabled} className="loginPage-submit-btn">
+                    {disabled ? "Loading..." : "Login"}
+                </button>
+                {error && <div className="loginPage-error-div">{error}</div>}
+            </form>
         </div>
     )
 }

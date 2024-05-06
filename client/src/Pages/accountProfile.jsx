@@ -5,6 +5,7 @@ import BioSectionExternalUser from "../Components/BioSection-externalUser";
 import ExternalUserArticle from '../Components/UserArticle-External';
 
 import LoadingPageGif from "/images/Loading Page animation1.gif"
+import { CurrentMode } from '../../currentMode';
 
 
 export default function AccountProfilePage() {
@@ -16,7 +17,8 @@ export default function AccountProfilePage() {
     const Navigate = useNavigate();
     useEffect(() => {
         async function fetchingData() {
-            const response = await fetch(`https://echo-hub-server.onrender.com/accounts/userProfile/${userId}`, {
+            const url = CurrentMode.serverUrl + `/accounts/userProfile/${userId}`;
+            const response = await fetch(url, {
                 method: "GET",
                 headers: {
                     'content-type': 'application/json',
@@ -84,7 +86,8 @@ function Home({ AccountDetails }) {
 
     useEffect(() => {
         async function fetchingData() {
-            const response = await fetch(`https://echo-hub-server.onrender.com/article/user/${AccountDetails._id}`, {
+            const url = CurrentMode.serverUrl + `/article/user/${AccountDetails._id}`
+            const response = await fetch(url, {
                 method: "GET",
                 headers: {
                     'content-type': `application/json`,
@@ -132,7 +135,8 @@ function Lists({ AccountDetails }) {
 
     useEffect(() => {
         async function fetchingData() {
-            const response = await fetch(`https://echo-hub-server.onrender.com/article/list/${AccountDetails._id}`, {
+            const url = CurrentMode.serverUrl + `/article/list/${AccountDetails._id}` 
+            const response = await fetch(url, {
                 method: "GET",
                 headers: {
                     'content-type': `application/json`,

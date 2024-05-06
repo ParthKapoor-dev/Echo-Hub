@@ -4,6 +4,7 @@ import CancelPng from "/images/cancel.png"
 import { useEffect, useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import useUserContext from "../hooks/useUserContext";
+import { CurrentMode } from "../../currentMode";
 export default function BioSection() {
 
     const { user, token, dispatch } = useUserContext();
@@ -16,7 +17,8 @@ export default function BioSection() {
     useEffect(() => {
 
         async function fetchingData() {
-            const response = await fetch(`https://echo-hub-server.onrender.com/accounts/followings/${user._id}`, {
+            const url = CurrentMode.serverUrl + `/accounts/followings/${user._id}`
+            const response = await fetch(url, {
                 method: 'GET',
                 headers: {
                     'content-type': 'application/json',
@@ -41,7 +43,8 @@ export default function BioSection() {
         const base64File = await ConvertToBase64(file);
         console.log(base64File);
         if (file) {
-            const response = await fetch(`https://echo-hub-server.onrender.com/accounts/upload/profilePic/${user._id}`, {
+            const url = CurrentMode.serverUrl + `/accounts/upload/profilePic/${user._id}`
+            const response = await fetch(url, {
                 method: "PUT",
                 headers: {
                     'content-type': 'application/json',
@@ -78,23 +81,29 @@ export default function BioSection() {
     }
     return (
         <div className="userPage-Bio-section-div">
-            {user?.profilePicture?.url ? (
-                <img src={user.profilePicture.url} className="userPage-Bio-section-profileImage" />
-            ) : (
-                <form>
-                    <input type="file" id="userPage-profilePicture" accept="image/*" onChange={handleProfilePictureUpdate} />
-                    <label htmlFor="userPage-profilePicture">
-                        <img src={ProfilePic} className="userPage-Bio-section-profileImage" />
-                    </label>
-                </form>
-            )}
+            <div className="userPage-Bio-section-personal-details">
 
-            <div className="userPage-Bio-section-userName">
-                {user?.name}
-            </div>
+                {user?.profilePicture?.url ? (
+                    <img src={user.profilePicture.url} className="userPage-Bio-section-profileImage" />
+                ) : (
+                    <form>
+                        <input type="file" id="userPage-profilePicture" accept="image/*" onChange={handleProfilePictureUpdate} />
+                        <label htmlFor="userPage-profilePicture">
+                            <img src={ProfilePic} className="userPage-Bio-section-profileImage" />
+                        </label>
+                    </form>
+                )}
+                <div>
 
-            <div className="userPage-Bio-section-followers-count">
-                {user?.followers?.length} {user.followers.length == 1 ? "Follower" : "Followers"}
+                    <div className="userPage-Bio-section-userName">
+                        {user?.name}
+                    </div>
+
+                    <div className="userPage-Bio-section-followers-count">
+                        {user?.followers?.length} {user.followers.length == 1 ? "Follower" : "Followers"}
+                    </div>
+                </div>
+
             </div>
 
             <div className="userPage-Bio-section-myBio">
@@ -134,7 +143,7 @@ function EditProfile({ ConvertToBase64, editProfileRef }) {
 
     const [editProfileImg, setEditProfileImg] = useState(() => {
         if (user.profilePicture.url !== "") return user.profilePicture.url;
-        if(user) return ProfilePic
+        if (user) return ProfilePic
         return ""
     })
     const [editProfileName, setEditProfileName] = useState(() => {
@@ -159,7 +168,8 @@ function EditProfile({ ConvertToBase64, editProfileRef }) {
         if (editProfileName !== user.name) updatedProfile.name = editProfileName;
         if (editProfileImg === ProfilePic) updatedProfile.profilePicture = null;
         else if (editProfileImg !== user.profilePicture) updatedProfile.profilePicture = editProfileImg;
-        const response = await fetch(`https://echo-hub-server.onrender.com/accounts/update/profile/${user._id}`, {
+        const url = CurrentMode.serverUrl + `/accounts/update/profile/${user._id}`
+        const response = await fetch(url, {
             method: "PUT",
             headers: {
                 'content-type': 'application/json',
@@ -215,16 +225,19 @@ function EditProfile({ ConvertToBase64, editProfileRef }) {
                     </p>
                     <div className="editProfile-Image-container">
                         <img src={editProfileImg} />
+                        <div className="editProfile-btns-container">
 
-                        <input type="file" id="editProfile-Image" accept="image/*" onChange={handleProfileImageChange} />
+                            <input type="file" id="editProfile-Image" accept="image/*" onChange={handleProfileImageChange} />
 
-                        <label htmlFor="editProfile-Image">
-                            Update
-                        </label>
+                            <label htmlFor="editProfile-Image">
+                                Update
+                            </label>
 
-                        <p className="editProfile-Image-remove" onClick={handleProfileImageRemove}>
-                            Remove
-                        </p>
+                            <p className="editProfile-Image-remove" onClick={handleProfileImageRemove}>
+                                Remove
+                            </p>
+                        </div>
+
                     </div>
                 </div>
 

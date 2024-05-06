@@ -6,6 +6,7 @@ import LoadingPageGif from "/images/Loading Page animation1.gif"
 import ProfilePic from "/images/profilePicture.png"
 import useFollow from "../hooks/useFollow";
 import { useNavigate } from "react-router-dom";
+import { CurrentMode } from "../../currentMode";
 
 export default function LandingPage() {
 
@@ -17,7 +18,8 @@ export default function LandingPage() {
     const [error, setError] = useState(null)
     useEffect(() => {
         async function fetchingData() {
-            const response = await fetch(`https://echo-hub-server.onrender.com/article/feed`, {
+            const url = CurrentMode.serverUrl + '/article/feed'
+            const response = await fetch(url, {
                 method: "GET",
                 headers: {
                     'content-type': 'application/json',

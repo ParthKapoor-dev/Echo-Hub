@@ -5,6 +5,7 @@ import useFollow from "../hooks/useFollow";
 
 import ProfilePic from "/images/profilePicture.png"
 import LoadingPageGif from "/images/Loading Page animation1.gif"
+import { CurrentMode } from "../../currentMode";
 
 
 export default function UserSearchPage({ setTags }) {
@@ -16,8 +17,8 @@ export default function UserSearchPage({ setTags }) {
 
     useEffect(() => {
         async function fetchingData() {
-
-            const response = await fetch(`https://echo-hub-server.onrender.com/search/user/${searchQuery}`, {
+            const url = CurrentMode.serverUrl + `/search/user/${searchQuery}` 
+            const response = await fetch(url, {
                 method: 'GET',
                 headers: {
                     'content-type': 'application/json',

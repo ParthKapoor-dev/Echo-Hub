@@ -6,6 +6,7 @@ import UserArticle from "../Components/UserArticle";
 
 
 import LoadingPageGif from "/images/Loading Page animation1.gif"
+import { CurrentMode } from "../../currentMode";
 
 export default function UserPage() {
     const { user, token } = useUserContext();
@@ -17,7 +18,8 @@ export default function UserPage() {
 
 
     async function fetchingData() {
-        const response = await fetch(`https://echo-hub-server.onrender.com/article/user/${user._id}`, {
+        const url = CurrentMode.serverUrl + `/article/user/${user._id}` 
+        const response = await fetch(url, {
             method: 'GET',
             headers: {
                 'content-type': 'application/json',
@@ -35,7 +37,8 @@ export default function UserPage() {
     }
     async function handleDeleteArticle(event, _id) {
         event.preventDefault();
-        const response = await fetch('https://echo-hub-server.onrender.com/article', {
+        const url = CurrentMode.serverUrl + '/article'
+        const response = await fetch(url, {
             method: "DELETE",
             headers: {
                 'content-type': 'application/json',
@@ -110,7 +113,8 @@ function Lists() {
 
     useEffect(() => {
         async function fetchingData() {
-            const response = await fetch(`https://echo-hub-server.onrender.com/article/list/${user._id}`, {
+            const url = CurrentMode.serverUrl + `/article/list/${user._id}` 
+            const response = await fetch(url, {
                 method: "GET",
                 headers: {
                     'content-type': `application/json`,

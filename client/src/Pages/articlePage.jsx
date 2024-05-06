@@ -12,6 +12,7 @@ import LikeStaticFilled from "/images/likeStaticFilled.png"
 import LikeGif from "/images/likegif.gif"
 import CommentsPng from "/images/commentsPng.png"
 import CommentsGif from "/images/commentsGif.gif"
+import { CurrentMode } from "../../currentMode";
 
 
 export default function ArticlePage() {
@@ -45,7 +46,8 @@ export default function ArticlePage() {
     }
 
     async function handleLike() {
-        const response = await fetch('https://echo-hub-server.onrender.com/article/like', {
+        const url = CurrentMode.serverUrl + '/article/like'
+        const response = await fetch(url, {
             method: "PUT",
             headers: {
                 'content-type': 'application/json',
@@ -73,7 +75,8 @@ export default function ArticlePage() {
 
     useEffect(() => {
         async function fetchingData() {
-            const response = await fetch(`https://echo-hub-server.onrender.com/article/${articleId}`, {
+            const url = CurrentMode.serverUrl + `/article/${articleId}`;
+            const response = await fetch(url, {
                 method: 'GET',
                 headers: {
                     'content-type': 'application/json',

@@ -4,6 +4,7 @@ import ExternalUserArticle from "./UserArticle-External";
 import { useLocation } from "react-router-dom";
 
 import LoadingPageGif from "/images/Loading Page animation1.gif"
+import { CurrentMode } from "../../currentMode";
 
 export default function ArticleSearchPage({ setTags }) {
     const location = useLocation();
@@ -13,7 +14,8 @@ export default function ArticleSearchPage({ setTags }) {
     const [PageIsLoading, setPageIsLoading] = useState(true)
     useEffect(() => {
         async function fetchingData() {
-            const response = await fetch(`https://echo-hub-server.onrender.com/search/articles/${searchQuery}`, {
+            const url = CurrentMode.serverUrl + `/search/articles/${searchQuery}` 
+            const response = await fetch(url, {
                 method: 'GET',
                 headers: {
                     'content-type': 'application/json',
