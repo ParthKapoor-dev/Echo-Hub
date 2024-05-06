@@ -12,6 +12,7 @@ async function articleFeed(req, res) {
             if (article) tags.push(...article.tags)
         }
         const finalTags = filterDuplicateItems(tags);
+        if (finalTags == null) finalTags.push(...[`The Editor's Choice`, `Welcome`]);
         return finalTags;
     }
 
