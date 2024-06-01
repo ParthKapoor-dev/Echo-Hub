@@ -22,8 +22,6 @@ Welcome to Echo Hub, a MERN stack Newsletter application where users can publish
 
 - **Frontend**:
   - React.js
-  - Redux (for state management)
-  - Axios (for API calls)
 - **Backend**:
   - Node.js
   - Express.js
